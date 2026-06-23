@@ -1,0 +1,12 @@
+﻿using EventManagement.API.DTO;
+namespace EventManagement.API.Interface;
+public interface IUserService
+{
+    Task<string> RegisterAsync(RegisterDto dto);
+
+    Task<LoginResponseDto> LoginAsync(LoginDto dto);
+
+    Task<bool> ForgotPasswordAsync(ForgotPasswordDto dto);
+
+    Task<bool> ResetPasswordAsync(ResetPasswordDto dto);
+}
