@@ -59,6 +59,16 @@ public class AuthController : ControllerBase
 
         return Ok("Password reset successful");
     }
+
+    [HttpPost("corporate-onboarding")]
+    public async Task<IActionResult> CorporateOnboarding(
+    CorporateOnboardingDto dto)
+    {
+        var result =
+            await _userService.CorporateOnboardingAsync(dto);
+
+        return Ok(result);
+    }
 }
 
 

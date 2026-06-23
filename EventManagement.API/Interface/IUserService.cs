@@ -9,4 +9,5 @@ public interface IUserService
     Task<bool> ForgotPasswordAsync(ForgotPasswordDto dto);
 
     Task<bool> ResetPasswordAsync(ResetPasswordDto dto);
+    Task<string> CorporateOnboardingAsync(CorporateOnboardingDto dto);
 }

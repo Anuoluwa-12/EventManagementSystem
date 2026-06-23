@@ -117,6 +117,49 @@ public class UserService : IUserService
         return true;
     }
 
+
+    public async Task<string> CorporateOnboardingAsync(
+    CorporateOnboardingDto dto)
+    {
+        var existingUser = await _context.Users
+            .FirstOrDefaultAsync(x => x.Email == dto.Email);
+
+        if (existingUser != null)
+            return "User already exists";
+
+        // Create company
+        var company = new Company
+        {
+            Name = dto.CompanyName,
+            Email = dto.CompanyEmail,
+            PhoneNumber = dto.PhoneNumber,
+            Address = dto.Address,
+            Website = dto.Website
+        };
+
+        _context.Companies.Add(company);
+        await _context.SaveChangesAsync();
+
+        // Create company admin
+        var user = new User
+        {
+            FirstName = dto.FirstName,
+            LastName = dto.LastName,
+            Email = dto.Email,
+            Role = "CorporateAdmin",
+            CompanyId = company.Id
+        };
+
+        user.PasswordHash =
+            _passwordHasher.HashPassword(user, dto.Password);
+
+        _context.Users.Add(user);
+
+        await _context.SaveChangesAsync();
+
+        return "Corporate account created successfully";
+    }
+
     //  JWT 
     private string GenerateJwtToken(User user)
     {
