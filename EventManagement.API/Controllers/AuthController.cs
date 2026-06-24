@@ -13,7 +13,7 @@ public class AuthController : ControllerBase
         _userService = userService;
     }
 
-    // ================= REGISTER =================
+    //  REGISTER
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterDto dto)
     {
@@ -25,7 +25,7 @@ public class AuthController : ControllerBase
         return Ok(result);
     }
 
-    // ================= LOGIN =================
+    //  LOGIN 
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginDto dto)
     {

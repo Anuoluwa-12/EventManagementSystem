@@ -1,0 +1,119 @@
+﻿@using EventManagement.MVC.Models;
+@using EventManagementSystem.DTO;
+@model LoginDto;
+
+<link rel="stylesheet" href="~/css/login.css" />
+<section class="h-100 gradient-form" style="background-color: #eee;">
+    <div class="container py-5 h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-xl-10">
+                <div class="card rounded-3 text-black">
+                    <div class="row g-0">
+
+                        <!-- Left Side -->
+                        <div class="col-lg-6">
+                            <div class="card-body p-md-5 mx-md-4">
+
+                                <div class="text-center">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/lotus.webp"
+                                         style="width: 185px;" alt="logo">
+
+                                    <h4 class="mt-1 mb-5 pb-1">
+                                        Welcome to Lumievent
+                                    </h4>
+                                </div>
+
+                                <form asp-action="Login" method="post">
+
+                                    <p>Please login to your account</p>
+
+                                    <div class="mb-4">
+                                        <label asp-for="Email" class="form-label">
+                                            Email
+                                        </label>
+
+                                        <input asp-for="Email"
+                                               class="form-control"
+                                               placeholder="Enter your email" />
+
+                                        <span asp-validation-for="Email"
+                                              class="text-danger"></span>
+                                    </div>
+
+                                    <div class="mb-4">
+                                        <label asp-for="Password"
+                                               class="form-label">
+                                            Password
+                                        </label>
+
+                                        <input asp-for="Password"
+                                               type="password"
+                                               class="form-control"
+                                               placeholder="Enter your password" />
+
+                                        <span asp-validation-for="Password"
+                                              class="text-danger"></span>
+                                    </div>
+
+                                    <div class="text-center pt-1 mb-5 pb-1">
+
+                                        <button class="btn btn-primary w-100 mb-3"
+                                                type="submit">
+                                            Log In
+                                        </button>
+
+                                        <a asp-action="ForgotPassword"
+                                               class="text-muted">
+                                            Forgot Password?
+                                        </a>
+
+                                    </div>
+
+                                    <div class="d-flex align-items-center justify-content-center pb-4">
+
+                                        <p class="mb-0 me-2">
+                                            Don't have an account?
+                                        </p>
+
+                                        <a asp-action="Register"
+                                               class="btn btn-outline-danger">
+                                            Create New
+                                        </a>
+
+                                    </div>
+
+                                </form>
+
+                            </div>
+                        </div>
+                        <div class="col-lg-6 d-flex align-items-center gradient-custom-2">
+
+                            <div class="text-white px-3 py-4 p-md-5 mx-md-4">
+
+                                <h4 class="mb-4">
+                                    Plan and manage events effortlessly
+                                </h4>
+
+                                <p class="small mb-0">
+                                    Lumievent helps individuals and organizations
+                                    create, manage, and attend events seamlessly.
+                                    From corporate conferences to social gatherings,
+                                    everything you need is in one place.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

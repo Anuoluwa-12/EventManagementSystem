@@ -14,9 +14,9 @@
 
         public string Role { get; set; }
 
-        public int CompanyId { get; set; }
+        public int? CompanyId { get; set; }
 
-        public Company Company { get; set; }
+        public Company? Company { get; set; }
         public string? ResetPasswordToken { get; set; }
 
         public DateTime? ResetPasswordTokenExpiry { get; set; }
