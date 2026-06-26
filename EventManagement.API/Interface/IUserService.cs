@@ -10,4 +10,7 @@ public interface IUserService
 
     Task<bool> ResetPasswordAsync(ResetPasswordDto dto);
     Task<string> CorporateOnboardingAsync(CorporateOnboardingDto dto);
+    Task<ProfileDto> GetProfileAsync(int userId);
+    Task<bool> UpdateProfileAsync(int userId,
+                              UpdateProfileDto dto);
 }

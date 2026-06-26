@@ -17,6 +17,7 @@
         public int? CompanyId { get; set; }
 
         public Company? Company { get; set; }
+        public string? ProfilePictureUrl { get; set; }
         public string? ResetPasswordToken { get; set; }
 
         public DateTime? ResetPasswordTokenExpiry { get; set; }

@@ -160,6 +160,41 @@ public class UserService : IUserService
         return "Corporate account created successfully";
     }
 
+    public async Task<ProfileDto> GetProfileAsync(int userId)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(x => x.Id == userId);
+
+        if (user == null)
+            return null;
+
+        return new ProfileDto
+        {
+            FirstName = user.FirstName,
+            LastName = user.LastName,
+            Email = user.Email,
+            ProfilePictureUrl = user.ProfilePictureUrl
+        };
+    }
+
+    public async Task<bool> UpdateProfileAsync(
+    int userId,
+    UpdateProfileDto dto)
+    {
+        var user = await _context.Users
+            .FirstOrDefaultAsync(x => x.Id == userId);
+
+        if (user == null)
+            return false;
+
+        user.FirstName = dto.FirstName;
+        user.LastName = dto.LastName;
+        user.Email = dto.Email;
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
     //  JWT 
     private string GenerateJwtToken(User user)
     {
