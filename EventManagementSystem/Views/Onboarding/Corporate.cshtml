@@ -1,0 +1,82 @@
+﻿{
+ViewData["Title"] = "Corporate Onboarding";
+}
+@using EventManagement.MVC.Models;
+@using EventManagementSystem.DTO;
+@model CorporateOnboardingDto;
+
+<div class="container mt-5">
+
+    <h2>Corporate Onboarding</h2>
+
+    <form asp-action="CorporateOnboarding"
+          method="post">
+
+        <h4>Company Information</h4>
+
+        <div class="mb-3">
+            <label>Company Name</label>
+            <input asp-for="CompanyName"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Company Email</label>
+            <input asp-for="CompanyEmail"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Phone Number</label>
+            <input asp-for="PhoneNumber"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Address</label>
+            <input asp-for="Address"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Website</label>
+            <input asp-for="Website"
+                   class="form-control" />
+        </div>
+
+        <hr />
+
+        <h4>Administrator Information</h4>
+
+        <div class="mb-3">
+            <label>First Name</label>
+            <input asp-for="FirstName"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Last Name</label>
+            <input asp-for="LastName"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Email</label>
+            <input asp-for="Email"
+                   class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label>Password</label>
+            <input asp-for="Password"
+                   type="password"
+                   class="form-control" />
+        </div>
+
+        <button class="btn btn-primary">
+            Create Company Account
+        </button>
+
+    </form>
+
+</div>

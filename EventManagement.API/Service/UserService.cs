@@ -3,7 +3,6 @@ using EventManagement.API.DTO;
 using EventManagement.API.Entity;
 using EventManagement.API.Interface;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -79,6 +78,7 @@ public class UserService : IUserService
         };
     }
 
+    //FORGOT PASSWORD
     public async Task<bool> ForgotPasswordAsync(ForgotPasswordDto dto)
     {
         var user = await _context.Users
@@ -94,6 +94,8 @@ public class UserService : IUserService
 
         return true;
     }
+
+    //RESET PASSWORD
     public async Task<bool> ResetPasswordAsync(ResetPasswordDto dto)
     {
         var user = await _context.Users
@@ -117,7 +119,7 @@ public class UserService : IUserService
         return true;
     }
 
-
+    //CORPORATE ONBOARDING
     public async Task<string> CorporateOnboardingAsync(
     CorporateOnboardingDto dto)
     {
@@ -160,6 +162,7 @@ public class UserService : IUserService
         return "Corporate account created successfully";
     }
 
+    //GET PROFILE
     public async Task<ProfileDto> GetProfileAsync(int userId)
     {
         var user = await _context.Users
@@ -177,6 +180,7 @@ public class UserService : IUserService
         };
     }
 
+    //UPDATE PROFILE
     public async Task<bool> UpdateProfileAsync(
     int userId,
     UpdateProfileDto dto)
@@ -190,6 +194,22 @@ public class UserService : IUserService
         user.FirstName = dto.FirstName;
         user.LastName = dto.LastName;
         user.Email = dto.Email;
+
+        await _context.SaveChangesAsync();
+
+        return true;
+    }
+
+    public async Task<bool> UpdateAccountTypeAsync(
+    int userId,
+    string accountType)
+    {
+        var user = await _context.Users.FindAsync(userId);
+
+        if (user == null)
+            return false;
+
+        user.AccountType = accountType;
 
         await _context.SaveChangesAsync();
 

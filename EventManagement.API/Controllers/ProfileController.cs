@@ -40,5 +40,7 @@ namespace EventManagement.API.Controllers
 
             return Ok("Profile updated successfully");
         }
+
+
     }
 }

@@ -13,4 +13,7 @@ public interface IUserService
     Task<ProfileDto> GetProfileAsync(int userId);
     Task<bool> UpdateProfileAsync(int userId,
                               UpdateProfileDto dto);
+    Task<bool> UpdateAccountTypeAsync(
+    int userId,
+    string accountType);
 }

@@ -1,0 +1,50 @@
+﻿@{
+    ViewData["Title"] = "Choose Account Type";
+}
+
+<div class="container mt-5">
+
+    <h2 class="text-center mb-4">
+        Choose Your Account Type
+    </h2>
+
+    <div class="row">
+
+        <div class="col-md-6">
+            <div class="card p-4 text-center">
+
+                <h3>Individual Account</h3>
+
+                <p>
+                    For personal event attendance and ticket purchases.
+                </p>
+
+                <a asp-controller="Onboarding"
+                       asp-action="Individual"
+                       class="btn btn-primary">
+                    Continue as Individual
+                </a>
+
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card p-4 text-center">
+
+                <h3>Corporate Account</h3>
+
+                <p>
+                    For companies and organizations hosting events.
+                </p>
+
+                <a asp-controller="Onboarding"
+                       asp-action="Corporate"
+                       class="btn btn-success">
+                    Continue as Corporate
+                </a>
+
+            </div>
+        </div>
+
+    </div>
+</div>

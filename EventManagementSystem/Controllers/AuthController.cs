@@ -58,7 +58,7 @@ namespace EventManagement.MVC.Controllers
 
             TempData["Success"] = "Login successful!";
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("ChooseType", "Onboarding");
         }
 
         public IActionResult ForgotPassword()

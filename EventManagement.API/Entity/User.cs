@@ -13,6 +13,7 @@
         public string PasswordHash { get; set; }
 
         public string Role { get; set; }
+        public string? AccountType { get; set; }
 
         public int? CompanyId { get; set; }
 
