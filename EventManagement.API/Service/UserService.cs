@@ -130,10 +130,13 @@ public class UserService : IUserService
             return "User already exists";
 
         // Create company
+        if (string.IsNullOrWhiteSpace(dto.CompanyName))
+            throw new Exception("CompanyName is required");
+
         var company = new Company
         {
-            Name = dto.CompanyName,
-            Email = dto.CompanyEmail,
+            CompanyName = dto.CompanyName,
+            CompanyEmail = dto.CompanyEmail,
             PhoneNumber = dto.PhoneNumber,
             Address = dto.Address,
             Website = dto.Website
@@ -239,171 +242,6 @@ public class UserService : IUserService
             signingCredentials: creds
         );
         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-           
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        return new JwtSecurityTokenHandler().WriteToken(token);
+  return new JwtSecurityTokenHandler().WriteToken(token);
     }
 }

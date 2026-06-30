@@ -1,0 +1,25 @@
+﻿@{
+    ViewData["Title"] = "Choose Account Type";
+}
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Choose Account Type</h2>
+
+    <form asp-action="ChooseType" method="post">
+
+        <button type="submit"
+                name="accountType"
+                value="Individual"
+                class="btn btn-primary w-100 mb-3">
+            Register as Individual
+        </button>
+
+        <button type="submit"
+                name="accountType"
+                value="Corporate"
+                class="btn btn-success w-100">
+            Register as Corporate
+        </button>
+
+    </form>
+</div>
