@@ -1,0 +1,70 @@
+﻿@model List<EventManagementSystem.DTO.EventDto>
+@{
+    Layout = "DashboardLayout";
+}
+@{
+    ViewData["Title"] = "Events";
+}
+
+<link rel="stylesheet" href="~/css/events.css" />
+
+<div class="container mt-5">
+
+    <h2 class="mb-4 text-center">
+        Upcoming Events
+    </h2>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+
+                <div class="card h-100 shadow">
+
+                    <img src="@item.EventImageUrl"
+                         class="card-img-top"
+                         alt="Event Image">
+
+                    <div class="card-body">
+
+                        <h5>@item.Title</h5>
+
+                        <p>@item.Description</p>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @item.EventDate.ToString("dd MMM yyyy")
+                        </p>
+
+                        <p>
+                            <strong>Venue:</strong>
+                            @item.Venue
+                        </p>
+
+                        <p>
+                            <strong>Organizer:</strong>
+                            @item.OrganizerName
+                        </p>
+
+                        <p>
+                            <strong>Price:</strong>
+                            ₦@item.TicketPrice
+                        </p>
+
+                        <a asp-action="Details"
+                               asp-route-id="@item.Id"
+                               class="btn btn-primary w-100">
+                            View Details
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>

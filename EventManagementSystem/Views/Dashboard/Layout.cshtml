@@ -1,0 +1,66 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"]</title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/dashboard.css" />
+</head>
+
+<body>
+
+    <div id="sidebar" class="sidebar">
+
+        <h3 class="text-center mt-4">Lumievent</h3>
+
+        <a asp-controller="Dashboard"
+               asp-action="Index">
+            Dashboard
+        </a>
+
+        <a asp-controller="Event"
+               asp-action="Index">
+            My Events
+        </a>
+
+        <a asp-controller="Profile"
+               asp-action="Index">
+            Profile
+        </a>
+
+        <a asp-controller="Auth"
+               asp-action="Login">
+            Logout
+        </a>
+
+    </div>
+
+    <div class="main-content">
+
+        <button class="menu-btn mb-3"
+                onclick="toggleSidebar()">
+            ☰
+        </button>
+
+        @RenderBody()
+
+    </div>
+
+    <script>
+            function toggleSidebar() {
+                const sidebar =
+                    document.getElementById("sidebar");
+
+                sidebar.classList.toggle("show-sidebar");
+            }
+    </script>
+   
+</body>
+</html>

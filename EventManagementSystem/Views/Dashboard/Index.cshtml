@@ -2,87 +2,53 @@
 @model DashboardDto
 
 @{
+    Layout = "DashboardLayout";
     ViewData["Title"] = "Dashboard";
 }
 
-<link rel="stylesheet" href="~/css/dashboard.css" />
+<h2>
+    Welcome,
+    @(Context.Session.GetString("FirstName") ?? "User") 👋
+</h2>
 
-<!-- Sidebar -->
-<div id="sidebar" class="sidebar">
+<p>Manage your events and profile here.</p>
 
-    <h3 class="text-center mt-4">Lumievent</h3>
+<div class="row mt-4">
 
-    <a href="#">Dashboard</a>
-    <a href="#">My Events</a>
-    <a href="#">Notifications</a>
-    <a asp-controller="Profile"
-           asp-action="Index">
-        Profile
-    </a>
-    <a href="#">Logout</a>
-
-</div>
-
-<!-- Main Content -->
-<div class="main-content">
-
-    <!-- Sidebar Toggle Button -->
-    <button class="menu-btn mb-4" onclick="toggleSidebar()">
-        ☰
-    </button>
-
-    <!-- Welcome Message -->
-    <h2>
-        Welcome,
-        @(Context.Session.GetString("FirstName") ?? "User") 👋
-    </h2>
-    <p>Manage your events and profile here.</p>
-
-    <!-- Statistics Cards -->
-    <div class="row mt-4">
-
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm p-3">
-                <div class="card-body text-center">
-                    <h5>Upcoming Events</h5>
-                    <h2>@Model.UpcomingEvents</h2>
-                </div>
+    ```
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm p-3">
+            <div class="card-body text-center">
+                <h5>Upcoming Events</h5>
+                <h2>@Model.UpcomingEvents</h2>
             </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm p-3">
-                <div class="card-body text-center">
-                    <h5>Registered Events</h5>
-                    <h2>@Model.RegisteredEvents</h2>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4 mb-3">
-            <div class="card shadow-sm p-3">
-                <div class="card-body text-center">
-                    <h5>Notifications</h5>
-                    <h2>@Model.NotificationsCount</h2>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Recent Activity Section -->
-    <div class="card mt-4 shadow-sm">
-        <div class="card-body">
-            <h4>Recent Activity</h4>
-            <p>No recent activity yet.</p>
         </div>
     </div>
 
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm p-3">
+            <div class="card-body text-center">
+                <h5>Registered Events</h5>
+                <h2>@Model.RegisteredEvents</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4 mb-3">
+        <div class="card shadow-sm p-3">
+            <div class="card-body text-center">
+                <h5>Notifications</h5>
+                <h2>@Model.NotificationsCount</h2>
+            </div>
+        </div>
+    </div>
+    ```
+
 </div>
 
-<script>
-    function toggleSidebar() {
-        const sidebar = document.getElementById("sidebar");
-        sidebar.classList.toggle("show-sidebar");
-    }
-</script>
+<div class="card mt-4 shadow-sm">
+    <div class="card-body">
+        <h4>Recent Activity</h4>
+        <p>No recent activity yet.</p>
+    </div>
+</div>

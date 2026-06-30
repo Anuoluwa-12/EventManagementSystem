@@ -1,4 +1,5 @@
 ﻿namespace EventManagement.API.Entity;
+
 public class Event
 {
     public int Id { get; set; }
@@ -19,9 +20,11 @@ public class Event
 
     public int AvailableSeats { get; set; }
 
-    public string BannerImage { get; set; }
+    public string? EventImageUrl { get; set; }
 
-    public int CategoryId { get; set; }
+    public string Category { get; set; }
 
-    public string OrganizerId { get; set; }
+    public string? OrganizerId { get; set; }
+
+    public string OrganizerName { get; set; }
 }

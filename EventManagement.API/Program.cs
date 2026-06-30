@@ -2,9 +2,7 @@ using EventManagement.API.Data;
 using EventManagement.API.Interface;
 using EventManagement.API.Service;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
-using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,7 +12,7 @@ builder.Services.AddControllers();
 //SERVICES
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
-
+builder.Services.AddScoped<IEventService, EventService>();
 // DB CONTEXT
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(

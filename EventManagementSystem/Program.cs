@@ -8,6 +8,7 @@ builder.Services.AddHttpClient();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
+builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddSession();
 
 var app = builder.Build();
