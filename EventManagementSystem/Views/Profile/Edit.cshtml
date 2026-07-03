@@ -3,7 +3,10 @@
 
 <h2>Edit Profile</h2>
 
-<form asp-action="Edit" method="post">
+<form asp-action="Edit"
+      method="post"
+      enctype="multipart/form-data">
+
 
     <div class="mb-3">
         <label>First Name</label>
@@ -27,4 +30,10 @@
         Save Changes
     </button>
 
+    <div class="mb-3">
+        <label>Profile Picture</label>
+        <input asp-for="ProfilePicture"
+               type="file"
+               class="form-control" />
+    </div>
 </form>

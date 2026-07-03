@@ -83,6 +83,7 @@ namespace EventManagement.MVC.Controllers
             HttpContext.Session.SetString("Token", result.Token);
             HttpContext.Session.SetString("FirstName", result.FirstName);
             HttpContext.Session.SetString("Role", result.Role);
+            HttpContext.Session.SetInt32("UserId", result.Id);
 
             TempData["Success"] = "Login successful!";
 
@@ -111,7 +112,7 @@ namespace EventManagement.MVC.Controllers
 
             //  Send clean request to API
             var response = await _httpClient.PostAsJsonAsync(
-                "https://localhost:5001/api/auth/corporate-onboarding",
+                "https://localhost:7053/api/auth/corporate-onboarding",
                 model
             );
 

@@ -14,14 +14,17 @@ public class UserService : IUserService
     private readonly ApplicationDbContext _context;
     private readonly IConfiguration _config;
     private readonly PasswordHasher<User> _passwordHasher;
-
-    public UserService(ApplicationDbContext context, IConfiguration config)
+    private readonly IWebHostEnvironment _environment;
+    public UserService(
+      ApplicationDbContext context,
+      IConfiguration config,
+      IWebHostEnvironment environment)
     {
         _context = context;
         _config = config;
+        _environment = environment;
         _passwordHasher = new PasswordHasher<User>();
     }
-
     //REGISTER 
     public async Task<string> RegisterAsync(RegisterDto dto)
     {
@@ -194,15 +197,44 @@ public class UserService : IUserService
         if (user == null)
             return false;
 
+        // Update profile information
         user.FirstName = dto.FirstName;
         user.LastName = dto.LastName;
         user.Email = dto.Email;
+
+        // Check if a new profile picture was uploaded
+        if (dto.ProfilePicture != null)
+        {
+            // Generate a unique filename
+            var fileName = Guid.NewGuid().ToString() +
+                           Path.GetExtension(dto.ProfilePicture.FileName);
+
+            // Create the folder path
+            var folderPath = Path.Combine(
+                _environment.WebRootPath,
+                "images",
+                "profile");
+
+            // Create the folder if it doesn't exist
+            Directory.CreateDirectory(folderPath);
+
+            // Create the full file path
+            var filePath = Path.Combine(folderPath, fileName);
+
+            // Save the uploaded image
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await dto.ProfilePicture.CopyToAsync(stream);
+            }
+
+            // Save the image URL to the database
+            user.ProfilePictureUrl = "/images/profile/" + fileName;
+        }
 
         await _context.SaveChangesAsync();
 
         return true;
     }
-
     public async Task<bool> UpdateAccountTypeAsync(
     int userId,
     string accountType)

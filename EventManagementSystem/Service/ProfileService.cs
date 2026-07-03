@@ -20,12 +20,31 @@ namespace EventManagementSystem.Service
         }
 
         public async Task<bool> UpdateProfileAsync(
-    int userId,
-    UpdateProfileDto dto)
+      int userId,
+      UpdateProfileDto dto)
         {
-            var response = await _httpClient.PutAsJsonAsync(
+            var content = new MultipartFormDataContent();
+
+            content.Add(new StringContent(dto.FirstName), "FirstName");
+            content.Add(new StringContent(dto.LastName), "LastName");
+            content.Add(new StringContent(dto.Email), "Email");
+
+            if (dto.ProfilePicture != null)
+            {
+                var streamContent = new StreamContent(dto.ProfilePicture.OpenReadStream());
+
+                streamContent.Headers.ContentType =
+                    new System.Net.Http.Headers.MediaTypeHeaderValue(dto.ProfilePicture.ContentType);
+
+                content.Add(
+                    streamContent,
+                    "ProfilePicture",
+                    dto.ProfilePicture.FileName);
+            }
+
+            var response = await _httpClient.PutAsync(
                 $"https://localhost:7053/api/Profile/{userId}",
-                dto);
+                content);
 
             return response.IsSuccessStatusCode;
         }

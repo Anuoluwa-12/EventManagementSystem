@@ -11,7 +11,9 @@
 
         <div class="text-center">
 
-            <img src="@(Model.ProfilePictureUrl ?? "/images/default-profile.png")"
+            <img src="@(string.IsNullOrEmpty(Model.ProfilePictureUrl)
+                                             ? "/images/default-profile.png"
+                                             : $"https://localhost:7053{Model.ProfilePictureUrl}")"
                  width="150"
                  height="150"
                  class="rounded-circle" />

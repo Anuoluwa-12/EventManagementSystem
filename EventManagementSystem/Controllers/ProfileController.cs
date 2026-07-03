@@ -15,10 +15,15 @@ namespace EventManagement.MVC.Controllers
 
         public async Task<IActionResult> Index()
         {
-            int userId = 1;
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
 
             var profile =
-                await _profileService.GetProfileAsync(userId);
+              await _profileService.GetProfileAsync(userId.Value);
 
             return View(profile);
         }
@@ -26,10 +31,15 @@ namespace EventManagement.MVC.Controllers
         // GET: Profile/Edit
         public async Task<IActionResult> Edit()
         {
-            int userId = 1;
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
 
             var profile =
-                await _profileService.GetProfileAsync(userId);
+              await _profileService.GetProfileAsync(userId.Value);
 
             var dto = new UpdateProfileDto
             {
@@ -45,10 +55,14 @@ namespace EventManagement.MVC.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateProfileDto dto)
         {
-            int userId = 1;
+            int? userId = HttpContext.Session.GetInt32("UserId");
 
-            var result = await _profileService
-                .UpdateProfileAsync(userId, dto);
+            if (userId == null)
+            {
+                return RedirectToAction("Login", "Auth");
+            }
+
+            var result = await _profileService.UpdateProfileAsync(userId.Value, dto);
 
             if (result)
             {

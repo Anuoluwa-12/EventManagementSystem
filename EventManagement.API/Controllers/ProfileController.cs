@@ -28,19 +28,16 @@ namespace EventManagement.API.Controllers
         }
 
         [HttpPut("{userId}")]
-        public async Task<IActionResult> UpdateProfile(
-        int userId,
-        UpdateProfileDto dto)
+        public async Task<IActionResult> Update(
+     int userId,
+     [FromForm] UpdateProfileDto dto)
         {
-            var result = await _userService
-                .UpdateProfileAsync(userId, dto);
+            var result = await _userService.UpdateProfileAsync(userId, dto);
 
             if (!result)
                 return NotFound();
 
             return Ok("Profile updated successfully");
         }
-
-
     }
 }

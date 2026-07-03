@@ -11,7 +11,9 @@
         </div>
     }
 
-    <form asp-action="Register" method="post">
+    <form asp-controller="Auth"
+          asp-action="Register"
+          method="post">
 
         <div class="mb-3">
             <label>First Name</label>
@@ -40,4 +42,3 @@
         </button>
 
     </form>
-</div>
