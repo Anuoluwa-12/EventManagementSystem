@@ -7,6 +7,8 @@
         {
             Task<ProfileDto> GetProfileAsync(int userId);
         Task<bool> UpdateProfileAsync(int userId, UpdateProfileDto dto);
+        Task<List<BookedEventDto>> GetBookedEventsAsync(int userId);
+        Task<List<TicketEventDto>> GetTicketEventsAsync(int userId);
     }
     }
 

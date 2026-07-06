@@ -1,0 +1,52 @@
+﻿@model List<EventManagementSystem.DTO.BookedEventDto>
+
+@{
+    Layout = "DashboardLayout";
+    ViewData["Title"] = "My Booked Events";
+}
+
+<h2 class="mb-4">My Booked Events</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-info">
+        You haven't booked any events yet.
+    </div>
+}
+else
+{
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow h-100">
+
+                    <img src="@item.EventImageUrl"
+                         class="card-img-top"
+                         alt="Event">
+
+                    <div class="card-body">
+
+                        <h5>@item.EventTitle</h5>
+
+                        <p>
+                            <strong>Date:</strong>
+                            @item.EventDate.ToString("dd MMM yyyy")
+                        </p>
+
+                        <p>
+                            <strong>Venue:</strong>
+                            @item.Venue
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+}

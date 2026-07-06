@@ -250,6 +250,42 @@ public class UserService : IUserService
 
         return true;
     }
+
+    public async Task<List<BookedEventDto>> GetBookedEventsAsync(int userId)
+    {
+        return await _context.EventRegistrations
+            .Where(r => r.UserId == userId)
+            .Include(r => r.Event)
+            .Select(r => new BookedEventDto
+            {
+                EventId = r.Event.Id,
+                EventTitle = r.Event.Title,
+                EventDate = r.Event.EventDate,
+                Venue = r.Event.Venue,
+                EventImageUrl = r.Event.EventImageUrl
+            })
+            .ToListAsync();
+    }
+
+    public async Task<List<TicketEventDto>> GetTicketsAsync(int userId)
+    {
+        return await _context.EventRegistrations
+            .Where(x => x.UserId == userId)
+            .Include(x => x.Event)
+            .Select(x => new TicketEventDto
+            {
+                TicketId = x.Id,
+                EventId = x.Event.Id,
+                EventTitle = x.Event.Title,
+                EventDate = x.Event.EventDate,
+                Venue = x.Event.Venue,
+                EventImageUrl = x.Event.EventImageUrl,
+                TicketNumber = $"TKT-{x.Id:D6}",
+                PurchaseDate = x.RegistrationDate,
+                QRCodeUrl = ""
+            })
+            .ToListAsync();
+    }
     //  JWT 
     private string GenerateJwtToken(User user)
     {

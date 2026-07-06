@@ -16,4 +16,8 @@ public interface IUserService
     Task<bool> UpdateAccountTypeAsync(
     int userId,
     string accountType);
+
+    Task<List<BookedEventDto>> GetBookedEventsAsync(int userId);
+
+    Task<List<TicketEventDto>> GetTicketsAsync(int userId);
 }

@@ -48,5 +48,21 @@ namespace EventManagementSystem.Service
 
             return response.IsSuccessStatusCode;
         }
+
+        public async Task<List<BookedEventDto>> GetBookedEventsAsync(int userId)
+        {
+            return await _httpClient.GetFromJsonAsync<List<BookedEventDto>>
+            (
+                $"https://localhost:7053/api/Profile/{userId}/booked-events"
+            );
+        }
+
+        public async Task<List<TicketEventDto>> GetTicketEventsAsync(int userId)
+        {
+            return await _httpClient.GetFromJsonAsync<List<TicketEventDto>>
+            (
+                $"https://localhost:7053/api/Profile/{userId}/tickets"
+            );
+        }
     }
 }

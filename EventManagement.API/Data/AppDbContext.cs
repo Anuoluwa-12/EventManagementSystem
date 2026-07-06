@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;using EventManagement.API.Entity;
-
+﻿using EventManagement.API.Entity;
+using Microsoft.EntityFrameworkCore;
 namespace EventManagement.API.Data
 {
     public class ApplicationDbContext : DbContext
@@ -12,5 +12,6 @@ namespace EventManagement.API.Data
         public DbSet<User> Users { get; set; }
         public DbSet<Company> Companies { get; set; }
         public DbSet<Event> Events { get; set; }
+        public DbSet<EventRegistration> EventRegistrations { get; set; }
     }
 }

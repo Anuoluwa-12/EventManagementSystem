@@ -18,28 +18,21 @@ namespace EventManagement.MVC.Controllers
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Login", "Auth");
-            }
 
-            var profile =
-              await _profileService.GetProfileAsync(userId.Value);
+            var profile = await _profileService.GetProfileAsync(userId.Value);
 
             return View(profile);
         }
 
-        // GET: Profile/Edit
         public async Task<IActionResult> Edit()
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Login", "Auth");
-            }
 
-            var profile =
-              await _profileService.GetProfileAsync(userId.Value);
+            var profile = await _profileService.GetProfileAsync(userId.Value);
 
             var dto = new UpdateProfileDto
             {
@@ -51,16 +44,13 @@ namespace EventManagement.MVC.Controllers
             return View(dto);
         }
 
-        // POST: Profile/Edit
         [HttpPost]
         public async Task<IActionResult> Edit(UpdateProfileDto dto)
         {
             int? userId = HttpContext.Session.GetInt32("UserId");
 
             if (userId == null)
-            {
                 return RedirectToAction("Login", "Auth");
-            }
 
             var result = await _profileService.UpdateProfileAsync(userId.Value, dto);
 
@@ -72,6 +62,30 @@ namespace EventManagement.MVC.Controllers
 
             TempData["Error"] = "Failed to update profile";
             return View(dto);
+        }
+
+        public async Task<IActionResult> BookedEvents()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            var events = await _profileService.GetBookedEventsAsync(userId.Value);
+
+            return View(events ?? new List<BookedEventDto>());
+        }
+
+        public async Task<IActionResult> Tickets()
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            var tickets = await _profileService.GetTicketEventsAsync(userId.Value);
+
+            return View(tickets ?? new List<TicketEventDto>());
         }
     }
 }

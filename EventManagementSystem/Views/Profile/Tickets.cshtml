@@ -1,0 +1,40 @@
+﻿@model List<EventManagementSystem.DTO.TicketEventDto>
+
+@{
+    Layout = "DashboardLayout";
+    ViewData["Title"] = "My Tickets";
+}
+
+<h2 class="mb-4">My Tickets</h2>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">
+        No tickets available.
+    </div>
+}
+else
+{
+    <table class="table table-bordered">
+
+        <thead>
+            <tr>
+                <th>Event</th>
+                <th>Ticket Number</th>
+                <th>Purchase Date</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var ticket in Model)
+            {
+                <tr>
+                    <td>@ticket.EventTitle</td>
+                    <td>@ticket.TicketNumber</td>
+                    <td>@ticket.PurchaseDate.ToString("dd MMM yyyy")</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}

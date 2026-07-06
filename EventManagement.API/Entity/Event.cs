@@ -21,6 +21,7 @@ public class Event
     public int AvailableSeats { get; set; }
 
     public string? EventImageUrl { get; set; }
+    public ICollection<EventRegistration> EventRegistrations { get; set; }
 
     public string Category { get; set; }
 

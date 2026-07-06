@@ -39,5 +39,21 @@ namespace EventManagement.API.Controllers
 
             return Ok("Profile updated successfully");
         }
+
+        [HttpGet("{userId}/booked-events")]
+        public async Task<IActionResult> GetBookedEvents(int userId)
+        {
+            var events = await _userService.GetBookedEventsAsync(userId);
+
+            return Ok(events);
+        }
+
+        [HttpGet("{userId}/tickets")]
+        public async Task<IActionResult> GetTickets(int userId)
+        {
+            var tickets = await _userService.GetTicketsAsync(userId);
+
+            return Ok(tickets);
+        }
     }
 }

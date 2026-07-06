@@ -19,5 +19,18 @@ namespace EventManagement.MVC.Controllers
 
             return View(events);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> BookEvent(int eventId)
+        {
+            int? userId = HttpContext.Session.GetInt32("UserId");
+
+            if (userId == null)
+                return RedirectToAction("Login", "Auth");
+
+            await _eventService.BookEventAsync(userId.Value, eventId);
+
+            return RedirectToAction("BookedEvents", "Profile");
+        }
     }
 }
