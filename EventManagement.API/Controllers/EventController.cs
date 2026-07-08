@@ -10,19 +10,33 @@ namespace EventManagement.API.Controllers
     {
         private readonly IEventService _eventService;
 
-    public EventController(IEventService eventService)
+        public EventController(IEventService eventService)
         {
             _eventService = eventService;
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllEvents()
+        public async Task<IActionResult> GetAllEvents(string? search, string? category, string? location, DateTime? date, decimal? maxPrice)
         {
-            var events =
-                await _eventService.GetAllEventsAsync();
+            var events = await _eventService.GetAllEventsAsync(
+                search,
+                category,
+                location,
+                date,
+                maxPrice);
 
             return Ok(events);
         }
-    }
 
-}
+        [HttpPost("{eventId}/book")]
+        public async Task<IActionResult> BookEvent(int eventId, int userId)
+        {
+            var result = await _eventService.BookEventAsync(userId, eventId);
+
+            if (!result)
+                return BadRequest("Unable to book event.");
+
+            return Ok("Event booked successfully.");
+        }
+    }
+    }

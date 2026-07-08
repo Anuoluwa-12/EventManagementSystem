@@ -12,14 +12,17 @@ namespace EventManagement.MVC.Controllers
             _eventService = eventService;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string? search, string? category, string? location, DateTime? date, decimal? maxPrice)
         {
-            var events =
-                await _eventService.GetAllEventsAsync();
+            var events = await _eventService.GetAllEventsAsync(
+                search,
+                category,
+                location,
+                date,
+                maxPrice);
 
             return View(events);
         }
-
         [HttpPost]
         public async Task<IActionResult> BookEvent(int eventId)
         {

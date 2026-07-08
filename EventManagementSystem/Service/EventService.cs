@@ -1,6 +1,5 @@
 ﻿using EventManagementSystem.DTO;
 using EventManagementSystem.Interface;
-using Microsoft.EntityFrameworkCore;
 using System.Net.Http.Json;
 
 namespace EventManagementSystem.Service
@@ -13,13 +12,17 @@ namespace EventManagementSystem.Service
             _httpClient = httpClient;
         }
 
-        public async Task<List<EventDto>> GetAllEventsAsync()
+        public async Task<List<EventDto>> GetAllEventsAsync(string? search, string? category,string? location, DateTime? date, decimal? maxPrice)
         {
-            return await _httpClient
-                .GetFromJsonAsync<List<EventDto>>
-                ("https://localhost:7053/api/Event");
-        }
+            string url = $"https://localhost:7053/api/Event?" +
+                         $"search={search}" +
+                         $"&category={category}" +
+                         $"&location={location}" +
+                         $"&date={date:yyyy-MM-dd}" +
+                         $"&maxPrice={maxPrice}";
 
+            return await _httpClient.GetFromJsonAsync<List<EventDto>>(url);
+        }
         public async Task<bool> BookEventAsync(int userId, int eventId)
         {
             var response = await _httpClient.PostAsync(

@@ -1,48 +1,157 @@
-﻿@foreach (var item in Model)
-{
-    <div class="col-md-4 mb-4">
+﻿@model List<EventManagementSystem.DTO.EventDto>
 
-        <div class="card h-100 shadow">
+@{
+    Layout = "DashboardLayout";
+    ViewData["Title"] = "Events";
+}
 
-            <img src="@item.EventImageUrl"
-            class="card-img-top"
-            alt="Event Image">
+<link rel="stylesheet" href="~/css/events.css" />
 
-            <div class="card-body">
+<div class="container mt-5">
 
-                <h5>@item.Title</h5>
+    <h2 class="text-center mb-4">
+        Upcoming Events
+    </h2>
 
-                <p>@item.Description</p>
+    <!-- Search & Filter -->
+    <form asp-action="Index" method="get" class="row g-3 mb-5">
 
-                <p>
-                    <strong>Date:</strong>
-                    @item.EventDate.ToString("dd MMM yyyy")
-                </p>
-
-                <p>
-                    <strong>Venue:</strong>
-                    @item.Venue
-                </p>
-
-                <p>
-                    <strong>Organizer:</strong>
-                    @item.OrganizerName
-                </p>
-
-                <p>
-                    <strong>Price:</strong>
-                    ₦@item.TicketPrice
-                </p>
-
-                <a asp-action="Details"
-                asp-route-id="@item.Id"
-                class="btn btn-primary w-100 mt-2">
-                    View Details
-                </a>
-
-            </div>
-
+        <div class="col-md-3">
+            <input type="text"
+                   name="search"
+                   value="@Context.Request.Query["search"]"
+                   class="form-control"
+                   placeholder="Search events..." />
         </div>
 
+        <div class="col-md-2">
+            <select name="category" class="form-select">
+
+                <option value="">All Categories</option>
+
+                <option value="Music"
+                        selected="@(Context.Request.Query["category"] == "Music")">
+                    Music
+                </option>
+
+                <option value="Technology"
+                        selected="@(Context.Request.Query["category"] == "Technology")">
+                    Technology
+                </option>
+
+                <option value="Business"
+                        selected="@(Context.Request.Query["category"] == "Business")">
+                    Business
+                </option>
+
+                <option value="Sports"
+                        selected="@(Context.Request.Query["category"] == "Sports")">
+                    Sports
+                </option>
+
+            </select>
+        </div>
+
+        <div class="col-md-2">
+            <input type="text"
+                   name="location"
+                   value="@Context.Request.Query["location"]"
+                   class="form-control"
+                   placeholder="Location" />
+        </div>
+
+        <div class="col-md-2">
+            <input type="date"
+                   name="date"
+                   value="@Context.Request.Query["date"]"
+                   class="form-control" />
+        </div>
+
+        <div class="col-md-2">
+            <input type="number"
+                   name="maxPrice"
+                   value="@Context.Request.Query["maxPrice"]"
+                   class="form-control"
+                   placeholder="Max Price" />
+        </div>
+
+        <div class="col-md-1">
+            <button type="submit"
+                    class="btn btn-primary w-100">
+                Search
+            </button>
+        </div>
+
+    </form>
+
+    <!-- Events -->
+    <div class="row">
+
+        @if (Model == null || !Model.Any())
+        {
+            <div class="col-12">
+                <div class="alert alert-warning text-center">
+                    No events found.
+                </div>
+            </div>
+        }
+        else
+        {
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4 mb-4">
+
+                    <div class="card h-100 shadow">
+
+                        <img src="@item.EventImageUrl"
+                             class="card-img-top"
+                             alt="Event Image">
+
+                        <div class="card-body">
+
+                            <h5>@item.Title</h5>
+
+                            <p>@item.Description</p>
+
+                            <p>
+                                <strong>Date:</strong>
+                                @item.EventDate.ToString("dd MMM yyyy")
+                            </p>
+
+                            <p>
+                                <strong>Venue:</strong>
+                                @item.Venue
+                            </p>
+
+                            <p>
+                                <strong>Category:</strong>
+                                @item.Category
+                            </p>
+
+                            <p>
+                                <strong>Organizer:</strong>
+                                @item.OrganizerName
+                            </p>
+
+                            <p>
+                                <strong>Price:</strong>
+                                ₦@item.TicketPrice
+                            </p>
+
+                            <a asp-action="Details"
+                                   asp-route-id="@item.Id"
+                                   class="btn btn-primary w-100 mt-2">
+                                View Details
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+        }
+
     </div>
-}
+
+</div>
