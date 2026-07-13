@@ -13,5 +13,6 @@ namespace EventManagement.API.Data
         public DbSet<Company> Companies { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<EventRegistration> EventRegistrations { get; set; }
+        public DbSet<Ticket> Tickets { get; set; }
     }
 }

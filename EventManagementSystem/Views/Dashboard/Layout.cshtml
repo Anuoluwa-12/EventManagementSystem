@@ -1,17 +1,23 @@
 ﻿<!DOCTYPE html>
 
-<html>
+<html lang="en">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>@ViewData["Title"]</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0"/>
+
+    <title>@ViewData["Title"] - Lumievent</title>
 
     <link rel="stylesheet"
-          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
 
     <link rel="stylesheet"
-          href="~/css/dashboard.css" />
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/dashboard.css"
+          asp-append-version="true" />
 </head>
 
 <body>
@@ -25,6 +31,28 @@
             Dashboard
         </a>
 
+        @{
+            var userRole = Context.Session
+                .GetString("UserRole")?
+                .Trim();
+        }
+
+        <!-- Temporary: shows the current session role -->
+        <p style="color: yellow; padding: 5px 20px;">
+            Role: @(userRole ?? "No role found")
+        </p>
+
+        @if (string.Equals(
+                userRole,
+                "Admin",
+                StringComparison.OrdinalIgnoreCase))
+        {
+            <a asp-controller="AdminDashboard"
+                   asp-action="Index">
+                Admin Dashboard
+            </a>
+        }
+
         <a asp-controller="Event"
                asp-action="Index">
             My Events
@@ -36,31 +64,10 @@
         </a>
 
         <a asp-controller="Auth"
-               asp-action="Login">
+               asp-action="Logout">
             Logout
         </a>
 
     </div>
-
-    <div class="main-content">
-
-        <button class="menu-btn mb-3"
-                onclick="toggleSidebar()">
-            ☰
-        </button>
-
-        @RenderBody()
-
-    </div>
-
-    <script>
-            function toggleSidebar() {
-                const sidebar =
-                    document.getElementById("sidebar");
-
-                sidebar.classList.toggle("show-sidebar");
-            }
-    </script>
-   
-</body>
-</html>
+    </body>
+    </html>

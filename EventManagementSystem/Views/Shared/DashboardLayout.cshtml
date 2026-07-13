@@ -1,48 +1,90 @@
 ﻿<!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>@ViewData["Title"]</title>
-    
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>@ViewData["Title"] - Lumievent</title>
+
+    <!-- Bootstrap -->
     <link rel="stylesheet"
           href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
+    <!-- Dashboard CSS -->
     <link rel="stylesheet"
-          href="~/css/dashboard.css" />
+          href="~/css/dashboard.css"
+          asp-append-version="true" />
 
-    <link rel="shortcut icon" href="~/favicon.ico">
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,700,800|Roboto:300,400,700&display=swap" rel="stylesheet">
-	
-    <!-- FontAwesome JS-->
-        <script defer src="~/assets/fontawesome/js/all.min.js"></script>
+    <link rel="shortcut icon"
+          href="~/favicon.ico" />
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,700,800|Roboto:300,400,700&display=swap"
+          rel="stylesheet" />
+
+    <!-- Font Awesome -->
+    <script defer
+            src="~/assets/fontawesome/js/all.min.js">
+    </script>
 
     <!-- Theme CSS -->
-        <link id="theme-style" rel="stylesheet" href="~/assets/css/theme.css">
+    <link id="theme-style"
+          rel="stylesheet"
+          href="~/assets/css/theme.css"
+          asp-append-version="true" />
 </head>
 
 <body>
 
+    @{
+        var userRole =
+            Context.Session.GetString("UserRole");
+    }
+
     <div id="sidebar" class="sidebar">
 
-        <h3 class="text-center mt-4">Lumievent</h3>
+        <h3 class="text-center mt-4">
+            Lumievent
+        </h3>
 
+        <!-- Normal dashboard -->
         <a asp-controller="Dashboard"
                asp-action="Index">
+            <i class="fas fa-home me-2"></i>
             Dashboard
         </a>
 
+        <!-- Only visible to administrators -->
+        @if (string.Equals(
+                    userRole,
+                    "Admin",
+                    StringComparison.OrdinalIgnoreCase))
+        {
+            <a asp-controller="AdminDashboard"
+                   asp-action="Index"
+                   class="admin-dashboard-link">
+                <i class="fas fa-user-shield me-2"></i>
+                Admin Dashboard
+            </a>
+        }
+
         <a asp-controller="Event"
                asp-action="Index">
+            <i class="fas fa-calendar-alt me-2"></i>
             My Events
         </a>
 
         <a asp-controller="Profile"
                asp-action="Index">
+            <i class="fas fa-user me-2"></i>
             Profile
         </a>
 
         <a asp-controller="Auth"
                asp-action="Logout">
+            <i class="fas fa-sign-out-alt me-2"></i>
             Logout
         </a>
 
@@ -50,8 +92,10 @@
 
     <div class="main-content">
 
-        <button class="menu-btn"
-                onclick="toggleSidebar()">
+        <button type="button"
+                class="menu-btn"
+                onclick="toggleSidebar()"
+                aria-label="Toggle sidebar">
             ☰
         </button>
 
@@ -63,9 +107,15 @@
             function toggleSidebar() {
                 document
                     .getElementById("sidebar")
-                    .classList.toggle("show-sidebar");
+                    .classList
+                    .toggle("show-sidebar");
             }
     </script>
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false
+    )
 
 </body>
 </html>

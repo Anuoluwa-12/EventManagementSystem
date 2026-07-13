@@ -6,6 +6,25 @@
     ViewData["Title"] = "Dashboard";
 }
 
+@{
+    var userRole = Context.Session.GetString("UserRole");
+}
+
+@if (string.Equals(
+    userRole,
+    "Admin",
+    StringComparison.OrdinalIgnoreCase))
+{
+    <a
+        asp-area="Admin"
+        asp-controller="Dashboard"
+        asp-action="Index"
+        class="btn btn-primary"
+    >
+        <i class="fas fa-user-shield me-2"></i>
+        Admin Dashboard
+    </a>
+}
 <h2>
     Welcome,
     @(Context.Session.GetString("FirstName") ?? "User") 👋
