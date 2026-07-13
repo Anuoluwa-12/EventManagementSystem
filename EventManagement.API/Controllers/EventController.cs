@@ -18,13 +18,7 @@ namespace EventManagement.API.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllEvents(string? search, string? category, string? location, DateTime? date, decimal? maxPrice)
         {
-            var events = await _eventService.GetAllEventsAsync(
-                search,
-                category,
-                location,
-                date,
-                maxPrice);
-
+            var events = await _eventService.GetAllEventsAsync(search, category, location, date, maxPrice);
             return Ok(events);
         }
 

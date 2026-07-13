@@ -5,6 +5,920 @@
     ViewData["Title"] = "Events";
 }
 
+<body>    
+	<header id="header" class="header fixed-top">	    
+
+		<div class="branding">
+			<div class="container-fluid">
+				<nav class="main-nav navbar navbar-expand-lg">
+					<div class="site-logo"><a class="scrollto" href="#hero-block"><img class="logo-icon" src="~/assets/images/logo-white.svg" alt="logo"></a></div>
+					
+					<div class="navbar-btn order-lg-2"><a class="btn btn-secondary" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Tickets</a></div>
+					
+					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+						<span class="navbar-toggler-icon"></span>
+					</button>
+					
+					<div id="navigation" class="navbar-collapse collapse  justify-content-lg-end me-lg-3">
+						<ul class="nav navbar-nav">
+							
+							<li class="nav-item"><a class="nav-link scrollto" href="#about-section">About</a></li>                                              
+							<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Speakers</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#schedule-section">Schedule</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#tickets-section">Tickets</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#venue-section">Venue</a></li>
+							<li class="nav-item"><a class="nav-link scrollto" href="#sponsors-section">Sponsors</a></li>
+						</ul><!--//nav-->
+					</div><!--//navbar-collapse-->
+
+				</nav><!--//main-nav-->
+				
+			</div><!--//container-->
+		</div><!--//branding-->
+	</header><!--//header-->
+	
+	<div id="hero-block" class="hero-block">
+		<div id="hero-carousel" class="hero-carousel carousel slide carousel-fade" data-ride="carousel">
+			<div class="carousel-inner">
+				<div class="carousel-item-1 carousel-item active">
+				</div>
+				<div class="carousel-item-2 carousel-item">
+				</div>
+				<div class="carousel-item-3 carousel-item">
+				</div>
+			</div>
+		</div>
+		<div class="hero-block-mask"></div>
+		<div class="container">
+			<div class="hero-text-block">
+				<h1 class="hero-heading mb-2">DevConf 2027</h1>
+				<div class="hero-meta mb-3"><i class="far fa-calendar-alt me-2"></i>12 - 15 Oct <i class="fas fa-map-marker-alt mx-2"></i>Nigeria, Lagos</div>
+				<div class="hero-intro mb-4">  <br>Tech Conferences and Events.</div>
+				<div class="hero-cta"><a class="btn btn-primary btn-lg" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Get Tickets</a></div>
+				
+			</div><!--//hero-text-block-->
+		</div><!--//container-->
+
+	</div><!--//hero-block-->
+	
+	<div class="stats-block theme-bg-primary text-white py-4 text-center">
+		<div class="container">
+			<div class="row">
+				<div class="col-6 col-md-3">
+					<div class="item">
+						<div class="number">2000+</div>
+						<div class="unit">Attendees</div>
+					</div><!--//item-->
+				</div><!--//col-->
+				<div class="col-6 col-md-3">
+					<div class="item">
+						<div class="number">3</div>
+						<div class="unit">Days</div>
+					</div><!--//item-->
+				</div><!--//col-->
+				<div class="col-6 col-md-3">
+					<div class="item">
+						<div class="number">60+</div>
+						<div class="unit">Talks</div>
+					</div><!--//item-->
+				</div><!--//col-->
+				<div class="col-6 col-md-3">
+					<div class="item">
+						<div class="number">10+</div>
+						<div class="unit">Workshops</div>
+					</div><!--//item-->
+				</div><!--//col-->
+			</div>
+		</div><!--//container-->
+	</div><!--//stats-block-->
+
+	<section id="about-section" class="about-section section theme-bg-light">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">About DevConf</h3>
+			<div class="section-intro single-col-max mx-auto mb-4">Join developers, designers, entrepreneurs, and tech enthusiasts for a day of inspiring talks, networking, and groundbreaking ideas that shape the future of technology. <strong>Are you a conference organizer? Want to source developer t-shirts as part of your conference package?</strong> Check out our programming tees at <a href="https://made4dev.com/" target="_blank">made4dev.com</a> - developers love them! Want to get a bulk discount or just want to use one of the t-shirt designs? Please email <a href="mailto:hello@made4dev.com">hello@made4dev.com</a> and we can discuss.</div>
+			<div class="benefits-list text-center mb-3">
+				<h4 class="text-center mb-4">Why Join Us</h4>
+				<ul class="list-unstyled text-start d-inline-block">
+					<li><i class="fas fa-check-circle me-2"></i>Gain insights into emerging technologies and industry trends</li>
+					<li><i class="fas fa-check-circle me-2"></i>Learn from leading technology experts and innovators</li>
+					<li><i class="fas fa-check-circle me-2"></i>Discover powerful tools, platforms, and best practices</li>
+					<li><i class="fas fa-check-circle me-2"></i>Connect with developers, founders, and technology professionals</li>
+					<li><i class="fas fa-check-circle me-2"></i>Build valuable professional connections and partnerships</li>
+					<li><i class="fas fa-check-circle me-2"></i>Participate in practical workshops and live demonstrations</li>
+					<li><i class="fas fa-check-circle me-2"></i>Relax and network at the official conference after-party</li>
+				</ul>
+			</div><!--//benefits-list-->
+			<div class="event-countdown text-center mb-3">		   
+				<h4 class="countdown-intro mb-2 text-center mb-3">Event Starts In:</h4>
+				<div id="countdown-box" class="countdown-box"></div>
+			</div><!--//event-countdown-->
+			<div class="about-cta text-center mb-5"><a class="btn btn-secondary btn-lg  mb-5" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Get Your Ticket Today</a></div>
+		</div><!--//container-->
+	
+	<section id="speakers-section" class="speakers-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">Speakers</h3>
+			<div class="section-intro text-center single-col-max mx-auto mb-5">Meet our inspiring speakers who are leaders in their fields and ready to share their knowledge and experiences with you.</div>
+			<div class="row">
+				<div class="col-6 col-lg-3 mb-4">
+					<div class="card rounded-0">
+						<a href="#modal-speaker-1" data-bs-toggle="modal" data-bs-target="#modal-speaker-1"><img src="~/assets/images/enoch.jpeg" class="card-img-top rounded-0" alt=""></a>
+						<div class="card-body">
+							<h5 class="card-title mb-2">Enoch Lamikanra</h5>
+							<div class="card-text mb-3">
+								<div class="meta">Software Developer</div>
+								<div class="meta">-</div>
+							</div><!--//card-text-->
+							<a href="#modal-speaker-1" data-bs-toggle="modal" data-bs-target="#modal-speaker-1">Read more &rarr;</a>
+						</div><!--//card-->
+						<div class="card-footer text-muted">
+							<ul class="social-list list-inline mb-0">
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+							</ul><!--//social-list-->
+						</div>
+					</div><!--//card-->t
+				</div><!--//col-->
+				<div class="col-6 col-lg-3 mb-4">
+					<div class="card rounded-0">
+						<a href="#modal-speaker-1" data-bs-toggle="modal" data-bs-target="#modal-speaker-2"><img src="~/assets/images/OT.jpeg" class="card-img-top rounded-0" alt=""></a>
+						<div class="card-body">
+							<h5 class="card-title mb-2">Omotayo Odupitan</h5>
+							<div class="card-text mb-3">
+								<div class="meta">Senior Software Engineer</div>
+								<div class="meta">Neegles</div>
+							</div><!--//card-text-->
+							<a href="#modal-speaker-1" data-bs-toggle="modal" data-bs-target="#modal-speaker-2">Read more &rarr;</a>
+						</div><!--//card-->
+						<div class="card-footer text-muted">
+							<ul class="social-list list-inline mb-0">
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+							</ul><!--//social-list-->
+						</div>
+					</div><!--//card-->
+				</div><!--//col-->
+				<div class="col-6 col-lg-3 mb-4">
+					<div class="card rounded-0">
+						<a href="#modal-speaker-1" data-bs-toggle="modal" data-bs-target="#modal-speaker-3"><img src="~/assets/images/speakers/speaker-3.jpg" class="card-img-top rounded-0" alt=""></a>
+						<div class="card-body">
+							<h5 class="card-title mb-2">Tim Doe</h5>
+							<div class="card-text mb-3">
+								<div class="meta">Software Developer</div>
+								<div class="meta">React Core Team</div>
+							</div><!--//card-text-->
+							<a href="#modal-speaker-1" data-bs-toggle="modal" data-bs-target="#modal-speaker-3">Read more &rarr;</a>
+						</div><!--//card-->
+						<div class="card-footer text-muted">
+							<ul class="social-list list-inline mb-0">
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+							</ul><!--//social-list-->
+						</div>
+					</div><!--//card-->
+				</div><!--//col-->
+				
+			<div class="speakers-cta text-center py-3"><a class="btn btn-primary btn-lg" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Get Tickets</a></div>
+		</div><!--//container-->
+		
+	</section><!--//speakers-section-->
+	
+	<div class="container">
+		<hr>
+	</div>
+	
+	<section id="schedule-section" class="schedule-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-5">Schedule</h3>
+			
+			<!-- Nav tabs -->
+			<ul class="schedule-nav nav nav-pills nav-fill" id="myTab" role="tablist">
+				<li class="nav-item me-2">
+					<a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#tab-1-content" role="tab" aria-controls="tab-1-content" aria-selected="true">
+						<span class="heading">Day 1</span>
+						<span class="meta">(Wed 12, Oct)</span>
+					</a>
+				</li>
+				<li class="nav-item me-2">
+					<a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#tab-2-content" role="tab" aria-controls="tab-2-content" aria-selected="false">
+						<span class="heading">Day 2</span>
+						<span class="meta">(Thu 13, Oct)</span>
+					</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#tab-3-content" role="tab" aria-controls="tab-3-content" aria-selected="false">
+						<span class="heading">Day 3</span>
+						<span class="meta">(Fri 14, Oct)</span>
+					</a>
+				</li>
+			</ul>
+			
+				<!-- Tab panes -->
+				<div class="schedule-tab-content tab-content">
+
+					<div class="tab-pane fade show active"
+						 id="tab-1-content"
+						 role="tabpanel"
+						 aria-labelledby="tab-1">
+
+						<!-- Registration -->
+						<div class="item item-other">
+							<div class="meta">
+								<h4 class="time mb-3">8:30 - 9:00</h4>
+							</div>
+
+							<div class="content">
+								<h3 class="title mb-3">Registration &amp; Welcome</h3>
+
+								<div class="location mb-3">
+									<i class="fas fa-map-marker-alt me-2"></i>
+									Main Entrance
+								</div>
+
+								<div class="desc">
+									Collect your conference badge, meet other attendees, and get
+									settled before the opening session begins.
+								</div>
+							</div>
+						</div>
+
+						<!-- Opening Session -->
+						<div class="item item-other">
+							<div class="meta">
+								<h4 class="time mb-3">9:00 - 9:20</h4>
+							</div>
+
+							<div class="content">
+								<h3 class="title mb-3">Opening Remarks</h3>
+
+								<div class="location mb-3">
+									<i class="fas fa-map-marker-alt me-2"></i>
+									Main Conference Hall
+								</div>
+
+								<div class="desc">
+									A brief introduction to the conference theme, the day’s agenda,
+									and what attendees can expect from each session.
+								</div>
+							</div>
+						</div>
+
+						<!-- Speaker 1 -->
+						<div class="item item-talk">
+							<div class="meta">
+								<h4 class="time mb-3">9:20 - 10:00</h4>
+
+								<div class="profile">
+									<a href="#modal-speaker-1"
+										   data-bs-toggle="modal"
+										   data-bs-target="#modal-speaker-1">
+										<img class="profile-image rounded-circle mb-2"
+											 src="~/assets/images/enoch.jpeg"
+											 alt="Enoch Lamikanra">
+										</a>
+
+										<div class="name">
+											<a class="theme-link"
+												   href="#modal-speaker-1"
+												   data-bs-toggle="modal"
+												   data-bs-target="#modal-speaker-1">
+												Enoch Lamikanra
+											</a>
+										</div>
+									</div>
+								</div>
+
+								<div class="content">
+									<h3 class="title mb-3">
+										Building Better Software: From Idea to Production
+									</h3>
+
+									<div class="location mb-3">
+										<i class="fas fa-map-marker-alt me-2"></i>
+										Main Conference Hall
+									</div>
+
+									<div class="desc">
+										Enoch Lamikanra shares practical lessons for transforming a
+										software idea into a reliable product. The session will cover
+										planning, development workflows, testing, deployment, and the
+										common mistakes developers should avoid.
+									</div>
+								</div>
+							</div>
+
+							<!-- Coffee Break -->
+							<div class="item item-other">
+								<div class="meta">
+									<h4 class="time mb-3">10:00 - 10:30</h4>
+								</div>
+
+								<div class="content">
+									<h3 class="title mb-3">Coffee Break &amp; Networking</h3>
+
+									<div class="location mb-3">
+										<i class="fas fa-map-marker-alt me-2"></i>
+										Networking Lounge
+									</div>
+
+									<div class="desc">
+										Enjoy light refreshments while connecting with developers,
+										founders, designers, and other technology professionals.
+									</div>
+								</div>
+							</div>
+
+							<!-- Speaker 2 -->
+							<div class="item item-talk">
+								<div class="meta">
+									<h4 class="time mb-3">10:30 - 11:15</h4>
+
+									<div class="profile">
+										<a href="#modal-speaker-2"
+											   data-bs-toggle="modal"
+											   data-bs-target="#modal-speaker-2">
+											<img class="profile-image rounded-circle mb-2"
+											 src="~/assets/images/OT.jpeg"
+											 alt="Omotayo Odupitan">
+											 </a>
+
+											<div class="name">
+												<a class="theme-link"
+													   href="#modal-speaker-2"
+													   data-bs-toggle="modal"
+													   data-bs-target="#modal-speaker-2">
+													Omotayo Odupitan
+												</a>
+											</div>
+										</div>
+									</div>
+
+									<div class="content">
+										<h3 class="title mb-3">
+											Engineering Scalable Applications for Real-World Growth
+										</h3>
+
+										<div class="location mb-3">
+											<i class="fas fa-map-marker-alt me-2"></i>
+											Main Conference Hall
+										</div>
+
+										<div class="desc">
+											Omotayo Odupitan explores the engineering decisions behind
+											scalable applications. Attendees will learn how to structure
+											codebases, improve performance, manage technical debt, and build
+											systems that can support growing users and business requirements.
+										</div>
+									</div>
+								</div>
+
+								<!-- Speaker 3 -->
+								<div class="item item-talk">
+									<div class="meta">
+										<h4 class="time mb-3">11:15 - 12:00</h4>
+
+										<div class="profile">
+											<a href="#modal-speaker-3"
+												   data-bs-toggle="modal"
+												   data-bs-target="#modal-speaker-3">
+												<img class="profile-image rounded-circle mb-2"
+													 src="~/assets/images/speakers/speaker-3.jpg"
+													 alt="Tim Doe">
+												</a>
+
+												<div class="name">
+													<a class="theme-link"
+														   href="#modal-speaker-3"
+														   data-bs-toggle="modal"
+														   data-bs-target="#modal-speaker-3">
+														Tim Doe
+													</a>
+												</div>
+											</div>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">
+												Modern Frontend Development with React
+											</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Main Conference Hall
+											</div>
+
+											<div class="desc">
+												Tim Doe discusses modern approaches to building fast,
+												accessible, and maintainable React applications. The session
+												will cover component architecture, state management,
+												performance optimization, and frontend best practices.
+											</div>
+										</div>
+									</div>
+
+									<!-- Panel Discussion -->
+									<div class="item item-other">
+										<div class="meta">
+											<h4 class="time mb-3">12:00 - 12:40</h4>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">
+												Panel Discussion: The Future of Software Development
+											</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Main Conference Hall
+											</div>
+
+											<div class="desc">
+												All three speakers discuss emerging technologies, artificial
+												intelligence, developer careers, software engineering trends,
+												and the skills developers need to remain relevant.
+											</div>
+										</div>
+									</div>
+
+									<!-- Questions -->
+									<div class="item item-other">
+										<div class="meta">
+											<h4 class="time mb-3">12:40 - 13:00</h4>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">Audience Questions &amp; Answers</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Main Conference Hall
+											</div>
+
+											<div class="desc">
+												An interactive session where attendees can ask the speakers
+												questions about software development, technology careers,
+												product development, and industry opportunities.
+											</div>
+										</div>
+									</div>
+
+									<!-- Lunch -->
+									<div class="item item-other">
+										<div class="meta">
+											<h4 class="time mb-3">13:00 - 14:00</h4>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">Lunch Break</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Dining Area
+											</div>
+
+											<div class="desc">
+												Lunch will be served to attendees, with additional time to
+												connect with speakers, sponsors, and other conference guests.
+											</div>
+										</div>
+									</div>
+
+									<!-- Workshop -->
+									<div class="item item-other">
+										<div class="meta">
+											<h4 class="time mb-3">14:00 - 15:30</h4>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">
+												Practical Workshop: Building and Deploying a Web Application
+											</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Workshop Room
+											</div>
+
+											<div class="desc">
+												A guided practical session covering the process of creating,
+												testing, and deploying a modern web application. Attendees are
+												encouraged to participate with their laptops.
+											</div>
+										</div>
+									</div>
+
+									<!-- Closing -->
+									<div class="item item-other">
+										<div class="meta">
+											<h4 class="time mb-3">15:30 - 16:00</h4>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">Closing Remarks</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Main Conference Hall
+											</div>
+
+											<div class="desc">
+												A summary of the day’s major lessons, acknowledgements for the
+												speakers and sponsors, and information about upcoming technology
+												events.
+											</div>
+										</div>
+									</div>
+
+									<!-- After-party -->
+									<div class="item item-other">
+										<div class="meta">
+											<h4 class="time mb-3">18:00 - 20:00</h4>
+										</div>
+
+										<div class="content">
+											<h3 class="title mb-3">Networking Dinner &amp; After-party</h3>
+
+											<div class="location mb-3">
+												<i class="fas fa-map-marker-alt me-2"></i>
+												Event Lounge
+											</div>
+
+											<div class="desc">
+												Relax after the conference, enjoy dinner and entertainment,
+												and continue building meaningful connections with attendees and
+												speakers.
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+					
+				</div><!--//tab-1-content-->
+				<div class="tab-pane no-timeline" id="tab-2-content" role="tabpanel" aria-labelledby="tab-2">
+					<h4 class="text-center py-5 text-muted">Day 2 Agenda Coming Soon...</h4>
+				</div><!--//tab-2-content-->
+				<div class="tab-pane no-timeline" id="tab-3-content" role="tabpanel" aria-labelledby="tab-3">
+					<h4 class="text-center py-5 text-muted">Day 3 Agenda Coming Soon...</h4>
+				</div><!--//tab-3-content-->
+			</div><!--//schedule-tab-content-->
+			<div class="schedule-cta text-center mx-auto"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" class="btn btn-primary btn-lg me-md-2 d-block d-md-inline-block mb-3 mb-md-0" target="_blank">Download Schedule</a><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" class="btn btn-secondary btn-lg d-block d-md-inline-block" target="_blank">Buy Tickets</a></div>
+		</div><!--//container-->
+	</section><!--//schedule-section-->
+	
+	<section id="tickets-section" class="tickets-section section theme-bg-light">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">Tickets</h3>
+			<div class="section-intro single-col-max mx-auto text-center mb-4">You can use 3rd party platforms such as <a class="theme-link" href="https://www.eventbrite.com/" target="_blank">eventbrite</a> and <a class="theme-link" href="https://www.tickettailor.com/" target="_blank">tickettailor</a> to sell your tickets.</div>
+			
+			<div class="row pricing mb-5">
+				<div class="col-12 col-md-4 p-2 p-lg-4">
+					<div class="card rounded-0 border-0">
+						<div class="card-body p-0">
+							<div class="heading  text-center p-3">
+								<h4 class="text-white mb-0">Super Early Bird</h4>
+							</div>
+							<div class="info p-3">
+										<div class="price-figure text-center mb-3"><span class="currency">₦</span><span class="number">250</span></div>
+								<div class="desc px-3">
+									Purchase before 1st Oct. Only 50 tickets available. There will be discount for the first 10 people. 
+								</div>
+							</div><!--//info-->
+						</div><!--//card-body-->
+						<div class="card-footer text-center">
+							<a href="#" class="btn btn-primary disabled">SOLD OUT</a>
+						</div>
+					</div><!--//card-->
+				</div><!--//col-->
+				<div class="col-12 col-md-4 p-2 p-lg-4">
+					<div class="card card-special rounded-0 border-0">
+						<div class="card-body p-0">
+							<div class="heading  text-center p-3">
+								<h4 class="text-white mb-0">Early Bird</h4>
+							</div>
+							<div class="info p-3">
+											<div class="price-figure text-center"><span class="currency">₦</span><span class="number">350</span></div>
+								<div class="desc px-3">
+									Purchase before 1st June 2022. Only 100 tickets available. Don't snooze!. 
+								</div>
+							</div><!--//info-->
+						</div><!--//card-body-->
+						<div class="card-footer text-center">
+							<a href="#" class="btn btn-primary">Buy Now</a>
+						</div>
+					</div><!--//card-->
+				</div><!--//col-->
+				<div class="col-12 col-md-4 p-2 p-lg-4">
+					<div class="card rounded-0 border-0">
+						<div class="card-body p-0">
+							<div class="heading  text-center p-3">
+								<h4 class="text-white mb-0">Regular</h4>
+							</div>
+							<div class="info p-3">
+											<div class="price-figure text-center mb-3"><span class="currency">₦</span><span class="number">500</span></div>
+								<div class="desc px-3">
+									Additional freebies and benefits included. You do not want to miss out on this. 						    
+								</div>
+							</div><!--//info-->
+						</div><!--//card-body-->
+						<div class="card-footer text-center">
+							<a href="#" class="btn btn-primary">Buy Now</a>
+						</div>
+					</div><!--//card-->
+				</div><!--//col-->
+			</div><!--//pricing-->
+			
+					<div class="offers text-center bg-white p-4 p-lg-5">
+						<h4 class="mb-3">What's included?</h4>
+
+						<ul class="offers-list list-unstyled d-inline-block mx-auto text-start">
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-user-tie"></i>
+								</span>
+								Insightful sessions from experienced software professionals
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-laptop-code"></i>
+								</span>
+								Access to a practical web development workshop
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-comments"></i>
+								</span>
+								Interactive panel discussion and audience Q&amp;A
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-users"></i>
+								</span>
+								Networking opportunities with developers and tech professionals
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-utensils"></i>
+								</span>
+								Complimentary refreshments and lunch
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-certificate"></i>
+								</span>
+								Certificate of participation for registered attendees
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-file-code"></i>
+								</span>
+								Access to presentation slides and useful digital resources
+							</li>
+
+							<li>
+								<span class="icon-holder me-2">
+									<i class="fas fa-glass-cheers"></i>
+								</span>
+								Networking dinner and conference after-party
+							</li>
+						</ul>
+					</div>
+
+		</div><!--//container-->
+	</section><!--//tickets-section-->
+		</div><!--//container-->
+	</section><!--//tickets-section-->
+
+
+	<section id="venue-section" class="venue-section section theme-bg-primary text-white">
+		<div class="container">
+
+			<h3 class="section-heading text-center mb-5 text-white">
+				Event Venue
+			</h3>
+
+			<div class="row gx-5 py-lg-5">
+				<div class="col-12 col-lg-7 h-100">
+
+					<div class="desc">
+						<h4 class="text-white mb-3">How to Get Here</h4>
+
+						<p>
+							The Tech Conference will take place at
+							<strong>The Civic Centre</strong>, located in
+								<strong>Ozumba Mbadiwe Avenue, Victoria Island, Lagos.</strong>. The venue is easily accessible
+							by private vehicle, public transport, and ride-hailing services.
+							Please arrive at least 30 minutes before the first session to
+							complete registration and collect your conference badge.
+						</p>
+
+						<div class="row pt-3">
+
+							<!-- Ride-hailing -->
+							<div class="col-12 col-md-6 mb-4">
+								<div class="grid-item p-4">
+									<h5 class="text-white mb-3 title">
+										<i class="fas fa-taxi me-2"></i>
+										By Ride-Hailing Service
+									</h5>
+
+										<p>
+											Use Uber, Bolt, or another ride-hailing service and enter
+											<strong>The Civic Centre, Victoria Island</strong> as your destination.
+											You can be dropped off directly at the venue’s main entrance.
+										</p>
+
+									<a class="text-white"
+										   href="#"
+										   target="_blank"
+										   rel="noopener noreferrer">
+										View Location &rarr;
+									</a>
+								</div>
+							</div>
+
+							<!-- Car -->
+							<div class="col-12 col-md-6 mb-4">
+								<div class="grid-item p-4">
+									<h5 class="text-white mb-3 title">
+										<i class="fas fa-car me-2"></i>
+										By Car
+									</h5>
+
+									<p>
+										Attendees driving to the conference can use the venue's
+										designated parking area. Parking spaces may be limited,
+										so early arrival is recommended.
+									</p>
+
+									<a class="text-white"
+										   href="#"
+										   target="_blank"
+										   rel="noopener noreferrer">
+										Check Driving Route &rarr;
+									</a>
+								</div>
+							</div>
+
+							<!-- Bus -->
+							<div class="col-12 col-md-6 mb-4">
+								<div class="grid-item p-4">
+									<h5 class="text-white mb-3 title">
+										<i class="fas fa-bus-alt me-2"></i>
+										By Public Transport
+									</h5>
+
+										<p>
+											Take a bus heading towards Victoria Island via Ozumba Mbadiwe Avenue.
+											Ask to stop at <strong>The Civic Centre, opposite 1004 Estate</strong>.
+											From the drop-off point, the venue is only a short walk away.
+										</p>
+
+									<a class="text-white"
+										   href="#"
+										   target="_blank"
+										   rel="noopener noreferrer">
+										View Transport Options &rarr;
+									</a>
+								</div>
+							</div>
+
+							<!-- Airport -->
+							<div class="col-12 col-md-6 mb-4">
+								<div class="grid-item p-4">
+									<h5 class="text-white mb-3 title">
+										<i class="fas fa-plane-arrival me-2"></i>
+										From the Airport
+									</h5>
+
+										<p>
+											Visitors arriving by air can take a taxi or ride-hailing service from
+											<strong>Murtala Muhammed International Airport</strong> to The Civic Centre,
+											Victoria Island. Travel time will depend on traffic conditions.
+										</p>
+									<a class="text-white"
+										   href="#"
+										   target="_blank"
+										   rel="noopener noreferrer">
+										Get Directions &rarr;
+									</a>
+								</div>
+							</div>
+
+						</div><!--//row-->
+					</div><!--//desc-->
+
+				</div><!--//col-->
+			</div><!--//row-->
+
+		</div><!--//container-->
+	</section><!--//venue-section-->
+
+	<section id="sponsors-section" class="sponsors-section section">
+		<div class="container">
+			<h3 class="section-heading text-center mb-3">Sponsors &amp; Partners</h3>
+				<div class="section-intro text-center single-col-max mx-auto mb-5">
+					Interested in sponsoring the Tech Conference? Partner with us to showcase your brand, connect with technology professionals, and support innovation. Get in touch to explore our sponsorship opportunities.
+				</div>
+
+			<div class="row logos justify-content-center">
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-1.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-2.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-3.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-4.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-5.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-6.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-7.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-8.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-9.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-10.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-11.svg" alt=""></div>
+				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-12.svg" alt=""></div>
+			</div><!--//row-->
+			<div class="sponsors-cta text-center pt-5"><a class="btn-primary btn btn-lg" href="#">Become A Sponsor</a></div>
+		</div><!--//container-->
+	</section><!--//sponsors-section-->
+
+	<footer class="footer py-5 theme-bg-primary">
+		<div class="container text-center">
+			
+			<ul class="social-list list-inline mb-4"> 
+				<li class="list-inline-item me-3"><a href="#"><i class="fas fa-envelope"></i></a></li>
+				<li class="list-inline-item me-3"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+				<li class="list-inline-item me-3"><a href="#"><i class="fa-brands fa-instagram fa-fw"></i></a></li>
+				<li class="list-inline-item me-0"><a href="#"><i class="fa-brands fa-youtube fa-fw"></i></a></li>
+			</ul><!--//social-list-->
+			
+			
+			<ul class="footer-links list-inline mx-auto mb-4">
+				<li class="list-inline-item"><a href="#">Code of Conduct</a></li>
+				<li class="list-inline-item">|</li>
+				<li class="list-inline-item"><a href="#">Terms</a></li>
+				<li class="list-inline-item">|</li>
+				<li class="list-inline-item me-0"><a href="#">Privacy</a></li>
+			</ul><!--//footer-link-->
+			
+			 <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+			<small class="copyright">Designed with <i class="fas fa-heart" style="color: #EC645E;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+			
+		</div><!--//container-->	    
+	</footer>
+
+	<!-- Modal Speaker -->
+	<div class="modal modal-speaker modal-speaker-1" id="modal-speaker-1" tabindex="-1" role="dialog" aria-labelledby="speaker-1-ModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 id="speaker-1-ModalLabel" class="modal-title sr-only"
+>Speaker Name</h4>
+				</div>
+				<div class="modal-body p-0">
+					<div class="theme-bg-light p-5">
+						<div class="row">
+							<div class="col-12 col-md-auto text-center">
+							    <img class="profile-image mb-3 mb-md-0 me-md-4 rounded-circle mx-auto" src="assets/images/speakers/speaker-1.jpg" alt="" />
+							</div>
+							
+							<div class="col text-center text-md-start mx-auto">
+								<h2 class="name mb-2">Speaker Name</h2>
+								<div class="meta">Job Title Or Position</div>
+								<div class="meta mb-2">Company Or Organization</div>
+								<ul class="social-list list-inline mb-0">								
+									<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+									<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+									<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+								</ul><!--//social-list--> 
+							</div><!--//col-->
+						</div><!--//row-->
+					</div>
+						<!--<div class="desc p-4 p-lg-5">
+						<p>You can put speaker's bio or talk related info here. Duis a mi quis metus porttitor eleifend. Pellentesque finibus ultrices imperdiet. Maecenas auctor tortor quis risus tincidunt, mattis mattis leo placerat. Fusce metus augue, sagittis eget enim vel, venenatis auctor est. In interdum felis massa, ac porta nunc pretium non. In fringilla orci vitae imperdiet malesuada. Vestibulum feugiat lobortis est, in sagittis nisi molestie vel. Mauris ultrices vitae lectus eu feugiat. Fusce semper, nisi at placerat mollis, augue elit pretium enim, eu pellentesque justo purus et lectus. </p>
+						<p class="mb-0">Donec neque magna, molestie vel varius ut, pretium a urna. Pellentesque placerat nunc eu condimentum pellentesque. Vivamus dictum nisl leo, id fermentum lectus porttitor et. Pellentesque tristique erat libero, condimentum porttitor nisl pharetra et.</p>
+					</div>-->
+
+				</div><!--//modal-body-->
+			</div><!--//modal-content-->
+		</div><!--//modal-dialog-->
+	</div><!--//modal-->
+	
+	<!-- Javascript -->          
+	<script src="assets/plugins/popper.min.js"></script>
+	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
+	<script src="assets/plugins/smoothscroll.min.js"></script>
+	<script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
+	<script src="assets/js/main.js"></script>  
+
+</body>
 <link rel="stylesheet" href="~/css/events.css" />
 
 <div class="container mt-5">

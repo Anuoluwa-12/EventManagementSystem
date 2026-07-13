@@ -15,10 +15,7 @@ public class UserService : IUserService
     private readonly IConfiguration _config;
     private readonly PasswordHasher<User> _passwordHasher;
     private readonly IWebHostEnvironment _environment;
-    public UserService(
-      ApplicationDbContext context,
-      IConfiguration config,
-      IWebHostEnvironment environment)
+    public UserService(ApplicationDbContext context, IConfiguration config,IWebHostEnvironment environment)
     {
         _context = context;
         _config = config;
@@ -123,8 +120,7 @@ public class UserService : IUserService
     }
 
     //CORPORATE ONBOARDING
-    public async Task<string> CorporateOnboardingAsync(
-    CorporateOnboardingDto dto)
+    public async Task<string> CorporateOnboardingAsync(CorporateOnboardingDto dto)
     {
         var existingUser = await _context.Users
             .FirstOrDefaultAsync(x => x.Email == dto.Email);
@@ -187,9 +183,7 @@ public class UserService : IUserService
     }
 
     //UPDATE PROFILE
-    public async Task<bool> UpdateProfileAsync(
-    int userId,
-    UpdateProfileDto dto)
+    public async Task<bool> UpdateProfileAsync(int userId, UpdateProfileDto dto)
     {
         var user = await _context.Users
             .FirstOrDefaultAsync(x => x.Id == userId);
@@ -235,9 +229,7 @@ public class UserService : IUserService
 
         return true;
     }
-    public async Task<bool> UpdateAccountTypeAsync(
-    int userId,
-    string accountType)
+    public async Task<bool> UpdateAccountTypeAsync(int userId, string accountType)
     {
         var user = await _context.Users.FindAsync(userId);
 
@@ -286,6 +278,7 @@ public class UserService : IUserService
             })
             .ToListAsync();
     }
+
     //  JWT 
     private string GenerateJwtToken(User user)
     {

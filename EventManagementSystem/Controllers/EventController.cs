@@ -14,13 +14,7 @@ namespace EventManagement.MVC.Controllers
 
         public async Task<IActionResult> Index(string? search, string? category, string? location, DateTime? date, decimal? maxPrice)
         {
-            var events = await _eventService.GetAllEventsAsync(
-                search,
-                category,
-                location,
-                date,
-                maxPrice);
-
+            var events = await _eventService.GetAllEventsAsync(search, category, location, date, maxPrice);
             return View(events);
         }
         [HttpPost]
