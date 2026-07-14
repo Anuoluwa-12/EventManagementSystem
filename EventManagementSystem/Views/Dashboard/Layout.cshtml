@@ -5,12 +5,12 @@
     <meta charset="utf-8" />
 
     <meta name="viewport"
-          content="width=device-width, initial-scale=1.0"/>
+          content="width=device-width, initial-scale=1.0" />
 
     <title>@ViewData["Title"] - Lumievent</title>
 
     <link rel="stylesheet"
-          href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
     <link rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
@@ -69,5 +69,14 @@
         </a>
 
     </div>
-    </body>
-    </html>
+
+    <div id="main" class="main-content">
+        @RenderBody()
+    </div>      
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+</body>
+</html>

@@ -2,12 +2,20 @@
 
 @{
     ViewData["Title"] = "Admin Dashboard";
-    Layout = "~/Views/Dashboard/Layout.cshtml";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
 }
 
-<section class="admin-dashboard">
+@if (Model is null)
+{
+    <div class="alert alert-danger">
+        The admin dashboard information could not be loaded.
+    </div>
+}
+else
+{
+    <section class="admin-dashboard">
 
-    <div class="dashboard-heading">
+        <div class="dashboard-heading">
         <div>
             <h2>Platform Overview</h2>
 
@@ -136,4 +144,6 @@
         </div>
 
     </div>
-</section>
+
+    </section>
+}

@@ -4,7 +4,5 @@ namespace EventManagementSystem.Interface;
 
 public interface IAdminDashboardApiService
 {
-    Task<AdminDashboardViewModel?> GetDashboardAsync(
-        string accessToken
-    );
+    Task<AdminDashboardViewModel?> GetDashboardAsync();
 }

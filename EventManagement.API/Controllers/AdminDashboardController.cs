@@ -2,10 +2,10 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EventManagement.API.Controllers.Admin;
+namespace EventManagement.API.Controllers;
 
 [ApiController]
-[Route("api/admin/dashboard")]
+[Route("api/[controller]")]
 [Authorize(Roles = "Admin")]
 public class AdminDashboardController : ControllerBase
 {

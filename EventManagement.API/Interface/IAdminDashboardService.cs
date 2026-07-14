@@ -4,8 +4,6 @@ namespace EventManagement.API.Interface
 {
     public interface IAdminDashboardService
     {
-        Task<AdminDashboardDto> GetDashboardAsync(
-            CancellationToken cancellationToken = default
-        );
+        Task<AdminDashboardDto> GetDashboardAsync();
     }
 }

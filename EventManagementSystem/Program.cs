@@ -1,38 +1,23 @@
 using EventManagementSystem.Interface;
 using EventManagementSystem.Service;
-
 var builder = WebApplication.CreateBuilder(args);
 
-// MVC
+// Add services to the container.
 builder.Services.AddControllersWithViews();
-
-// Required backing store for session
-builder.Services.AddDistributedMemoryCache();
-
-// Session configuration
-builder.Services.AddSession(options =>
-{
-    options.IdleTimeout = TimeSpan.FromHours(2);
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
-});
-
-// Existing application services
 builder.Services.AddHttpClient();
-
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IProfileService, ProfileService>();
 builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddSession();
+builder.Services.AddHttpContextAccessor();
 
-// Backend API URL
 var apiBaseUrl =
     builder.Configuration["ApiSettings:BaseUrl"]
     ?? throw new InvalidOperationException(
         "ApiSettings:BaseUrl is missing."
     );
 
-// Admin dashboard API service
 builder.Services.AddHttpClient<
     IAdminDashboardApiService,
     AdminDashboardApiService
@@ -40,29 +25,26 @@ builder.Services.AddHttpClient<
 {
     client.BaseAddress = new Uri(apiBaseUrl);
 });
-
 var app = builder.Build();
 
+// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
+    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
-
-app.MapStaticAssets();
-
-app.UseRouting();
-
-// Session must be available before controllers run
 app.UseSession();
+app.UseRouting();
 
 app.UseAuthorization();
 
+app.MapStaticAssets();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Auth}/{action=Login}/{id?}"
-);
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();

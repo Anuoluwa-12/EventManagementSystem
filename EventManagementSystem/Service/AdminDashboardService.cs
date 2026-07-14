@@ -1,37 +1,44 @@
-﻿using System.Net.Http.Headers;
-using System.Net.Http.Json;
+﻿using EventManagementSystem.DTO;
 using EventManagementSystem.Interface;
 using EventManagementSystem.Models.Admin;
+using System.Net.Http.Json;
 
 namespace EventManagementSystem.Service;
 
-public sealed class AdminDashboardApiService(
-    HttpClient httpClient
-) : IAdminDashboardApiService
+public class AdminDashboardApiService : IAdminDashboardApiService
 {
-    public async Task<AdminDashboardViewModel?> GetDashboardAsync(
-        string accessToken)
+    private readonly HttpClient _httpClient;
+
+    public AdminDashboardApiService(HttpClient httpClient)
     {
-        using var request = new HttpRequestMessage(
-            HttpMethod.Get,
-            "api/admin/dashboard"
-        );
+        _httpClient = httpClient;
+    }
 
-        request.Headers.Authorization =
-            new AuthenticationHeaderValue(
-                "Bearer",
-                accessToken
-            );
+    public async Task<AdminDashboardViewModel?> GetDashboardAsync()
 
-        using var response =
-            await httpClient.SendAsync(request);
-
-        if (!response.IsSuccessStatusCode)
-        {
-            return null;
-        }
-
-        return await response.Content
-            .ReadFromJsonAsync<AdminDashboardViewModel>();
+    {
+        using var response = await _httpClient.GetAsync(
+            "api/AdminDashboard/");
+        if (!response.IsSuccessStatusCode) return null;
+        return await response.Content.ReadFromJsonAsync<AdminDashboardViewModel>();
     }
 }
+//public sealed class AdminDashboardApiService(
+//    HttpClient httpClient
+//) : IAdminDashboardApiService
+//{
+//    public async Task<AdminDashboardViewModel?> GetDashboardAsync()
+//    {
+//        using var response = await httpClient.GetAsync(
+//            "api/dashboard"
+//        );
+
+//        if (!response.IsSuccessStatusCode)
+//        {
+//            return null;
+//        }
+
+//        return await response.Content
+//            .ReadFromJsonAsync<AdminDashboardViewModel>();
+//    }
+//}

@@ -4,41 +4,32 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.Controllers;
 
-public class AdminDashboardController(
-    IAdminDashboardApiService dashboardService
-) : Controller
+public class AdminDashboardController : Controller
 {
+    private readonly IAdminDashboardApiService _dashboardService;
+
+    public AdminDashboardController(
+        IAdminDashboardApiService dashboardService)
+    {
+        _dashboardService = dashboardService;
+    }
+
     public async Task<IActionResult> Index()
     {
         var userRole =
-            HttpContext.Session.GetString("UserRole");
-
-        var accessToken =
-            HttpContext.Session.GetString("AccessToken");
+            HttpContext.Session.GetString("Role");
 
         if (!string.Equals(
             userRole?.Trim(),
             "Admin",
             StringComparison.OrdinalIgnoreCase))
         {
-            return Forbid();
-        }
-
-        if (string.IsNullOrWhiteSpace(accessToken))
-        {
-            return RedirectToAction("Login", "Auth");
+            return RedirectToAction("Index", "Dashboard");
         }
 
         var dashboard =
-            await dashboardService.GetDashboardAsync(accessToken);
-
-        if (dashboard is null)
-        {
-            ViewBag.ErrorMessage =
-                "The admin dashboard could not be loaded.";
-
-            dashboard = new AdminDashboardViewModel();
-        }
+            await _dashboardService.GetDashboardAsync()
+            ?? new AdminDashboardViewModel();
 
         return View(dashboard);
     }
