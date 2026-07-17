@@ -1,0 +1,321 @@
+﻿@model List<EventManagementSystem.Models.OrganizerEventViewModel>
+
+@{
+    ViewData["Title"] = "Manage Events";
+    Layout = "~/Views/Dashboard/Layout.cshtml";
+}
+
+<div class="organizer-page container py-4">
+
+    <div class="d-flex flex-column flex-md-row
+        justify-content-between
+        align-items-md-center
+        gap-3 mb-4">
+
+        <div>
+            <h2 class="mb-2">
+                Manage Events
+            </h2>
+
+            <p class="text-muted mb-0">
+                View, edit, cancel and delete your events.
+            </p>
+        </div>
+
+        <div class="d-flex flex-wrap gap-2">
+
+            <a asp-controller="Organizer"
+                   asp-action="Dashboard"
+                   class="btn btn-outline-secondary">
+                Organizer Dashboard
+            </a>
+
+            <a asp-controller="Organizer"
+                   asp-action="CreateEvent"
+                   class="btn btn-primary">
+                <i class="fas fa-plus me-1"></i>
+                Create Event
+            </a>
+
+        </div>
+    </div>
+
+    @if (TempData["OrganizerMessage"] is not null)
+    {
+        <div class="alert alert-info alert-dismissible fade show"
+             role="alert">
+
+            @TempData["OrganizerMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close">
+            </button>
+        </div>
+    }
+
+    @if (Model is null || Model.Count == 0)
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body py-5 text-center">
+
+                <div class="mb-3">
+                    <i class="fas fa-calendar-plus
+                        fa-3x text-muted">
+                    </i>
+                </div>
+
+                <h4>
+                    No events created yet
+                </h4>
+
+                <p class="text-muted">
+                    Create your first event to start accepting bookings.
+                </p>
+
+                <a asp-controller="Organizer"
+                       asp-action="CreateEvent"
+                       class="btn btn-primary">
+                    Create Your First Event
+                </a>
+
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="card border-0 shadow-sm">
+            <div class="card-body p-0">
+
+                <div class="table-responsive">
+                    <table class="table table-hover
+                        align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">
+                                    Event
+                                </th>
+
+                                <th>
+                                    Date and Time
+                                </th>
+
+                                <th>
+                                    Venue
+                                </th>
+
+                                <th>
+                                    Ticket Price
+                                </th>
+
+                                <th>
+                                    Seats
+                                </th>
+
+                                <th>
+                                    Status
+                                </th>
+
+                                <th class="text-end pe-4">
+                                    Actions
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            @foreach (var item in Model)
+                            {
+                                var statusClass =
+                                    item.Status == "Published"
+                                        ? "bg-success"
+                                        : item.Status == "Cancelled"
+                                            ? "bg-danger"
+                                            : item.Status == "Draft"
+                                                ? "bg-secondary"
+                                                : "bg-primary";
+
+                                <tr>
+                                    <td class="ps-4">
+                                        <div class="d-flex
+                                            align-items-center gap-3">
+
+                                            @if (!string.IsNullOrWhiteSpace(
+                                                                                            item.EventImageUrl))
+                                            {
+                                                <img src="@item.EventImageUrl"
+                                                     alt="@item.Title"
+                                                     class="rounded"
+                                                     style="width: 60px;
+                                                height: 50px;
+                                                object-fit: cover;" />
+                                            }
+                                            else
+                                            {
+                                                <div class="rounded bg-light
+                                                    d-flex
+                                                    align-items-center
+                                                    justify-content-center"
+                                                     style="width: 60px;
+                                                    height: 50px;">
+
+                                                    <i class="fas fa-image
+                                                        text-muted">
+                                                    </i>
+                                                </div>
+                                            }
+
+                                            <div>
+                                                <strong class="d-block">
+                                                    @item.Title
+                                                </strong>
+
+                                                <small class="text-muted">
+                                                    @item.Category
+                                                </small>
+                                            </div>
+
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <div>
+                                            @item.EventDate.ToString(
+                                                "dd MMM yyyy"
+                                            )
+                                        </div>
+
+                                        <small class="text-muted">
+                                            @item.EventTime.ToString(
+                                                @"hh\:mm"
+                                            )
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        @item.Venue
+                                    </td>
+
+                                    <td>
+                                        ₦@item.TicketPrice.ToString("N2")
+                                    </td>
+
+                                    <td>
+                                        <div>
+                                            <strong>
+                                                @item.AvailableSeats
+                                            </strong>
+                                            available
+                                        </div>
+
+                                        <small class="text-muted">
+                                            @item.BookedSeats booked
+                                            out of @item.TotalSeats
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        <span class="badge @statusClass">
+                                            @item.Status
+                                        </span>
+                                    </td>
+
+                                    <td class="text-end pe-4">
+
+                                        <div class="dropdown">
+
+                                            <button class="btn btn-sm
+                                                btn-outline-secondary
+                                                dropdown-toggle"
+                                                    type="button"
+                                                    data-bs-toggle="dropdown"
+                                                    aria-expanded="false">
+                                                Actions
+                                            </button>
+
+                                            <ul class="dropdown-menu
+                                                dropdown-menu-end">
+
+                                                <li>
+                                                    <a asp-controller="Organizer"
+                                                           asp-action="EditEvent"
+                                                           asp-route-id="@item.Id"
+                                                           class="dropdown-item">
+
+                                                        <i class="fas fa-pen
+                                                            me-2">
+                                                        </i>
+
+                                                        Edit Event
+                                                    </a>
+                                                </li>
+
+                                                @if (item.Status != "Cancelled")
+                                                {
+                                                    <li>
+                                                        <form asp-controller="Organizer"
+                                                              asp-action="CancelEvent"
+                                                              asp-route-id="@item.Id"
+                                                              method="post"
+                                                              onsubmit="return confirm('Are you sure you want to cancel this event?');">
+
+                                                            <button type="submit"
+                                                                    class="dropdown-item
+                                                                text-warning">
+
+                                                                <i class="fas fa-ban
+                                                                    me-2">
+                                                                </i>
+
+                                                                Cancel Event
+                                                            </button>
+
+                                                        </form>
+                                                    </li>
+                                                }
+
+                                                <li>
+                                                    <hr class="dropdown-divider" />
+                                                </li>
+
+                                                <li>
+                                                    <form asp-controller="Organizer"
+                                                          asp-action="DeleteEvent"
+                                                          asp-route-id="@item.Id"
+                                                          method="post"
+                                                          onsubmit="return confirm('Are you sure you want to permanently delete this event?');">
+
+                                                        <button type="submit"
+                                                                class="dropdown-item
+                                                            text-danger">
+
+                                                            <i class="fas fa-trash
+                                                                me-2">
+                                                            </i>
+
+                                                            Delete Event
+                                                        </button>
+
+                                                    </form>
+                                                </li>
+
+                                            </ul>
+
+                                        </div>
+
+                                    </td>
+                                </tr>
+                            }
+
+                        </tbody>
+
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    }
+
+</div>

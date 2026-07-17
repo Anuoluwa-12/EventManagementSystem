@@ -1,0 +1,203 @@
+﻿@model EventManagementSystem.Models.OrganizerDashboardViewModel
+
+@{
+    ViewData["Title"] = "Organizer Dashboard";
+    Layout = "~/Views/Dashboard/Layout.cshtml";
+}
+
+<div class="organizer-page container py-4">
+
+    @if (TempData["OrganizerMessage"] is not null)
+    {
+        <div class="alert alert-success alert-dismissible fade show"
+             role="alert">
+
+            @TempData["OrganizerMessage"]
+
+            <button type="button"
+                    class="btn-close"
+                    data-bs-dismiss="alert"
+                    aria-label="Close">
+            </button>
+        </div>
+    }
+
+    <!-- Page heading -->
+    <div class="organizer-toolbar">
+
+        <div>
+            <h2 class="mb-2">
+                Organizer Dashboard
+            </h2>
+
+            <p class="text-muted mb-0">
+                Manage your events, bookings and earnings.
+            </p>
+        </div>
+
+        <div class="organizer-toolbar-actions">
+
+            <a asp-controller="Organizer"
+                   asp-action="Events"
+                   class="btn btn-outline-primary">
+
+                <i class="fas fa-calendar-days me-1"></i>
+                Manage Events
+            </a>
+
+            <a asp-controller="Organizer"
+                   asp-action="CreateEvent"
+                   class="btn btn-primary">
+
+                <i class="fas fa-plus me-1"></i>
+                Create Event
+            </a>
+
+        </div>
+
+    </div>
+
+    <!-- Dashboard summary cards -->
+    <div class="row g-4">
+
+        <!-- Total events -->
+        <div class="col-12 col-sm-6 col-lg-4 col-xl">
+            <div class="organizer-summary-card">
+
+                <div class="organizer-summary-icon organizer-icon-events">
+                    <i class="fas fa-calendar-days"></i>
+                </div>
+
+                <p class="organizer-summary-label">
+                    Total Events
+                </p>
+
+                <h3 class="organizer-summary-value">
+                    @Model.TotalEvents.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <!-- Active events -->
+        <div class="col-12 col-sm-6 col-lg-4 col-xl">
+            <div class="organizer-summary-card">
+
+                <div class="organizer-summary-icon organizer-icon-active">
+                    <i class="fas fa-circle-check"></i>
+                </div>
+
+                <p class="organizer-summary-label">
+                    Active Events
+                </p>
+
+                <h3 class="organizer-summary-value">
+                    @Model.ActiveEvents.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <!-- Total earnings -->
+        <div class="col-12 col-sm-6 col-lg-4 col-xl">
+            <div class="organizer-summary-card">
+
+                <div class="organizer-summary-icon organizer-icon-earnings">
+                    ₦
+                </div>
+
+                <p class="organizer-summary-label">
+                    Total Earnings
+                </p>
+
+                <h3 class="organizer-summary-value">
+                    ₦@Model.TotalEarnings.ToString("N2")
+                </h3>
+
+            </div>
+        </div>
+
+        <!-- Pending bookings -->
+        <div class="col-12 col-sm-6 col-lg-4 col-xl">
+            <div class="organizer-summary-card">
+
+                <div class="organizer-summary-icon organizer-icon-pending">
+                    <i class="fas fa-clock"></i>
+                </div>
+
+                <p class="organizer-summary-label">
+                    Pending Bookings
+                </p>
+
+                <h3 class="organizer-summary-value">
+                    @Model.PendingBookings.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <!-- Paid bookings -->
+        <div class="col-12 col-sm-6 col-lg-4 col-xl">
+            <div class="organizer-summary-card">
+
+                <div class="organizer-summary-icon organizer-icon-paid">
+                    <i class="fas fa-ticket"></i>
+                </div>
+
+                <p class="organizer-summary-label">
+                    Paid Bookings
+                </p>
+
+                <h3 class="organizer-summary-value">
+                    @Model.PaidBookings.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Manage events section -->
+    <div class="card border-0 shadow-sm mt-4">
+        <div class="card-body p-4">
+
+            <div class="d-flex flex-column flex-md-row
+                justify-content-between
+                align-items-md-center gap-3">
+
+                <div>
+                    <h5 class="mb-1">
+                        Manage Your Events
+                    </h5>
+
+                    <p class="text-muted mb-0">
+                        Create new events or update your existing events.
+                    </p>
+                </div>
+
+                <div class="d-flex flex-wrap gap-2">
+
+                    <a asp-controller="Organizer"
+                           asp-action="Events"
+                           class="btn btn-outline-primary">
+
+                        <i class="fas fa-calendar-days me-1"></i>
+                        View All Events
+                    </a>
+
+                    <a asp-controller="Organizer"
+                           asp-action="CreateEvent"
+                           class="btn btn-primary">
+
+                        <i class="fas fa-plus me-1"></i>
+                        Create Event
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

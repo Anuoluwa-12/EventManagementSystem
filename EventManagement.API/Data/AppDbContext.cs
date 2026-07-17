@@ -1,4 +1,5 @@
 ﻿using EventManagement.API.Entity;
+using EventManagement.API.Models;
 using Microsoft.EntityFrameworkCore;
 namespace EventManagement.API.Data
 {
@@ -14,5 +15,6 @@ namespace EventManagement.API.Data
         public DbSet<Event> Events { get; set; }
         public DbSet<EventRegistration> EventRegistrations { get; set; }
         public DbSet<Ticket> Tickets { get; set; }
+        public DbSet<OrganizerProfile> OrganizerProfiles { get; set; }
     }
 }

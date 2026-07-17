@@ -18,6 +18,10 @@
     <link rel="stylesheet"
           href="~/css/dashboard.css"
           asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/organizer.css"
+          asp-append-version="true" />
 </head>
 
 <body>
@@ -66,6 +70,27 @@
         <a asp-controller="Auth"
                asp-action="Logout">
             Logout
+        </a>
+
+        <a asp-controller="Organizer"
+               asp-action="Dashboard"
+               class="nav-link">
+            <i class="fas fa-chart-line"></i>
+            <span>Organizer Dashboard</span>
+        </a>
+
+        <a asp-controller="Organizer"
+               asp-action="Events"
+               class="nav-link">
+            <i class="fas fa-calendar-days"></i>
+            <span>Manage Events</span>
+        </a>
+
+        <a asp-controller="Organizer"
+               asp-action="CreateEvent"
+               class="nav-link">
+            <i class="fas fa-calendar-plus"></i>
+            <span>Create Event</span>
         </a>
 
     </div>

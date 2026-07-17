@@ -23,22 +23,3 @@ public class AdminDashboardApiService : IAdminDashboardApiService
         return await response.Content.ReadFromJsonAsync<AdminDashboardViewModel>();
     }
 }
-//public sealed class AdminDashboardApiService(
-//    HttpClient httpClient
-//) : IAdminDashboardApiService
-//{
-//    public async Task<AdminDashboardViewModel?> GetDashboardAsync()
-//    {
-//        using var response = await httpClient.GetAsync(
-//            "api/dashboard"
-//        );
-
-//        if (!response.IsSuccessStatusCode)
-//        {
-//            return null;
-//        }
-
-//        return await response.Content
-//            .ReadFromJsonAsync<AdminDashboardViewModel>();
-//    }
-//}

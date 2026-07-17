@@ -10,9 +10,13 @@
 
             public int EventId { get; set; }
             public int? TicketId { get; set; }
+            public decimal UnitPrice { get; set; }
             public Ticket? Ticket { get; set; }
             public decimal AmountPaid { get; set; }
-            public string PaymentStatus { get; set; }
+            public DateTime? PaidAt { get; set; }
+            public DateTime? CancelledAt { get; set; }
+            public string BookingStatus { get; set; } = "Pending";
+            public string PaymentStatus { get; set; } = "Pending";
             public string? PaymentReference { get; set; }
 
             public Event Event { get; set; }

@@ -1,0 +1,245 @@
+﻿@model EventManagementSystem.Models.OrganizerEventFormViewModel
+
+@{
+    ViewData["Title"] = "Create Event";
+    Layout = "~/Views/Dashboard/Layout.cshtml";
+}
+
+<div class="organizer-page container py-4">
+
+    <div class="row justify-content-center">
+        <div class="col-12 col-xl-10">
+
+            <div class="d-flex flex-column flex-md-row
+                justify-content-between
+                align-items-md-center
+                gap-3 mb-4">
+
+                <div>
+                    <h2 class="mb-2">
+                        Create Event
+                    </h2>
+
+                    <p class="text-muted mb-0">
+                        Add the information attendees need to discover
+                        and book your event.
+                    </p>
+                </div>
+
+                <a asp-controller="Organizer"
+                       asp-action="Events"
+                       class="btn btn-outline-secondary">
+                    Back to Events
+                </a>
+
+            </div>
+
+            <div class="card border-0 shadow-sm">
+                <div class="card-body p-4 p-md-5">
+
+                    <form asp-controller="Organizer"
+                          asp-action="CreateEvent"
+                          method="post"
+                          enctype="multipart/form-data">
+
+                        <div asp-validation-summary="ModelOnly"
+                             class="alert alert-danger">
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Title"
+                                   class="form-label">
+                                Event Title
+                            </label>
+
+                            <input asp-for="Title"
+                                   class="form-control"
+                                   placeholder="Enter the event title" />
+
+                            <span asp-validation-for="Title"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Description"
+                                   class="form-label">
+                                Event Description
+                            </label>
+
+                            <textarea asp-for="Description"
+                                      class="form-control"
+                                      rows="6"
+                                      placeholder="Describe the event, speakers, activities and what attendees should expect"></textarea>
+
+                            <span asp-validation-for="Description"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <label asp-for="EventDate"
+                                       class="form-label">
+                                    Event Date
+                                </label>
+
+                                <input asp-for="EventDate"
+                                       asp-format="{0:yyyy-MM-dd}"
+                                       type="date"
+                                       min="@DateTime.Today.ToString("yyyy-MM-dd")"
+                                       class="form-control" />
+
+                                <span asp-validation-for="EventDate"
+                                      class="text-danger">
+                                </span>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <label asp-for="EventTime"
+                                       class="form-label">
+                                    Event Time
+                                </label>
+
+                                <input asp-for="EventTime"
+                                       type="time"
+                                       step="60"
+                                       class="form-control" />
+
+                                <span asp-validation-for="EventTime"
+                                      class="text-danger">
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Venue"
+                                   class="form-label">
+                                Event Venue
+                            </label>
+
+                            <input asp-for="Venue"
+                                   class="form-control"
+                                   placeholder="Enter the physical or online event location" />
+
+                            <span asp-validation-for="Venue"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <div class="row">
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <label asp-for="TicketPrice"
+                                       class="form-label">
+                                    Ticket Price
+                                </label>
+
+                                <div class="input-group">
+                                    <span class="input-group-text">
+                                        ₦
+                                    </span>
+
+                                    <input asp-for="TicketPrice"
+                                           type="number"
+                                           min="0"
+                                           step="0.01"
+                                           class="form-control"
+                                           placeholder="0.00" />
+                                </div>
+
+                                <span asp-validation-for="TicketPrice"
+                                      class="text-danger">
+                                </span>
+
+                                <small class="text-muted">
+                                    Enter 0 for a free event.
+                                </small>
+                            </div>
+
+                            <div class="col-12 col-md-6 mb-3">
+                                <label asp-for="TotalSeats"
+                                       class="form-label">
+                                    Number of Seats
+                                </label>
+
+                                <input asp-for="TotalSeats"
+                                       type="number"
+                                       min="1"
+                                       class="form-control"
+                                       placeholder="Enter available seats" />
+
+                                <span asp-validation-for="TotalSeats"
+                                      class="text-danger">
+                                </span>
+                            </div>
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Category"
+                                   class="form-label">
+                                Event Category
+                            </label>
+
+                            <input asp-for="Category"
+                                   class="form-control"
+                                   placeholder="For example: Technology, Business, Music or Education" />
+
+                            <span asp-validation-for="Category"
+                                  class="text-danger">
+                            </span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="EventImage"
+                                   class="form-label">
+                                Event Image
+                            </label>
+
+                            <input asp-for="EventImage"
+                                   type="file"
+                                   accept=".jpg,.jpeg,.png,.webp"
+                                   class="form-control" />
+
+                            <span asp-validation-for="EventImage"
+                                  class="text-danger">
+                            </span>
+
+                            <small class="text-muted">
+                                Upload a JPG, PNG or WEBP image.
+                                Maximum size: 5 MB.
+                            </small>
+                        </div>
+
+                        <div class="d-flex flex-wrap gap-2">
+
+                            <button type="submit"
+                                    class="btn btn-primary">
+                                <i class="fas fa-calendar-plus me-1"></i>
+                                Create Event
+                            </button>
+
+                            <a asp-controller="Organizer"
+                                   asp-action="Events"
+                                   class="btn btn-outline-secondary">
+                                Cancel
+                            </a>
+
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
