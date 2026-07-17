@@ -97,10 +97,12 @@
 
     <div id="main" class="main-content">
         @RenderBody()
-    </div>      
-
+    </div>     
+    <!-- jQuery must load first -->
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap must load after jQuery -->
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-
+    <!-- Loads validation scripts from the individual page -->
     @await RenderSectionAsync("Scripts", required: false)
 
 </body>

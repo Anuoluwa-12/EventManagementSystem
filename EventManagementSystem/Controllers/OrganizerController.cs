@@ -62,21 +62,10 @@ public class OrganizerController : Controller
 
         try
         {
-            var registered =
-                await _organizerService.RegisterAsync(
-                    token,
-                    model
-                );
-
-            if (!registered)
-            {
-                ModelState.AddModelError(
-                    string.Empty,
-                    "The organizer profile could not be created. You may already have an organizer profile."
-                );
-
-                return View(model);
-            }
+            await _organizerService.RegisterAsync(
+                token,
+                model
+            );
 
             TempData["OrganizerMessage"] =
                 "Your organizer profile was created successfully.";
@@ -84,6 +73,15 @@ public class OrganizerController : Controller
             return RedirectToAction(
                 nameof(Dashboard)
             );
+        }
+        catch (InvalidOperationException exception)
+        {
+            ModelState.AddModelError(
+                string.Empty,
+                exception.Message
+            );
+
+            return View(model);
         }
         catch (UnauthorizedAccessException)
         {
@@ -97,11 +95,28 @@ public class OrganizerController : Controller
                 "Auth"
             );
         }
-        catch (HttpRequestException)
+        catch (HttpRequestException exception)
         {
+            Console.WriteLine(
+                $"Organizer API connection error: {exception}"
+            );
+
             ModelState.AddModelError(
                 string.Empty,
                 "The organizer service could not be reached."
+            );
+
+            return View(model);
+        }
+        catch (Exception exception)
+        {
+            Console.WriteLine(
+                $"Unexpected organizer registration error: {exception}"
+            );
+
+            ModelState.AddModelError(
+                string.Empty,
+                "An unexpected error occurred while creating the organizer profile."
             );
 
             return View(model);
@@ -136,10 +151,6 @@ public class OrganizerController : Controller
                 await _organizerService
                     .GetDashboardAsync(token);
 
-            /*
-             * The user is logged in but does not have
-             * an active organizer profile.
-             */
             if (dashboard is null)
             {
                 TempData["OrganizerError"] =
@@ -312,6 +323,15 @@ public class OrganizerController : Controller
             return RedirectToAction(
                 nameof(Events)
             );
+        }
+        catch (InvalidOperationException exception)
+        {
+            ModelState.AddModelError(
+                string.Empty,
+                exception.Message
+            );
+
+            return View(model);
         }
         catch (UnauthorizedAccessException)
         {
@@ -490,6 +510,15 @@ public class OrganizerController : Controller
             return RedirectToAction(
                 nameof(Events)
             );
+        }
+        catch (InvalidOperationException exception)
+        {
+            ModelState.AddModelError(
+                string.Empty,
+                exception.Message
+            );
+
+            return View(model);
         }
         catch (UnauthorizedAccessException)
         {
@@ -693,6 +722,7 @@ public class OrganizerController : Controller
         HttpContext.Session.Remove("Token");
         HttpContext.Session.Remove("UserId");
         HttpContext.Session.Remove("FirstName");
+        HttpContext.Session.Remove("UserRole");
         HttpContext.Session.Remove("Role");
     }
 }

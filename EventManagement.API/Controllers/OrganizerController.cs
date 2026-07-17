@@ -1,8 +1,9 @@
-﻿using System.Security.Claims;
-using EventManagement.API.DTO;
+﻿using EventManagement.API.DTO;
 using EventManagement.API.Interface;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace EventManagement.API.Controllers;
 
@@ -44,28 +45,42 @@ public class OrganizerController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var registered =
+        try
+        {
             await _organizerService.RegisterAsync(
                 userId.Value,
                 request
             );
 
-        if (!registered)
+            return Ok(new
+            {
+                message =
+                    "Organizer registration completed successfully."
+            });
+        }
+        catch (InvalidOperationException exception)
         {
             return BadRequest(new
             {
-                message =
-                    "The organizer profile could not be created. You may already have an organizer profile."
+                message = exception.Message
             });
         }
-
-        return Ok(new
+        catch (DbUpdateException exception)
         {
-            message =
-                "Organizer registration completed successfully."
-        });
-    }
+            Console.WriteLine(
+                $"Organizer database error: {exception.InnerException?.Message ?? exception.Message}"
+            );
 
+            return StatusCode(
+                StatusCodes.Status500InternalServerError,
+                new
+                {
+                    message =
+                        "The organizer profile could not be saved because of a database error."
+                }
+            );
+        }
+    }
     /*
      * ==================================================
      * ORGANIZER DASHBOARD

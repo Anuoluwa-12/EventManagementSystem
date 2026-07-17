@@ -71,7 +71,8 @@ builder.Services.AddHttpClient<IOrganizerService, OrganizerService>
  * ==================================================
  */
 
-builder.Services.AddHttpClient<IAdminDashboardApiService, AdminDashboardApiService>(client =>
+builder.Services.AddHttpClient<IAdminDashboardApiService, AdminDashboardApiService>
+    (client =>
 {
     client.BaseAddress =
         new Uri(apiBaseUrl);

@@ -36,24 +36,50 @@ public class OrganizerService : IOrganizerService
      * ==================================================
      */
 
-    public async Task<bool> RegisterAsync(int userId, RegisterOrganizerRequestDto request)
+    public async Task<bool> RegisterAsync( int userId, RegisterOrganizerRequestDto request)
     {
-        var userExists =
+        var user =
             await _context.Users
-                .AnyAsync(x => x.Id == userId);
+                .FirstOrDefaultAsync(x => x.Id == userId);
 
-        if (!userExists)
+        if (user is null)
         {
-            return false;
+            throw new InvalidOperationException(
+                $"The authenticated user with ID {userId} was not found."
+            );
         }
 
-        var organizerAlreadyExists =
+        var existingOrganizer =
             await _context.OrganizerProfiles
-                .AnyAsync(x => x.UserId == userId);
+                .FirstOrDefaultAsync(x => x.UserId == userId);
 
-        if (organizerAlreadyExists)
+        if (existingOrganizer is not null)
         {
-            return false;
+            if (string.Equals(
+                existingOrganizer.Status,
+                "Active",
+                StringComparison.OrdinalIgnoreCase))
+            {
+                throw new InvalidOperationException(
+                    "You already have an active organizer profile."
+                );
+            }
+
+            existingOrganizer.DisplayName =
+                request.DisplayName.Trim();
+
+            existingOrganizer.Phone =
+                request.Phone?.Trim();
+
+            existingOrganizer.Bio =
+                request.Bio?.Trim();
+
+            existingOrganizer.Status =
+                "Active";
+
+            await _context.SaveChangesAsync();
+
+            return true;
         }
 
         var organizer =
@@ -72,13 +98,10 @@ public class OrganizerService : IOrganizerService
 
                 Status = "Active",
 
-                CreatedAt =
-                    DateTime.UtcNow
+                CreatedAt = DateTime.UtcNow
             };
 
-        _context.OrganizerProfiles.Add(
-            organizer
-        );
+        _context.OrganizerProfiles.Add(organizer);
 
         await _context.SaveChangesAsync();
 
