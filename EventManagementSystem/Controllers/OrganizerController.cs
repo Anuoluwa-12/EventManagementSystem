@@ -39,8 +39,7 @@ public class OrganizerController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Register(
-        OrganizerRegistrationViewModel model)
+    public async Task<IActionResult> Register(OrganizerRegistrationViewModel model)
     {
         var token = GetToken();
 
@@ -277,8 +276,7 @@ public class OrganizerController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateEvent(
-        OrganizerEventFormViewModel model)
+    public async Task<IActionResult> CreateEvent(OrganizerEventFormViewModel model)
     {
         var token = GetToken();
 
@@ -363,8 +361,7 @@ public class OrganizerController : Controller
      */
 
     [HttpGet]
-    public async Task<IActionResult> EditEvent(
-        int id)
+    public async Task<IActionResult> EditEvent(int id)
     {
         var token = GetToken();
 
@@ -551,8 +548,7 @@ public class OrganizerController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CancelEvent(
-        int id)
+    public async Task<IActionResult> CancelEvent(int id)
     {
         var token = GetToken();
 
@@ -621,8 +617,7 @@ public class OrganizerController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteEvent(
-        int id)
+    public async Task<IActionResult> DeleteEvent(int id)
     {
         var token = GetToken();
 

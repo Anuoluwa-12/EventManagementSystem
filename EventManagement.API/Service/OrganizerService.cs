@@ -114,8 +114,7 @@ public class OrganizerService : IOrganizerService
      * ==================================================
      */
 
-    public async Task<OrganizerDashboardDto?>
-        GetDashboardAsync(int userId)
+    public async Task<OrganizerDashboardDto?>GetDashboardAsync(int userId)
     {
         var organizer =
             await GetActiveOrganizerAsync(userId);
@@ -252,10 +251,7 @@ public class OrganizerService : IOrganizerService
      * ==================================================
      */
 
-    public async Task<OrganizerEventDto?>
-        GetEventAsync(
-            int userId,
-            int eventId)
+    public async Task<OrganizerEventDto?> GetEventAsync(int userId, int eventId)
     {
         var organizer =
             await GetActiveOrganizerAsync(userId);
@@ -599,8 +595,7 @@ public class OrganizerService : IOrganizerService
      * ==================================================
      */
 
-    private async Task<OrganizerProfile?>
-        GetActiveOrganizerAsync(int userId)
+    private async Task<OrganizerProfile?>GetActiveOrganizerAsync(int userId)
     {
         return await _context.OrganizerProfiles
             .AsNoTracking()
@@ -610,9 +605,7 @@ public class OrganizerService : IOrganizerService
             );
     }
 
-    private static void ValidateEventDateAndTime(
-        DateTime eventDate,
-        TimeSpan eventTime)
+    private static void ValidateEventDateAndTime(DateTime eventDate, TimeSpan eventTime)
     {
         var fullEventDateTime =
             eventDate.Date.Add(eventTime);
@@ -625,8 +618,7 @@ public class OrganizerService : IOrganizerService
         }
     }
 
-    private async Task<string?>
-        SaveEventImageAsync(IFormFile? image)
+    private async Task<string?>SaveEventImageAsync(IFormFile? image)
     {
         if (image is null ||
             image.Length == 0)

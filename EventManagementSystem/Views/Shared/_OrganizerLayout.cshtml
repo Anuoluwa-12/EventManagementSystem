@@ -1,0 +1,507 @@
+﻿@using Microsoft.AspNetCore.Http
+@using System.Text.Json
+
+@{
+    var currentController =
+        ViewContext.RouteData.Values["controller"]?.ToString();
+
+    var currentAction =
+        ViewContext.RouteData.Values["action"]?.ToString();
+
+    var firstName =
+        Context.Session.GetString("FirstName")
+        ?? "Organizer";
+
+    var role =
+        Context.Session.GetString("Role")
+        ?? "Attendee";
+
+    var dashboardActive =
+        currentController == "Organizer" &&
+        currentAction == "Dashboard";
+
+    var eventsActive =
+        currentController == "Organizer" &&
+        (
+            currentAction == "Events" ||
+            currentAction == "EditEvent"
+        );
+
+    var createEventActive =
+        currentController == "Organizer" &&
+        currentAction == "CreateEvent";
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @ViewData["Title"] - Organizer
+    </title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/site.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="~/css/organizer.css"
+          asp-append-version="true" />
+
+    <link rel="stylesheet"
+          href="/css/organizer-layout.css" />
+
+    <link rel="stylesheet"
+          href="~/EventManagementSystem.styles.css"
+          asp-append-version="true" />
+
+    @await RenderSectionAsync(
+        "Styles",
+        required: false
+    )
+</head>
+
+<body class="organizer-body">
+
+    <div class="organizer-layout">
+
+        <!-- Organizer sidebar -->
+        <aside class="organizer-sidebar"
+               id="organizerSidebar">
+
+            <div class="organizer-sidebar-header">
+
+                <a asp-controller="Organizer"
+                       asp-action="Dashboard"
+                       class="organizer-brand">
+
+                    <span class="organizer-brand-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </span>
+
+                    <span class="organizer-brand-text">
+                        EventManager
+                    </span>
+
+                </a>
+
+                <button type="button"
+                        class="organizer-sidebar-close"
+                        id="organizerSidebarClose"
+                        aria-label="Close menu">
+
+                    <i class="fa-solid fa-xmark"></i>
+
+                </button>
+
+            </div>
+
+            <div class="organizer-profile-summary">
+
+                <div class="organizer-profile-avatar">
+                    @firstName.Substring(0, 1).ToUpper()
+                </div>
+
+                <div class="organizer-profile-details">
+
+                    <strong>
+                        @firstName
+                    </strong>
+
+                    <span>
+                        Organizer Workspace
+                    </span>
+
+                </div>
+
+            </div>
+
+            <nav class="organizer-navigation">
+
+                <p class="organizer-navigation-title">
+                    Organizer
+                </p>
+
+                <a asp-controller="Organizer"
+                       asp-action="Dashboard"
+                       class="organizer-navigation-link @(dashboardActive ? "active" : "")">
+
+                    <span class="organizer-navigation-icon">
+                        <i class="fa-solid fa-chart-line"></i>
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+                <a asp-controller="Organizer"
+                       asp-action="Events"
+                       class="organizer-navigation-link @(eventsActive ? "active" : "")">
+
+                    <span class="organizer-navigation-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </span>
+
+                    <span>
+                        Manage Events
+                    </span>
+
+                </a>
+
+                <a asp-controller="Organizer"
+                       asp-action="CreateEvent"
+                       class="organizer-navigation-link @(createEventActive ? "active" : "")">
+
+                    <span class="organizer-navigation-icon">
+                        <i class="fa-solid fa-circle-plus"></i>
+                    </span>
+
+                    <span>
+                        Create Event
+                    </span>
+
+                </a>
+
+                <div class="organizer-navigation-divider"></div>
+
+                <p class="organizer-navigation-title">
+                    Main Account
+                </p>
+
+                <a asp-controller="Dashboard"
+                       asp-action="Index"
+                       class="organizer-navigation-link">
+
+                    <span class="organizer-navigation-icon">
+                        <i class="fa-solid fa-house"></i>
+                    </span>
+
+                    <span>
+                        User Dashboard
+                    </span>
+
+                </a>
+
+                <a asp-controller="Event"
+                       asp-action="Index"
+                       class="organizer-navigation-link">
+
+                    <span class="organizer-navigation-icon">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </span>
+
+                    <span>
+                        Browse Events
+                    </span>
+
+                </a>
+
+                <a asp-controller="Home"
+                       asp-action="Index"
+                       class="organizer-navigation-link">
+
+                    <span class="organizer-navigation-icon">
+                        <i class="fa-solid fa-globe"></i>
+                    </span>
+
+                    <span>
+                        Main Website
+                    </span>
+
+                </a>
+
+                @if (role == "Admin")
+                {
+                    <a asp-controller="AdminDashboard"
+                           asp-action="Index"
+                           class="organizer-navigation-link">
+
+                        <span class="organizer-navigation-icon">
+                            <i class="fa-solid fa-user-shield"></i>
+                        </span>
+
+                        <span>
+                            Admin Dashboard
+                        </span>
+
+                    </a>
+                }
+
+            </nav>
+
+            <div class="organizer-sidebar-footer">
+
+                <a asp-controller="Auth"
+                       asp-action="Logout"
+                       class="organizer-logout-link">
+
+                    <i class="fa-solid fa-right-from-bracket"></i>
+
+                    <span>
+                        Log Out
+                    </span>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+        <!-- Mobile sidebar overlay -->
+        <div class="organizer-sidebar-overlay"
+             id="organizerSidebarOverlay">
+        </div>
+
+        <!-- Main organizer area -->
+        <div class="organizer-main">
+
+            <header class="organizer-topbar">
+
+                <div class="organizer-topbar-left">
+
+                    <button type="button"
+                            class="organizer-menu-button"
+                            id="organizerMenuButton"
+                            aria-label="Open menu">
+
+                        <i class="fa-solid fa-bars"></i>
+
+                    </button>
+
+                    <div>
+                        <h1 class="organizer-topbar-title">
+                            @ViewData["Title"]
+                        </h1>
+
+                        <p class="organizer-topbar-subtitle">
+                            Manage your events and bookings
+                        </p>
+                    </div>
+
+                </div>
+
+                <div class="organizer-topbar-user">
+
+                    <div class="organizer-topbar-avatar">
+                        @firstName.Substring(0, 1).ToUpper()
+                    </div>
+
+                    <div class="organizer-topbar-user-details">
+
+                        <strong>
+                            @firstName
+                        </strong>
+
+                        <span>
+                            Organizer
+                        </span>
+
+                    </div>
+
+                </div>
+
+            </header>
+
+            <main class="organizer-main-content">
+                @RenderBody()
+            </main>
+
+            <footer class="organizer-footer">
+
+                <span>
+                    &copy; 2026 EventManagementSystem
+                </span>
+
+                <a asp-controller="Home"
+                       asp-action="Privacy">
+                    Privacy
+                </a>
+
+            </footer>
+
+        </div>
+
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="~/js/site.js"
+            asp-append-version="true">
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js">
+    </script>
+
+    <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                const sidebar =
+                    document.getElementById("organizerSidebar");
+
+                const menuButton =
+                    document.getElementById("organizerMenuButton");
+
+                const closeButton =
+                    document.getElementById("organizerSidebarClose");
+
+                const overlay =
+                    document.getElementById("organizerSidebarOverlay");
+
+                function openSidebar() {
+                    sidebar?.classList.add("show");
+                    overlay?.classList.add("show");
+                    document.body.classList.add("sidebar-open");
+                }
+
+                function closeSidebar() {
+                    sidebar?.classList.remove("show");
+                    overlay?.classList.remove("show");
+                    document.body.classList.remove("sidebar-open");
+                }
+
+                menuButton?.addEventListener(
+                    "click",
+                    openSidebar
+                );
+
+                closeButton?.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+
+                overlay?.addEventListener(
+                    "click",
+                    closeSidebar
+                );
+
+                document
+                    .querySelectorAll(".organizer-navigation-link")
+                    .forEach(function (link) {
+                        link.addEventListener(
+                            "click",
+                            closeSidebar
+                        );
+                    });
+
+                window.addEventListener(
+                    "resize",
+                    function () {
+                        if (window.innerWidth >= 992) {
+                            closeSidebar();
+                        }
+                    }
+                );
+            });
+    </script>
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false
+    )
+
+    @if (TempData["Success"] is not null)
+    {
+        var successMessage =
+            JsonSerializer.Serialize(
+                TempData["Success"]?.ToString()
+            );
+
+        <script>
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    function () {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: @Html.Raw(successMessage),
+                            confirmButtonColor: "#2563eb"
+                        });
+                    }
+                );
+        </script>
+    }
+
+    @if (TempData["OrganizerMessage"] is not null)
+    {
+        var organizerMessage =
+            JsonSerializer.Serialize(
+                TempData["OrganizerMessage"]?.ToString()
+            );
+
+        <script>
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    function () {
+                        Swal.fire({
+                            icon: "success",
+                            title: "Success",
+                            text: @Html.Raw(organizerMessage),
+                            confirmButtonColor: "#2563eb"
+                        });
+                    }
+                );
+        </script>
+    }
+
+    @if (TempData["Error"] is not null)
+    {
+        var errorMessage =
+            JsonSerializer.Serialize(
+                TempData["Error"]?.ToString()
+            );
+
+        <script>
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    function () {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Oops...",
+                            text: @Html.Raw(errorMessage),
+                            confirmButtonColor: "#dc2626"
+                        });
+                    }
+                );
+        </script>
+    }
+
+    @if (TempData["OrganizerError"] is not null)
+    {
+        var organizerError =
+            JsonSerializer.Serialize(
+                TempData["OrganizerError"]?.ToString()
+            );
+
+        <script>
+                document.addEventListener(
+                    "DOMContentLoaded",
+                    function () {
+                        Swal.fire({
+                            icon: "error",
+                            title: "Organizer Error",
+                            text: @Html.Raw(organizerError),
+                            confirmButtonColor: "#dc2626"
+                        });
+                    }
+                );
+        </script>
+    }
+
+</body>
+
+</html>

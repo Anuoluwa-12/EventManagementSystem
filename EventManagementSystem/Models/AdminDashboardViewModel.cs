@@ -1,4 +1,4 @@
-﻿namespace EventManagementSystem.Models.Admin;
+﻿namespace EventManagementSystem.Models;
 
 public sealed class AdminDashboardViewModel
 {

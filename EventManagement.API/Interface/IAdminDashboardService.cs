@@ -1,9 +1,20 @@
-﻿using EventManagement.API.DTO.Admin;
+﻿using EventManagement.API.DTO;
 
-namespace EventManagement.API.Interface
+namespace EventManagement.API.Interface;
+
+public interface IAdminDashboardService
 {
-    public interface IAdminDashboardService
-    {
-        Task<AdminDashboardDto> GetDashboardAsync();
-    }
+    Task<AdminDashboardDto> GetDashboardAsync();
+
+    Task<List<AdminUserDto>> GetUsersAsync();
+
+    Task<List<AdminOrganizerDto>> GetOrganizersAsync();
+
+    Task<List<AdminEventDto>> GetEventsAsync();
+
+    Task<List<AdminBookingDto>> GetBookingsAsync();
+
+    Task<List<AdminPaymentDto>> GetPaymentsAsync();
+
+    Task<AdminReportDto> GetReportsAsync();
 }

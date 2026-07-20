@@ -1,4 +1,4 @@
-﻿namespace EventManagement.API.DTO.Admin;
+﻿namespace EventManagement.API.DTO;
 
 public class AdminDashboardDto
 {

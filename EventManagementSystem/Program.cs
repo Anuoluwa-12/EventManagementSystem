@@ -31,26 +31,53 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromHours(2);
+    options.IdleTimeout =
+        TimeSpan.FromHours(2);
+
     options.Cookie.HttpOnly = true;
+
     options.Cookie.IsEssential = true;
+
+    options.Cookie.SameSite =
+        SameSiteMode.Lax;
 });
 
 builder.Services.AddHttpContextAccessor();
 
 /*
  * ==================================================
- * FRONTEND SERVICES
+ * STANDARD FRONTEND SERVICES
  * ==================================================
  */
 
-builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<
+    IAuthService,
+    AuthService
+>();
 
-builder.Services.AddScoped<IDashboardService, DashboardService>();
+builder.Services.AddScoped<
+    IDashboardService,
+    DashboardService
+>();
 
-builder.Services.AddScoped<IProfileService,ProfileService>();
+builder.Services.AddScoped<
+    IProfileService,
+    ProfileService
+>();
 
-builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddScoped<
+    IEventService,
+    EventService
+>();
+
+/*
+ * Do not register these in the frontend:
+ *
+ * IAdminDashboardService
+ * AdminDashboardService
+ *
+ * They belong to EventManagement.API.
+ */
 
 /*
  * ==================================================
@@ -58,8 +85,10 @@ builder.Services.AddScoped<IEventService, EventService>();
  * ==================================================
  */
 
-builder.Services.AddHttpClient<IOrganizerService, OrganizerService>
-    (client =>
+builder.Services.AddHttpClient<
+    IOrganizerService,
+    OrganizerService
+>(client =>
 {
     client.BaseAddress =
         new Uri(apiBaseUrl);
@@ -71,8 +100,10 @@ builder.Services.AddHttpClient<IOrganizerService, OrganizerService>
  * ==================================================
  */
 
-builder.Services.AddHttpClient<IAdminDashboardApiService, AdminDashboardApiService>
-    (client =>
+builder.Services.AddHttpClient<
+    IAdminDashboardApiService,
+    AdminDashboardApiService
+>(client =>
 {
     client.BaseAddress =
         new Uri(apiBaseUrl);
@@ -97,12 +128,22 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseStaticFiles();
+
 app.UseRouting();
 
+/*
+ * Session must run before controllers
+ * read the Role, UserId or token.
+ */
 app.UseSession();
 
 app.UseAuthorization();
 
+/*
+ * Keep this only if the project is using
+ * the .NET static asset mapping feature.
+ */
 app.MapStaticAssets();
 
 /*

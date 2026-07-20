@@ -1,0 +1,137 @@
+﻿@model EventManagementSystem.Models.AdminReportViewModel
+
+@{
+    ViewData["Title"] = "Reports";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
+}
+
+<section class="admin-dashboard">
+
+    <div class="dashboard-heading">
+        <div>
+            <h2>Platform Reports</h2>
+
+            <p>
+                Review users, organizers, events,
+                bookings and platform revenue.
+            </p>
+        </div>
+    </div>
+
+    <div class="row g-4">
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Total Revenue
+                </p>
+
+                <h3 class="dashboard-value">
+                    ₦@Model.TotalRevenue.ToString("N2")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Paid Bookings
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.PaidBookings.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Pending Bookings
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.PendingBookings.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Upcoming Events
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.UpcomingEvents.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Total Users
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.TotalUsers.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Active Organizers
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.ActiveOrganizers.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Total Events
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.TotalEvents.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-3">
+            <div class="dashboard-card">
+
+                <p class="dashboard-label">
+                    Cancelled Bookings
+                </p>
+
+                <h3 class="dashboard-value">
+                    @Model.CancelledBookings.ToString("N0")
+                </h3>
+
+            </div>
+        </div>
+
+    </div>
+
+</section>

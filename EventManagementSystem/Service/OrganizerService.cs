@@ -16,9 +16,7 @@ public class OrganizerService : IOrganizerService
         _httpClient = httpClient;
     }
 
-    public async Task<bool> RegisterAsync(
-     string token,
-     OrganizerRegistrationViewModel model)
+    public async Task<bool> RegisterAsync(string token, OrganizerRegistrationViewModel model)
     {
         using var request =
             CreateAuthorizedRequest(
@@ -154,8 +152,7 @@ public class OrganizerService : IOrganizerService
             .ReadFromJsonAsync<List<OrganizerEventViewModel>>()?? new List<OrganizerEventViewModel>();
     }
 
-    public async Task<OrganizerEventViewModel?>
-        GetEventAsync(string token, int eventId)
+    public async Task<OrganizerEventViewModel?>GetEventAsync(string token, int eventId)
     {
         using var request =
             CreateAuthorizedRequest(

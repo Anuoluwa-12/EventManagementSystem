@@ -1,0 +1,99 @@
+﻿@model List<EventManagementSystem.Models.AdminPaymentViewModel>
+
+@{
+    ViewData["Title"] = "Payments";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
+}
+
+<section class="admin-dashboard">
+
+    <div class="dashboard-heading">
+        <div>
+            <h2>Payments</h2>
+
+            <p>
+                Monitor payment statuses and platform
+                registration revenue.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+
+            @if (Model.Count == 0)
+            {
+                <div class="text-center py-5">
+                    <p class="text-muted mb-0">
+                        No payment records were found.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-hover
+                        align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">
+                                    Booking
+                                </th>
+
+                                <th>Customer</th>
+                                <th>Event</th>
+                                <th>Amount</th>
+                                <th class="pe-4">Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var payment in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4">
+                                        #@payment.BookingId
+                                    </td>
+
+                                    <td>
+                                        <strong class="d-block">
+                                            @payment.CustomerName
+                                        </strong>
+
+                                        <small class="text-muted">
+                                            @payment.CustomerEmail
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        @payment.EventTitle
+                                    </td>
+
+                                    <td>
+                                        ₦@payment.Amount.ToString("N2")
+                                    </td>
+
+                                    <td class="pe-4">
+                                        <span class="badge
+                                            @(payment.PaymentStatus == "Paid"
+                                                                        ? "bg-success"
+                                                                        : "bg-warning text-dark")">
+
+                                            @payment.PaymentStatus
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+</section>

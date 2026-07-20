@@ -2,10 +2,10 @@
 
 @{
     ViewData["Title"] = "Become an Organizer";
-    Layout = "~/Views/Dashboard/Layout.cshtml";
+    Layout = "~/Views/Shared/_OrganizerLayout.cshtml";
 }
 
-<div class="organizer-page container py-4">
+<div class="organizer-page">
 
     <div class="row justify-content-center">
         <div class="col-12 col-lg-8 col-xl-6">
@@ -13,7 +13,13 @@
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-4 p-md-5">
 
+                    <!-- Page heading -->
                     <div class="mb-4">
+
+                        <div class="organizer-summary-icon organizer-icon-events">
+                            <i class="fa-solid fa-calendar-check"></i>
+                        </div>
+
                         <h2 class="mb-2">
                             Become an Organizer
                         </h2>
@@ -22,14 +28,8 @@
                             Create an organizer profile to publish and
                             manage events on Lumievent.
                         </p>
-                    </div>
 
-                    @if (TempData["OrganizerMessage"] is not null)
-                    {
-                        <div class="alert alert-success" role="alert">
-                            @TempData["OrganizerMessage"]
-                        </div>
-                    }
+                    </div>
 
                     <form asp-controller="Organizer"
                           asp-action="Register"
@@ -39,7 +39,9 @@
                              class="alert alert-danger">
                         </div>
 
+                        <!-- Organizer name -->
                         <div class="mb-3">
+
                             <label asp-for="DisplayName"
                                    class="form-label">
                                 Organizer Name
@@ -52,9 +54,17 @@
                             <span asp-validation-for="DisplayName"
                                   class="text-danger">
                             </span>
+
+                            <small class="text-muted d-block mt-1">
+                                This name will be displayed publicly on
+                                your events.
+                            </small>
+
                         </div>
 
+                        <!-- Phone number -->
                         <div class="mb-3">
+
                             <label asp-for="Phone"
                                    class="form-label">
                                 Phone Number
@@ -68,9 +78,12 @@
                             <span asp-validation-for="Phone"
                                   class="text-danger">
                             </span>
+
                         </div>
 
+                        <!-- Organizer bio -->
                         <div class="mb-4">
+
                             <label asp-for="Bio"
                                    class="form-label">
                                 About the Organizer
@@ -84,18 +97,24 @@
                             <span asp-validation-for="Bio"
                                   class="text-danger">
                             </span>
+
                         </div>
 
+                        <!-- Actions -->
                         <div class="d-flex flex-wrap gap-2">
 
                             <button type="submit"
                                     class="btn btn-primary">
+
+                                <i class="fa-solid fa-user-plus me-1"></i>
                                 Register as Organizer
                             </button>
 
                             <a asp-controller="Dashboard"
                                    asp-action="Index"
                                    class="btn btn-outline-secondary">
+
+                                <i class="fa-solid fa-arrow-left me-1"></i>
                                 Back to Dashboard
                             </a>
 
@@ -111,6 +130,7 @@
 
 </div>
 
-@section Scripts {
+@section Scripts
+{
     <partial name="_ValidationScriptsPartial" />
 }

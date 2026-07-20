@@ -1,0 +1,107 @@
+﻿@model List<EventManagementSystem.Models.AdminBookingViewModel>
+
+@{
+    ViewData["Title"] = "Bookings";
+    Layout = "~/Views/Shared/_AdminDashboardLayout.cshtml";
+}
+
+<section class="admin-dashboard">
+
+    <div class="dashboard-heading">
+        <div>
+            <h2>Bookings</h2>
+
+            <p>
+                View all attendee event registrations.
+            </p>
+        </div>
+    </div>
+
+    <div class="card border-0 shadow-sm">
+        <div class="card-body p-0">
+
+            @if (Model.Count == 0)
+            {
+                <div class="text-center py-5">
+                    <p class="text-muted mb-0">
+                        No bookings were found.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div class="table-responsive">
+
+                    <table class="table table-hover
+                        align-middle mb-0">
+
+                        <thead class="table-light">
+                            <tr>
+                                <th class="ps-4">
+                                    Booking
+                                </th>
+
+                                <th>Attendee</th>
+                                <th>Event</th>
+                                <th>Amount</th>
+                                <th>Booking Status</th>
+                                <th class="pe-4">
+                                    Payment Status
+                                </th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var booking in Model)
+                            {
+                                <tr>
+                                    <td class="ps-4">
+                                        #@booking.Id
+                                    </td>
+
+                                    <td>
+                                        <strong class="d-block">
+                                            @booking.AttendeeName
+                                        </strong>
+
+                                        <small class="text-muted">
+                                            @booking.AttendeeEmail
+                                        </small>
+                                    </td>
+
+                                    <td>
+                                        @booking.EventTitle
+                                    </td>
+
+                                    <td>
+                                        ₦@booking.AmountPaid.ToString("N2")
+                                    </td>
+
+                                    <td>
+                                        <span class="badge bg-secondary">
+                                            @booking.BookingStatus
+                                        </span>
+                                    </td>
+
+                                    <td class="pe-4">
+                                        <span class="badge
+                                            @(booking.PaymentStatus == "Paid"
+                                                                        ? "bg-success"
+                                                                        : "bg-warning text-dark")">
+
+                                            @booking.PaymentStatus
+                                        </span>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+                </div>
+            }
+
+        </div>
+    </div>
+
+</section>

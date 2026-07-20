@@ -267,9 +267,7 @@ public class OrganizerController : ControllerBase
 
     [HttpPut("events/{eventId:int}")]
     [RequestSizeLimit(6 * 1024 * 1024)]
-    public async Task<IActionResult> UpdateEvent(
-        int eventId,
-        [FromForm] OrganizerEventRequestDto request)
+    public async Task<IActionResult> UpdateEvent(int eventId, [FromForm] OrganizerEventRequestDto request)
     {
         var userId = GetCurrentUserId();
 
@@ -335,8 +333,7 @@ public class OrganizerController : ControllerBase
      */
 
     [HttpPatch("events/{eventId:int}/cancel")]
-    public async Task<IActionResult> CancelEvent(
-        int eventId)
+    public async Task<IActionResult> CancelEvent(int eventId)
     {
         var userId = GetCurrentUserId();
 
@@ -386,8 +383,7 @@ public class OrganizerController : ControllerBase
      */
 
     [HttpDelete("events/{eventId:int}")]
-    public async Task<IActionResult> DeleteEvent(
-        int eventId)
+    public async Task<IActionResult> DeleteEvent(int eventId)
     {
         var userId = GetCurrentUserId();
 

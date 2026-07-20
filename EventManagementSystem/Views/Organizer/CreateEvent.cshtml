@@ -2,18 +2,16 @@
 
 @{
     ViewData["Title"] = "Create Event";
-    Layout = "~/Views/Dashboard/Layout.cshtml";
+    Layout = "~/Views/Shared/_OrganizerLayout.cshtml";
 }
 
-<div class="organizer-page container py-4">
+<div class="organizer-page">
 
     <div class="row justify-content-center">
         <div class="col-12 col-xl-10">
 
-            <div class="d-flex flex-column flex-md-row
-                justify-content-between
-                align-items-md-center
-                gap-3 mb-4">
+            <!-- Page heading -->
+            <div class="organizer-toolbar">
 
                 <div>
                     <h2 class="mb-2">
@@ -26,14 +24,21 @@
                     </p>
                 </div>
 
-                <a asp-controller="Organizer"
-                       asp-action="Events"
-                       class="btn btn-outline-secondary">
-                    Back to Events
-                </a>
+                <div class="organizer-toolbar-actions">
+
+                    <a asp-controller="Organizer"
+                           asp-action="Events"
+                           class="btn btn-outline-secondary">
+
+                        <i class="fa-solid fa-arrow-left me-1"></i>
+                        Back to Events
+                    </a>
+
+                </div>
 
             </div>
 
+            <!-- Create event form -->
             <div class="card border-0 shadow-sm">
                 <div class="card-body p-4 p-md-5">
 
@@ -46,7 +51,9 @@
                              class="alert alert-danger">
                         </div>
 
+                        <!-- Event title -->
                         <div class="mb-3">
+
                             <label asp-for="Title"
                                    class="form-label">
                                 Event Title
@@ -59,9 +66,12 @@
                             <span asp-validation-for="Title"
                                   class="text-danger">
                             </span>
+
                         </div>
 
+                        <!-- Event description -->
                         <div class="mb-3">
+
                             <label asp-for="Description"
                                    class="form-label">
                                 Event Description
@@ -75,11 +85,14 @@
                             <span asp-validation-for="Description"
                                   class="text-danger">
                             </span>
+
                         </div>
 
+                        <!-- Date and time -->
                         <div class="row">
 
                             <div class="col-12 col-md-6 mb-3">
+
                                 <label asp-for="EventDate"
                                        class="form-label">
                                     Event Date
@@ -94,9 +107,11 @@
                                 <span asp-validation-for="EventDate"
                                       class="text-danger">
                                 </span>
+
                             </div>
 
                             <div class="col-12 col-md-6 mb-3">
+
                                 <label asp-for="EventTime"
                                        class="form-label">
                                     Event Time
@@ -110,11 +125,14 @@
                                 <span asp-validation-for="EventTime"
                                       class="text-danger">
                                 </span>
+
                             </div>
 
                         </div>
 
+                        <!-- Venue -->
                         <div class="mb-3">
+
                             <label asp-for="Venue"
                                    class="form-label">
                                 Event Venue
@@ -127,17 +145,21 @@
                             <span asp-validation-for="Venue"
                                   class="text-danger">
                             </span>
+
                         </div>
 
+                        <!-- Price and seats -->
                         <div class="row">
 
                             <div class="col-12 col-md-6 mb-3">
+
                                 <label asp-for="TicketPrice"
                                        class="form-label">
                                     Ticket Price
                                 </label>
 
                                 <div class="input-group">
+
                                     <span class="input-group-text">
                                         ₦
                                     </span>
@@ -148,6 +170,7 @@
                                            step="0.01"
                                            class="form-control"
                                            placeholder="0.00" />
+
                                 </div>
 
                                 <span asp-validation-for="TicketPrice"
@@ -157,9 +180,11 @@
                                 <small class="text-muted">
                                     Enter 0 for a free event.
                                 </small>
+
                             </div>
 
                             <div class="col-12 col-md-6 mb-3">
+
                                 <label asp-for="TotalSeats"
                                        class="form-label">
                                     Number of Seats
@@ -174,11 +199,14 @@
                                 <span asp-validation-for="TotalSeats"
                                       class="text-danger">
                                 </span>
+
                             </div>
 
                         </div>
 
+                        <!-- Category -->
                         <div class="mb-3">
+
                             <label asp-for="Category"
                                    class="form-label">
                                 Event Category
@@ -191,9 +219,12 @@
                             <span asp-validation-for="Category"
                                   class="text-danger">
                             </span>
+
                         </div>
 
+                        <!-- Event image -->
                         <div class="mb-4">
+
                             <label asp-for="EventImage"
                                    class="form-label">
                                 Event Image
@@ -208,23 +239,27 @@
                                   class="text-danger">
                             </span>
 
-                            <small class="text-muted">
-                                Upload a JPG, PNG or WEBP image.
+                            <small class="text-muted d-block mt-2">
+                                Upload a JPG, JPEG, PNG or WEBP image.
                                 Maximum size: 5 MB.
                             </small>
+
                         </div>
 
+                        <!-- Actions -->
                         <div class="d-flex flex-wrap gap-2">
 
                             <button type="submit"
                                     class="btn btn-primary">
-                                <i class="fas fa-calendar-plus me-1"></i>
+
+                                <i class="fa-solid fa-calendar-plus me-1"></i>
                                 Create Event
                             </button>
 
                             <a asp-controller="Organizer"
                                    asp-action="Events"
                                    class="btn btn-outline-secondary">
+
                                 Cancel
                             </a>
 
@@ -240,6 +275,7 @@
 
 </div>
 
-@section Scripts {
+@section Scripts
+{
     <partial name="_ValidationScriptsPartial" />
 }

@@ -1,6 +1,7 @@
 using EventManagement.API.Data;
 using EventManagement.API.Interface;
 using EventManagement.API.Service;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
@@ -27,8 +28,9 @@ builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IOrganizerService, OrganizerService>();
+builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
-// Uncomment only when the implementation exists.
+// Add this only when the service has been implemented.
 // builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
 
 /*
@@ -51,7 +53,9 @@ if (string.IsNullOrWhiteSpace(connectionString))
 
 builder.Services.AddDbContext<ApplicationDbContext>(
     options =>
-        options.UseSqlServer(connectionString)
+    {
+        options.UseSqlServer(connectionString);
+    }
 );
 
 /*
@@ -91,18 +95,29 @@ if (string.IsNullOrWhiteSpace(jwtAudience))
 }
 
 builder.Services
-    .AddAuthentication("Bearer")
-    .AddJwtBearer("Bearer", options =>
+    .AddAuthentication(options =>
+    {
+        options.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+
+        options.DefaultChallengeScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
     {
         options.TokenValidationParameters =
             new TokenValidationParameters
             {
                 ValidateIssuer = true,
+
                 ValidateAudience = true,
+
                 ValidateLifetime = true,
+
                 ValidateIssuerSigningKey = true,
 
                 ValidIssuer = jwtIssuer,
+
                 ValidAudience = jwtAudience,
 
                 IssuerSigningKey =
@@ -116,7 +131,8 @@ builder.Services
                 RoleClaimType =
                     ClaimTypes.Role,
 
-                ClockSkew = TimeSpan.Zero
+                ClockSkew =
+                    TimeSpan.Zero
             };
     });
 
@@ -137,8 +153,59 @@ builder.Services.AddSwaggerGen(options =>
         new OpenApiInfo
         {
             Title = "EventManagement API",
-            Version = "v1"
+
+            Version = "v1",
+
+            Description =
+                "API for managing users, organizers, events and bookings."
         }
+    );
+
+    /*
+     * Adds JWT Bearer authentication
+     * to the Swagger interface.
+     *
+     * This creates the Authorize button.
+     */
+    options.AddSecurityDefinition(
+        "bearer",
+        new OpenApiSecurityScheme
+        {
+            Type =
+                SecuritySchemeType.Http,
+
+            Scheme =
+                "bearer",
+
+            BearerFormat =
+                "JWT",
+
+            In =
+                ParameterLocation.Header,
+
+            Name =
+                "Authorization",
+
+            Description =
+                "Paste your JWT token here. Do not include the word Bearer."
+        }
+    );
+
+    /*
+     * Swashbuckle 10 requires the generated
+     * OpenApiDocument when creating a reference.
+     */
+    options.AddSecurityRequirement(
+        document =>
+            new OpenApiSecurityRequirement
+            {
+                [
+                    new OpenApiSecuritySchemeReference(
+                        "bearer",
+                        document
+                    )
+                ] = []
+            }
     );
 });
 
@@ -175,17 +242,26 @@ builder.Services.AddSession(options =>
     options.IdleTimeout =
         TimeSpan.FromMinutes(30);
 
-    options.Cookie.HttpOnly = true;
-    options.Cookie.IsEssential = true;
+    options.Cookie.HttpOnly =
+        true;
+
+    options.Cookie.IsEssential =
+        true;
 });
 
 builder.Services.AddHttpContextAccessor();
+
+/*
+ * ==================================================
+ * BUILD APPLICATION
+ * ==================================================
+ */
 
 var app = builder.Build();
 
 /*
  * ==================================================
- * HTTP PIPELINE
+ * SWAGGER PIPELINE
  * ==================================================
  */
 
@@ -200,9 +276,19 @@ if (app.Environment.IsDevelopment())
             "EventManagement API v1"
         );
 
-        options.RoutePrefix = "swagger";
+        options.RoutePrefix =
+            "swagger";
+
+        options.DocumentTitle =
+            "EventManagement API Documentation";
     });
 }
+
+/*
+ * ==================================================
+ * HTTP PIPELINE
+ * ==================================================
+ */
 
 app.UseHttpsRedirection();
 
@@ -212,7 +298,11 @@ app.UseCors("AllowAll");
 
 app.UseSession();
 
+/*
+ * Authentication must come before authorization.
+ */
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
