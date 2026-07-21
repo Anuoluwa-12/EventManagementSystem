@@ -7,14 +7,11 @@ namespace EventManagement.API.Controllers;
 [ApiController]
 [Route("api/admin")]
 [Authorize(Roles = "Admin")]
-public class AdminDashboardController :
-    ControllerBase
+public class AdminDashboardController : ControllerBase
 {
-    private readonly IAdminDashboardService
-        _adminService;
+    private readonly IAdminDashboardService _adminService;
 
-    public AdminDashboardController(
-        IAdminDashboardService adminService)
+    public AdminDashboardController(IAdminDashboardService adminService)
     {
         _adminService = adminService;
     }
@@ -40,8 +37,7 @@ public class AdminDashboardController :
     }
 
     [HttpGet("organizers")]
-    public async Task<IActionResult>
-        GetOrganizers()
+    public async Task<IActionResult> GetOrganizers()
     {
         var result =
             await _adminService

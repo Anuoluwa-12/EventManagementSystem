@@ -1,0 +1,172 @@
+﻿@model EventManagementSystem.DTO.CheckoutViewModel
+
+@{
+    ViewData["Title"] = "Checkout";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="ticket-page">
+
+    <div class="ticket-page-heading">
+
+        <div>
+            <span class="ticket-eyebrow">
+                Secure checkout
+            </span>
+
+            <h1>
+                Complete your purchase
+            </h1>
+
+            <p>
+                Confirm your email and continue
+                to the secure payment page.
+            </p>
+        </div>
+
+    </div>
+
+    <form asp-controller="Checkout"
+          asp-action="Start"
+          method="post"
+          class="checkout-layout">
+
+        @Html.AntiForgeryToken()
+
+        <section class="checkout-information-card">
+
+            <span class="ticket-eyebrow">
+                Contact information
+            </span>
+
+            <h2>
+                Payment details
+            </h2>
+
+            <div asp-validation-summary="ModelOnly"
+                 class="ticket-validation-summary">
+            </div>
+
+            <div class="ticket-form-group">
+
+                <label asp-for="Email">
+                    Email address
+                </label>
+
+                <input asp-for="Email"
+                       placeholder="name@example.com" />
+
+                <span asp-validation-for="Email">
+                </span>
+
+                <small>
+                    Your payment confirmation and
+                    ticket information will be
+                    associated with this email.
+                </small>
+
+            </div>
+
+            <div class="secure-payment-notice">
+
+                <i class="fa-solid fa-lock"></i>
+
+                <div>
+                    <strong>
+                        Secure payment
+                    </strong>
+
+                    <span>
+                        You will be redirected to
+                        Paystack to complete payment.
+                    </span>
+                </div>
+
+            </div>
+
+        </section>
+
+        <aside class="ticket-order-summary checkout-summary">
+
+            <span class="ticket-eyebrow">
+                Your order
+            </span>
+
+            <h2>
+                Order Summary
+            </h2>
+
+            <div class="checkout-item-list">
+
+                @foreach (var item in Model.Items)
+                {
+                    <div class="checkout-summary-item">
+
+                        <div>
+                            <strong>
+                                @item.EventTitle
+                            </strong>
+
+                            <span>
+                                @item.Quantity ×
+                                ₦@item.UnitPrice.ToString("N2")
+                            </span>
+                        </div>
+
+                        <strong>
+                            ₦@item.Subtotal.ToString("N2")
+                        </strong>
+
+                    </div>
+                }
+
+            </div>
+
+            <div class="ticket-summary-row">
+
+                <span>
+                    Total tickets
+                </span>
+
+                <strong>
+                    @Model.TotalQuantity
+                </strong>
+
+            </div>
+
+            <div class="ticket-summary-row total">
+
+                <span>
+                    Total payment
+                </span>
+
+                <strong>
+                    ₦@Model.TotalAmount.ToString("N2")
+                </strong>
+
+            </div>
+
+            <button type="submit"
+                    class="ticket-primary-button full">
+
+                <i class="fa-solid fa-lock"></i>
+
+                Pay securely
+            </button>
+
+            <a asp-controller="Cart"
+                   asp-action="Index"
+                   class="return-to-cart-link">
+
+                Return to cart
+            </a>
+
+        </aside>
+
+    </form>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

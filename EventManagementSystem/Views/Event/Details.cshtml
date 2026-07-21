@@ -1,0 +1,216 @@
+﻿<div class="ticket-purchase-card">
+
+    <div class="ticket-purchase-heading">
+
+        <span>
+            Ticket price
+        </span>
+
+        <strong>
+            ₦@Model.TicketPrice.ToString("N2")
+        </strong>
+
+    </div>
+
+    @if (Model.AvailableSeats > 0)
+    {
+        <form asp-controller="Cart"
+              asp-action="Add"
+              method="post"
+              class="ticket-purchase-form">
+
+            @Html.AntiForgeryToken()
+
+            <input type="hidden"
+                   name="EventId"
+                   value="@Model.Id" />
+
+            <input type="hidden"
+                   name="EventTitle"
+                   value="@Model.Title" />
+
+            <input type="hidden"
+                   name="EventImageUrl"
+                   value="@Model.EventImageUrl" />
+
+            <input type="hidden"
+                   name="EventDate"
+                   value="@Model.EventDate.ToString("O")" />
+
+            <input type="hidden"
+                   name="UnitPrice"
+                   value="@Model.TicketPrice" />
+
+            <input type="hidden"
+                   name="AvailableSeats"
+                   value="@Model.AvailableSeats" />
+
+            <div class="ticket-availability">
+
+                <i class="fa-solid fa-circle-check"></i>
+
+                @Model.AvailableSeats ticket(s)
+                available
+
+            </div>
+
+            <label for="ticketQuantity">
+                Number of tickets
+            </label>
+
+            <div class="ticket-quantity-control">
+
+                <button type="button"
+                        id="decreaseTicketQuantity"
+                        aria-label="Reduce ticket quantity">
+                    −
+                </button>
+
+                <input type="number"
+                       id="ticketQuantity"
+                       name="Quantity"
+                       value="1"
+                       min="1"
+                       max="@Math.Min(Model.AvailableSeats, 10)"
+                       readonly />
+
+                <button type="button"
+                        id="increaseTicketQuantity"
+                        aria-label="Increase ticket quantity">
+                    +
+                </button>
+
+            </div>
+
+            <div class="ticket-price-summary">
+
+                <span>
+                    Subtotal
+                </span>
+
+                <strong id="ticketSubtotal">
+                    ₦@Model.TicketPrice.ToString("N2")
+                </strong>
+
+            </div>
+
+            <button type="submit"
+                    class="add-ticket-to-cart-button">
+
+                <i class="fa-solid fa-cart-plus"></i>
+
+                Add tickets to cart
+            </button>
+
+        </form>
+    }
+    else
+    {
+        <div class="ticket-sold-out">
+
+            <i class="fa-solid fa-circle-xmark"></i>
+
+            This event is sold out.
+
+        </div>
+    }
+
+</div>
+
+<script>
+    document.addEventListener(
+        "DOMContentLoaded",
+        function () {
+            const quantityInput =
+                document.getElementById(
+                    "ticketQuantity"
+                );
+
+            const decreaseButton =
+                document.getElementById(
+                    "decreaseTicketQuantity"
+                );
+
+            const increaseButton =
+                document.getElementById(
+                    "increaseTicketQuantity"
+                );
+
+            const subtotalElement =
+                document.getElementById(
+                    "ticketSubtotal"
+                );
+
+            if (!quantityInput) {
+                return;
+            }
+
+            const unitPrice =
+                @Model.TicketPrice.ToString(
+                        System.Globalization
+                                .CultureInfo
+                                .InvariantCulture
+                );
+
+            const minimum =
+                Number(quantityInput.min);
+
+            const maximum =
+                Number(quantityInput.max);
+
+            function updateSubtotal() {
+                const quantity =
+                    Number(quantityInput.value);
+
+                const subtotal =
+                    unitPrice * quantity;
+
+                subtotalElement.textContent =
+                    "₦" +
+                    subtotal.toLocaleString(
+                        "en-NG",
+                        {
+                            minimumFractionDigits: 2,
+                            maximumFractionDigits: 2
+                        }
+                    );
+            }
+
+            decreaseButton?.addEventListener(
+                "click",
+                function () {
+                    const current =
+                        Number(
+                            quantityInput.value
+                        );
+
+                    quantityInput.value =
+                        Math.max(
+                            minimum,
+                            current - 1
+                        );
+
+                    updateSubtotal();
+                }
+            );
+
+            increaseButton?.addEventListener(
+                "click",
+                function () {
+                    const current =
+                        Number(
+                            quantityInput.value
+                        );
+
+                    quantityInput.value =
+                        Math.min(
+                            maximum,
+                            current + 1
+                        );
+
+                    updateSubtotal();
+                }
+            );
+        }
+    );
+</script>

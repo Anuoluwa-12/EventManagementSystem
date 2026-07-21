@@ -2,90 +2,224 @@
 using EventManagementSystem.Interface;
 using Microsoft.AspNetCore.Mvc;
 
-namespace EventManagement.MVC.Controllers
+namespace EventManagementSystem.Controllers;
+
+public class ProfileController : Controller
 {
-    public class ProfileController : Controller
+    private readonly IProfileService _profileService;
+
+    public ProfileController(
+        IProfileService profileService)
     {
-        private readonly IProfileService _profileService;
+        _profileService = profileService;
+    }
 
-        public ProfileController(IProfileService profileService)
+    /*
+     * ==================================================
+     * USER PROFILE / DASHBOARD
+     * URL: /Profile/Index
+     * ==================================================
+     */
+
+    [HttpGet]
+    public async Task<IActionResult> Index()
+    {
+        var userId = GetCurrentUserId();
+
+        if (!userId.HasValue)
         {
-            _profileService = profileService;
+            return RedirectToAction(
+                "Login",
+                "Auth"
+            );
         }
 
-        public async Task<IActionResult> Index()
+        var profile =
+            await _profileService.GetProfileAsync(
+                userId.Value
+            );
+
+        if (profile is null)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
+            TempData["Error"] =
+                "Your profile could not be loaded.";
 
-            if (userId == null)
-                return RedirectToAction("Login", "Auth");
-
-            var profile = await _profileService.GetProfileAsync(userId.Value);
-
-            return View(profile);
+            return RedirectToAction(
+                "Login",
+                "Auth"
+            );
         }
 
-        public async Task<IActionResult> Edit()
+        return View(profile);
+    }
+
+    /*
+     * ==================================================
+     * EDIT PROFILE
+     * ==================================================
+     */
+
+    [HttpGet]
+    public async Task<IActionResult> Edit()
+    {
+        var userId = GetCurrentUserId();
+
+        if (!userId.HasValue)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
+            return RedirectToAction(
+                "Login",
+                "Auth"
+            );
+        }
 
-            if (userId == null)
-                return RedirectToAction("Login", "Auth");
+        var profile =
+            await _profileService.GetProfileAsync(
+                userId.Value
+            );
 
-            var profile = await _profileService.GetProfileAsync(userId.Value);
+        if (profile is null)
+        {
+            TempData["Error"] =
+                "Your profile could not be loaded.";
 
-            var dto = new UpdateProfileDto
+            return RedirectToAction(
+                nameof(Index)
+            );
+        }
+
+        var dto =
+            new UpdateProfileDto
             {
                 FirstName = profile.FirstName,
                 LastName = profile.LastName,
                 Email = profile.Email
             };
 
+        return View(dto);
+    }
+
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(
+        UpdateProfileDto dto)
+    {
+        var userId = GetCurrentUserId();
+
+        if (!userId.HasValue)
+        {
+            return RedirectToAction(
+                "Login",
+                "Auth"
+            );
+        }
+
+        if (!ModelState.IsValid)
+        {
             return View(dto);
         }
 
-        [HttpPost]
-        public async Task<IActionResult> Edit(UpdateProfileDto dto)
+        var result =
+            await _profileService.UpdateProfileAsync(
+                userId.Value,
+                dto
+            );
+
+        if (!result)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
+            TempData["Error"] =
+                "Failed to update profile.";
 
-            if (userId == null)
-                return RedirectToAction("Login", "Auth");
-
-            var result = await _profileService.UpdateProfileAsync(userId.Value, dto);
-
-            if (result)
-            {
-                TempData["Success"] = "Profile updated successfully";
-                return RedirectToAction("Index");
-            }
-
-            TempData["Error"] = "Failed to update profile";
             return View(dto);
         }
 
-        public async Task<IActionResult> BookedEvents()
+        /*
+         * Keep the session name updated after
+         * the profile information changes.
+         */
+        if (!string.IsNullOrWhiteSpace(dto.FirstName))
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-
-            if (userId == null)
-                return RedirectToAction("Login", "Auth");
-
-            var events = await _profileService.GetBookedEventsAsync(userId.Value);
-
-            return View(events ?? new List<BookedEventDto>());
+            HttpContext.Session.SetString(
+                "FirstName",
+                dto.FirstName.Trim()
+            );
         }
 
-        public async Task<IActionResult> Tickets()
+        TempData["Success"] =
+            "Profile updated successfully.";
+
+        return RedirectToAction(
+            nameof(Index)
+        );
+    }
+
+    /*
+     * ==================================================
+     * BOOKED EVENTS
+     * URL: /Profile/BookedEvents
+     * ==================================================
+     */
+
+    [HttpGet]
+    public async Task<IActionResult> BookedEvents()
+    {
+        var userId = GetCurrentUserId();
+
+        if (!userId.HasValue)
         {
-            int? userId = HttpContext.Session.GetInt32("UserId");
-
-            if (userId == null)
-                return RedirectToAction("Login", "Auth");
-
-            var tickets = await _profileService.GetTicketEventsAsync(userId.Value);
-
-            return View(tickets ?? new List<TicketEventDto>());
+            return RedirectToAction(
+                "Login",
+                "Auth"
+            );
         }
+
+        var events =
+            await _profileService.GetBookedEventsAsync(
+                userId.Value
+            );
+
+        return View(
+            events ?? new List<BookedEventDto>()
+        );
+    }
+
+    /*
+     * ==================================================
+     * USER TICKETS
+     * URL: /Profile/Tickets
+     * ==================================================
+     */
+
+    [HttpGet]
+    public async Task<IActionResult> Tickets()
+    {
+        var userId = GetCurrentUserId();
+
+        if (!userId.HasValue)
+        {
+            return RedirectToAction(
+                "Login",
+                "Auth"
+            );
+        }
+
+        var tickets =
+            await _profileService.GetTicketEventsAsync(
+                userId.Value
+            );
+
+        return View(
+            tickets ?? new List<TicketEventDto>()
+        );
+    }
+
+    /*
+     * Gets the authenticated user's ID
+     * from the frontend session.
+     */
+    private int? GetCurrentUserId()
+    {
+        return HttpContext.Session.GetInt32(
+            "UserId"
+        );
     }
 }

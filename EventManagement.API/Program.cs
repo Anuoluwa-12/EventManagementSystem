@@ -29,6 +29,14 @@ builder.Services.AddScoped<IDashboardService, DashboardService>();
 builder.Services.AddScoped<IEventService, EventService>();
 builder.Services.AddScoped<IOrganizerService, OrganizerService>();
 builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();
+builder.Services.AddScoped<ICheckoutService, CheckoutService>();
+
+builder.Services.AddHttpClient<IPaystackService, PaystackService>
+    (client =>
+{
+    client.BaseAddress =
+        new Uri("https://api.paystack.co/");
+});
 
 // Add this only when the service has been implemented.
 // builder.Services.AddScoped<IAdminDashboardService, AdminDashboardService>();

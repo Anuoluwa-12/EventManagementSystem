@@ -1,0 +1,613 @@
+﻿@{
+    var pageTitle =
+        ViewData["Title"]?.ToString()
+        ?? "Dashboard";
+
+    var firstName =
+        Context.Session.GetString("FirstName")
+        ?? "User";
+
+    var userRole =
+        Context.Session.GetString("Role")?
+            .Trim();
+
+    var currentController =
+        ViewContext.RouteData
+            .Values["controller"]?
+            .ToString();
+
+    var currentAction =
+        ViewContext.RouteData
+            .Values["action"]?
+            .ToString();
+
+    var firstInitial =
+        string.IsNullOrWhiteSpace(firstName)
+            ? "U"
+            : firstName[..1].ToUpperInvariant();
+
+    string ActiveClass(
+        string controllerName,
+        string? actionName = null)
+    {
+        var controllerMatches =
+            string.Equals(
+                currentController,
+                controllerName,
+                StringComparison.OrdinalIgnoreCase
+            );
+
+        if (!controllerMatches)
+        {
+            return string.Empty;
+        }
+
+        if (string.IsNullOrWhiteSpace(actionName))
+        {
+            return "active";
+        }
+
+        return string.Equals(
+            currentAction,
+            actionName,
+            StringComparison.OrdinalIgnoreCase
+        )
+            ? "active"
+            : string.Empty;
+    }
+}
+
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8" />
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0" />
+
+    <title>
+        @pageTitle - Lumievent
+    </title>
+
+    <link rel="stylesheet"
+          href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+    <link rel="preconnect"
+          href="https://fonts.googleapis.com" />
+
+    <link rel="preconnect"
+          href="https://fonts.gstatic.com"
+          crossorigin />
+
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" />
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
+
+    <link rel="stylesheet"
+          href="~/css/dashboard.css"
+          asp-append-version="true" />
+
+    <link rel="shortcut icon"
+          href="~/favicon.ico" />
+
+    <link rel="stylesheet"
+          href="~/css/ticket-purchase.css"
+          asp-append-version="true" />
+
+    @await RenderSectionAsync(
+        "Styles",
+        required: false
+    )
+
+</head>
+
+<body class="dashboard-body">
+
+    <aside id="dashboardSidebar"
+           class="dashboard-sidebar">
+
+        <div class="sidebar-brand">
+
+            <a asp-controller="Home"
+                   asp-action="Index"
+                   class="sidebar-brand-link">
+
+                <span class="sidebar-logo-mark">
+
+                    <i class="fa-solid fa-bolt"></i>
+
+                </span>
+
+                <span class="sidebar-brand-text">
+                    Lumievent
+                </span>
+
+            </a>
+
+            <button type="button"
+                    id="sidebarCloseButton"
+                    class="sidebar-close-button"
+                    aria-label="Close menu">
+
+                <i class="fa-solid fa-xmark"></i>
+
+            </button>
+
+        </div>
+
+        <div class="sidebar-user-card">
+
+            <div class="sidebar-user-avatar">
+                @firstInitial
+            </div>
+
+            <div class="sidebar-user-details">
+
+                <strong>
+                    @firstName
+                </strong>
+
+                <span>
+                    @(string.IsNullOrWhiteSpace(userRole)
+                        ? "Lumievent User"
+                        : userRole)
+                </span>
+
+            </div>
+
+        </div>
+
+        <div class="sidebar-section">
+
+            <span class="sidebar-section-label">
+                Main menu
+            </span>
+
+            <nav class="dashboard-navigation">
+
+                <a asp-controller="Dashboard"
+                       asp-action="Index"
+                       class="@ActiveClass("Dashboard")">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-solid fa-grid-2"></i>
+
+                    </span>
+
+                    <span>
+                        Dashboard
+                    </span>
+
+                </a>
+
+                <a asp-controller="Event"
+                       asp-action="Index"
+                       class="@ActiveClass("Event")">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                    </span>
+
+                    <span>
+                        My Events
+                    </span>
+
+                    <a asp-controller="Cart"
+                           asp-action="Index"
+                           class="@ActiveClass("Cart")">
+
+                        <span class="navigation-icon">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </span>
+
+                        <span>
+                            Ticket Cart
+                        </span>
+
+                    </a>
+                </a>
+
+                <a asp-controller="Profile"
+                       asp-action="Tickets"
+                       class="@ActiveClass(
+                                                              "Profile",
+                                                              "Tickets"
+                                                          )">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                    </span>
+
+                    <span>
+                        My Tickets
+                    </span>
+
+                </a>
+
+                <a asp-controller="Profile"
+                       asp-action="Index"
+                       class="@ActiveClass(
+                                                              "Profile",
+                                                              "Index"
+                                                          )">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-regular fa-user"></i>
+
+                    </span>
+
+                    <span>
+                        My Profile
+                    </span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        <div class="sidebar-section">
+
+            <span class="sidebar-section-label">
+                Event management
+            </span>
+
+            <nav class="dashboard-navigation">
+
+                <a asp-controller="Organizer"
+                       asp-action="Dashboard"
+                       class="@ActiveClass(
+                                                              "Organizer",
+                                                              "Dashboard"
+                                                          )">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-solid fa-chart-pie"></i>
+
+                    </span>
+
+                    <span>
+                        Organizer Dashboard
+                    </span>
+
+                </a>
+
+                <a asp-controller="Organizer"
+                       asp-action="Events"
+                       class="@ActiveClass(
+                                                              "Organizer",
+                                                              "Events"
+                                                          )">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-solid fa-list-check"></i>
+
+                    </span>
+
+                    <span>
+                        Manage Events
+                    </span>
+
+                </a>
+
+                <a asp-controller="Organizer"
+                       asp-action="CreateEvent"
+                       class="@ActiveClass(
+                                                              "Organizer",
+                                                              "CreateEvent"
+                                                          )">
+
+                    <span class="navigation-icon">
+
+                        <i class="fa-solid fa-calendar-plus"></i>
+
+                    </span>
+
+                    <span>
+                        Create Event
+                    </span>
+
+                </a>
+
+            </nav>
+
+        </div>
+
+        @if (string.Equals(
+                    userRole,
+                    "Admin",
+                    StringComparison.OrdinalIgnoreCase))
+        {
+            <div class="sidebar-section">
+
+                <span class="sidebar-section-label">
+                    Administration
+                </span>
+
+                <nav class="dashboard-navigation">
+
+                    <a asp-controller="AdminDashboard"
+                           asp-action="Index"
+                           class="admin-navigation-link
+                        @ActiveClass(
+                                                   "AdminDashboard"
+                                               )">
+
+                        <span class="navigation-icon">
+
+                            <i class="fa-solid fa-user-shield"></i>
+
+                        </span>
+
+                        <span>
+                            Admin Dashboard
+                        </span>
+
+                    </a>
+
+                </nav>
+
+            </div>
+        }
+
+        <div class="sidebar-footer">
+
+            <a asp-controller="Home"
+                   asp-action="Index"
+                   class="sidebar-footer-link">
+
+                <i class="fa-solid fa-arrow-left"></i>
+
+                <span>
+                    Back to website
+                </span>
+
+            </a>
+
+            <a asp-controller="Auth"
+                   asp-action="Logout"
+                   class="sidebar-footer-link logout-link">
+
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+
+                <span>
+                    Logout
+                </span>
+
+            </a>
+
+        </div>
+
+    </aside>
+
+    <div class="dashboard-shell">
+
+        <header class="dashboard-topbar">
+
+            <div class="topbar-left">
+
+                <button type="button"
+                        id="dashboardMenuButton"
+                        class="dashboard-menu-button"
+                        aria-label="Open navigation menu">
+
+                    <i class="fa-solid fa-bars"></i>
+
+                </button>
+
+                <div class="topbar-title">
+
+                    <span>
+                        Lumievent account
+                    </span>
+
+                    <h2>
+                        @pageTitle
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="topbar-actions">
+
+                <a asp-controller="Event"
+                       asp-action="Index"
+                       class="topbar-icon-button"
+                       aria-label="View events">
+
+                    <i class="fa-regular fa-calendar"></i>
+
+                </a>
+
+                <button type="button"
+                        class="topbar-icon-button notification-button"
+                        aria-label="Notifications">
+
+                    <i class="fa-regular fa-bell"></i>
+
+                    <span class="notification-dot"></span>
+
+                </button>
+
+                <a asp-controller="Profile"
+                       asp-action="Index"
+                       class="topbar-profile">
+
+                    <span class="topbar-avatar">
+                        @firstInitial
+                    </span>
+
+                    <span class="topbar-profile-copy">
+
+                        <strong>
+                            @firstName
+                        </strong>
+
+                        <small>
+                            View profile
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-down"></i>
+
+                </a>
+
+            </div>
+
+        </header>
+
+        <main class="dashboard-main-content">
+
+            @if (TempData["Success"] is not null)
+            {
+                <div class="alert alert-success
+                    dashboard-alert"
+                     role="alert">
+
+                    <i class="fa-solid fa-circle-check"></i>
+
+                    @TempData["Success"]
+
+                </div>
+            }
+
+            @if (TempData["Error"] is not null)
+            {
+                <div class="alert alert-danger
+                    dashboard-alert"
+                     role="alert">
+
+                    <i class="fa-solid fa-circle-exclamation"></i>
+
+                    @TempData["Error"]
+
+                </div>
+            }
+
+            @RenderBody()
+
+        </main>
+
+    </div>
+
+    <div id="dashboardOverlay"
+         class="dashboard-overlay">
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js">
+    </script>
+
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+    </script>
+
+    <script>
+            document.addEventListener(
+                "DOMContentLoaded",
+                function () {
+                    const sidebar =
+                        document.getElementById(
+                            "dashboardSidebar"
+                        );
+
+                    const menuButton =
+                        document.getElementById(
+                            "dashboardMenuButton"
+                        );
+
+                    const closeButton =
+                        document.getElementById(
+                            "sidebarCloseButton"
+                        );
+
+                    const overlay =
+                        document.getElementById(
+                            "dashboardOverlay"
+                        );
+
+                    function openSidebar() {
+                        sidebar?.classList.add(
+                            "show-sidebar"
+                        );
+
+                        overlay?.classList.add(
+                            "show-overlay"
+                        );
+
+                        document.body.classList.add(
+                            "sidebar-is-open"
+                        );
+                    }
+
+                    function closeSidebar() {
+                        sidebar?.classList.remove(
+                            "show-sidebar"
+                        );
+
+                        overlay?.classList.remove(
+                            "show-overlay"
+                        );
+
+                        document.body.classList.remove(
+                            "sidebar-is-open"
+                        );
+                    }
+
+                    menuButton?.addEventListener(
+                        "click",
+                        openSidebar
+                    );
+
+                    closeButton?.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+
+                    overlay?.addEventListener(
+                        "click",
+                        closeSidebar
+                    );
+
+                    document.addEventListener(
+                        "keydown",
+                        function (event) {
+                            if (event.key === "Escape") {
+                                closeSidebar();
+                            }
+                        }
+                    );
+
+                    window.addEventListener(
+                        "resize",
+                        function () {
+                            if (window.innerWidth > 991) {
+                                closeSidebar();
+                            }
+                        }
+                    );
+                }
+            );
+    </script>
+
+    @await RenderSectionAsync(
+        "Scripts",
+        required: false
+    )
+
+</body>
+
+</html>

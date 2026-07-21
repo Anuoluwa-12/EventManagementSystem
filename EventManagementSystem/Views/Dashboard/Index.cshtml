@@ -2,70 +2,435 @@
 @model DashboardDto
 
 @{
-    Layout = "DashboardLayout";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
     ViewData["Title"] = "Dashboard";
+
+    var firstName =
+        Context.Session.GetString("FirstName")
+        ?? "User";
+
+    var userRole =
+        Context.Session.GetString("Role");
 }
 
-@{
-    var userRole = Context.Session.GetString("UserRole");
-}
+<section class="user-dashboard">
 
-@if (string.Equals(
-    userRole,
-    "Admin",
-    StringComparison.OrdinalIgnoreCase))
-{
-    <a
-        asp-area="Admin"
-        asp-controller="Dashboard"
-        asp-action="Index"
-        class="btn btn-primary"
-    >
-        <i class="fas fa-user-shield me-2"></i>
-        Admin Dashboard
-    </a>
-}
-<h2>
-    Welcome,
-    @(Context.Session.GetString("FirstName") ?? "User") 👋
-</h2>
+    <div class="dashboard-welcome">
 
-<p>Manage your events and profile here.</p>
+        <div class="dashboard-welcome-content">
 
-<div class="row mt-4">
+            <span class="dashboard-eyebrow">
+                <i class="fa-regular fa-calendar"></i>
 
-    <div class="col-md-4 mb-3">
-        <div class="card dashboard-card upcoming-card">
-            <div class="card-body text-center">
-                <h5>Upcoming Events</h5>
-                <h2>@Model.UpcomingEvents</h2>
+                @DateTime.Now.ToString(
+                    "dddd, dd MMMM yyyy"
+                )
+            </span>
+
+            <h1>
+                Welcome back,
+                <span>@firstName</span>
+            </h1>
+
+            <p>
+                Manage your events, tickets and
+                Lumievent profile from one place.
+            </p>
+
+            <div class="dashboard-welcome-actions">
+
+                <a asp-controller="Event"
+                       asp-action="Index"
+                       class="dashboard-primary-button">
+
+                    <i class="fa-solid fa-calendar-days"></i>
+
+                    Browse Events
+                </a>
+
+                <a asp-controller="Profile"
+                       asp-action="Index"
+                       class="dashboard-secondary-button">
+
+                    <i class="fa-regular fa-user"></i>
+
+                    View Profile
+                </a>
+
+                @if (string.Equals(
+                                    userRole?.Trim(),
+                                    "Admin",
+                                    StringComparison.OrdinalIgnoreCase))
+                {
+                    <a asp-controller="AdminDashboard"
+                           asp-action="Index"
+                           class="dashboard-admin-button">
+
+                        <i class="fa-solid fa-user-shield"></i>
+
+                        Admin Dashboard
+                    </a>
+                }
+
             </div>
-        </div>
-    </div>
 
-    <div class="col-md-4 mb-3">
-        <div class="card dashboard-card registered-card">
-            <div class="card-body text-center">
-                <h5>Registered Events</h5>
-                <h2>@Model.RegisteredEvents</h2>
+        </div>
+
+        <div class="dashboard-welcome-visual">
+
+            <div class="welcome-visual-icon">
+                <i class="fa-solid fa-ticket"></i>
             </div>
-        </div>
-    </div>
 
-    <div class="col-md-4 mb-3">
-        <div class="card dashboard-card notification-card">
-            <div class="card-body text-center">
-                <h5>Notifications</h5>
-                <h2>@Model.NotificationsCount</h2>
+            <div class="welcome-floating-card floating-card-one">
+
+                <i class="fa-solid fa-calendar-check"></i>
+
+                <div>
+                    <strong>
+                        @Model.RegisteredEvents
+                    </strong>
+
+                    <span>
+                        Events booked
+                    </span>
+                </div>
+
             </div>
+
+            <div class="welcome-floating-card floating-card-two">
+
+                <i class="fa-solid fa-bell"></i>
+
+                <div>
+                    <strong>
+                        @Model.NotificationsCount
+                    </strong>
+
+                    <span>
+                        Notifications
+                    </span>
+                </div>
+
+            </div>
+
         </div>
+
     </div>
 
-</div>
+    <div class="dashboard-section-heading">
 
-<div class="card mt-4 shadow-sm">
-    <div class="card-body">
-        <h4>Recent Activity</h4>
-        <p>No recent activity yet.</p>
+        <div>
+            <span class="section-label">
+                Overview
+            </span>
+
+            <h2>
+                Your activity at a glance
+            </h2>
+        </div>
+
+        <a asp-controller="Event"
+               asp-action="Index"
+               class="section-link">
+
+            View all events
+
+            <i class="fa-solid fa-arrow-right"></i>
+        </a>
+
     </div>
-</div>
+
+    <div class="dashboard-stat-grid">
+
+        <article class="dashboard-stat-card stat-upcoming">
+
+            <div class="stat-card-header">
+
+                <div class="stat-icon">
+                    <i class="fa-regular fa-calendar"></i>
+                </div>
+
+                <span class="stat-status">
+                    Upcoming
+                </span>
+
+            </div>
+
+            <div class="stat-card-content">
+
+                <p>
+                    Upcoming Events
+                </p>
+
+                <h3>
+                    @Model.UpcomingEvents
+                </h3>
+
+                <span>
+                    Events available to attend
+                </span>
+
+            </div>
+
+            <div class="stat-card-decoration"></div>
+
+        </article>
+
+        <article class="dashboard-stat-card stat-registered">
+
+            <div class="stat-card-header">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-ticket"></i>
+                </div>
+
+                <span class="stat-status">
+                    Registered
+                </span>
+
+            </div>
+
+            <div class="stat-card-content">
+
+                <p>
+                    Registered Events
+                </p>
+
+                <h3>
+                    @Model.RegisteredEvents
+                </h3>
+
+                <span>
+                    Events you have booked
+                </span>
+
+            </div>
+
+            <div class="stat-card-decoration"></div>
+
+        </article>
+
+        <article class="dashboard-stat-card stat-notifications">
+
+            <div class="stat-card-header">
+
+                <div class="stat-icon">
+                    <i class="fa-regular fa-bell"></i>
+                </div>
+
+                <span class="stat-status">
+                    Updates
+                </span>
+
+            </div>
+
+            <div class="stat-card-content">
+
+                <p>
+                    Notifications
+                </p>
+
+                <h3>
+                    @Model.NotificationsCount
+                </h3>
+
+                <span>
+                    New event-related updates
+                </span>
+
+            </div>
+
+            <div class="stat-card-decoration"></div>
+
+        </article>
+
+    </div>
+
+    <div class="dashboard-content-grid">
+
+        <section class="dashboard-panel recent-activity-panel">
+
+            <div class="dashboard-panel-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        Activity
+                    </span>
+
+                    <h2>
+                        Recent Activity
+                    </h2>
+
+                </div>
+
+                <button type="button"
+                        class="panel-menu-button"
+                        aria-label="Activity options">
+
+                    <i class="fa-solid fa-ellipsis"></i>
+                </button>
+
+            </div>
+
+            <div class="dashboard-empty-state">
+
+                <div class="empty-state-icon">
+
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+
+                </div>
+
+                <h3>
+                    No recent activity yet
+                </h3>
+
+                <p>
+                    Your recent bookings, ticket updates
+                    and event activity will appear here.
+                </p>
+
+                <a asp-controller="Event"
+                       asp-action="Index">
+
+                    Explore events
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            </div>
+
+        </section>
+
+        <aside class="dashboard-panel quick-actions-panel">
+
+            <div class="dashboard-panel-heading">
+
+                <div>
+
+                    <span class="section-label">
+                        Shortcuts
+                    </span>
+
+                    <h2>
+                        Quick Actions
+                    </h2>
+
+                </div>
+
+            </div>
+
+            <div class="quick-action-list">
+
+                <a asp-controller="Event"
+                       asp-action="Index"
+                       class="quick-action-item">
+
+                    <span class="quick-action-icon action-events">
+
+                        <i class="fa-solid fa-calendar-days"></i>
+
+                    </span>
+
+                    <span class="quick-action-copy">
+
+                        <strong>
+                            Browse Events
+                        </strong>
+
+                        <small>
+                            Find upcoming events
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+                <a asp-controller="Profile"
+                       asp-action="Tickets"
+                       class="quick-action-item">
+
+                    <span class="quick-action-icon action-tickets">
+
+                        <i class="fa-solid fa-ticket"></i>
+
+                    </span>
+
+                    <span class="quick-action-copy">
+
+                        <strong>
+                            View Tickets
+                        </strong>
+
+                        <small>
+                            Access your event tickets
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+                <a asp-controller="Profile"
+                       asp-action="Edit"
+                       class="quick-action-item">
+
+                    <span class="quick-action-icon action-profile">
+
+                        <i class="fa-solid fa-user-pen"></i>
+
+                    </span>
+
+                    <span class="quick-action-copy">
+
+                        <strong>
+                            Edit Profile
+                        </strong>
+
+                        <small>
+                            Update your information
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+                <a asp-controller="Organizer"
+                       asp-action="CreateEvent"
+                       class="quick-action-item">
+
+                    <span class="quick-action-icon action-create">
+
+                        <i class="fa-solid fa-calendar-plus"></i>
+
+                    </span>
+
+                    <span class="quick-action-copy">
+
+                        <strong>
+                            Create Event
+                        </strong>
+
+                        <small>
+                            Publish a new event
+                        </small>
+
+                    </span>
+
+                    <i class="fa-solid fa-chevron-right"></i>
+
+                </a>
+
+            </div>
+
+        </aside>
+
+    </div>
+
+</section>

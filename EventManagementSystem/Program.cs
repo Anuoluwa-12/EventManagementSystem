@@ -4,9 +4,9 @@ using EventManagementSystem.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 /*
- * ==================================================
+ * ====================
  * API BASE URL
- * ==================================================
+ * ====================
  */
 
 var apiBaseUrl =
@@ -16,17 +16,17 @@ var apiBaseUrl =
     );
 
 /*
- * ==================================================
+ * =================
  * MVC
- * ==================================================
+ * =================
  */
 
 builder.Services.AddControllersWithViews();
 
 /*
- * ==================================================
+ * =================
  * SESSION
- * ==================================================
+ * =================
  */
 
 builder.Services.AddSession(options =>
@@ -45,31 +45,27 @@ builder.Services.AddSession(options =>
 builder.Services.AddHttpContextAccessor();
 
 /*
- * ==================================================
+ * =================================
  * STANDARD FRONTEND SERVICES
- * ==================================================
+ * =================================
  */
 
-builder.Services.AddScoped<
-    IAuthService,
-    AuthService
->();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
-builder.Services.AddScoped<
-    IDashboardService,
-    DashboardService
->();
+builder.Services.AddScoped<IDashboardService,DashboardService>();
 
-builder.Services.AddScoped<
-    IProfileService,
-    ProfileService
->();
+builder.Services.AddScoped<IProfileService, ProfileService>();
 
-builder.Services.AddScoped<
-    IEventService,
-    EventService
->();
+builder.Services.AddScoped<IEventService, EventService>();
 
+builder.Services.AddHttpClient<
+    ICheckoutService,
+    CheckoutService
+>(client =>
+{
+    client.BaseAddress =
+        new Uri(apiBaseUrl);
+});
 /*
  * Do not register these in the frontend:
  *
@@ -85,9 +81,7 @@ builder.Services.AddScoped<
  * ==================================================
  */
 
-builder.Services.AddHttpClient<
-    IOrganizerService,
-    OrganizerService
+builder.Services.AddHttpClient<IOrganizerService, OrganizerService
 >(client =>
 {
     client.BaseAddress =
@@ -100,9 +94,7 @@ builder.Services.AddHttpClient<
  * ==================================================
  */
 
-builder.Services.AddHttpClient<
-    IAdminDashboardApiService,
-    AdminDashboardApiService
+builder.Services.AddHttpClient<IAdminDashboardApiService, AdminDashboardApiService
 >(client =>
 {
     client.BaseAddress =

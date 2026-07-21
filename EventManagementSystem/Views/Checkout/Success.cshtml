@@ -1,0 +1,93 @@
+﻿@model EventManagementSystem.DTO.VerifyPaymentResponseDto
+
+@{
+    ViewData["Title"] = "Payment Successful";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="payment-result-page">
+
+    <div class="payment-result-card success">
+
+        <div class="payment-result-icon">
+            <i class="fa-solid fa-check"></i>
+        </div>
+
+        <span class="ticket-eyebrow">
+            Payment confirmed
+        </span>
+
+        <h1>
+            Your tickets are ready!
+        </h1>
+
+        <p>
+            Your payment of
+            <strong>
+                ₦@Model.AmountPaid.ToString("N2")
+            </strong>
+            was successful.
+        </p>
+
+        <div class="payment-reference">
+
+            <span>
+                Payment reference
+            </span>
+
+            <strong>
+                @Model.Reference
+            </strong>
+
+        </div>
+
+        <div class="generated-ticket-list">
+
+            @foreach (var ticket in Model.Tickets)
+            {
+                <article class="generated-ticket">
+
+                    <div class="generated-ticket-icon">
+                        <i class="fa-solid fa-ticket"></i>
+                    </div>
+
+                    <div>
+                        <span>
+                            @ticket.EventTitle
+                        </span>
+
+                        <strong>
+                            @ticket.TicketNumber
+                        </strong>
+                    </div>
+
+                    <span class="ticket-valid-badge">
+                        @ticket.Status
+                    </span>
+
+                </article>
+            }
+
+        </div>
+
+        <div class="payment-result-actions">
+
+            <a asp-controller="Profile"
+                   asp-action="Tickets"
+                   class="ticket-primary-button">
+
+                View my tickets
+            </a>
+
+            <a asp-controller="Event"
+                   asp-action="Index"
+                   class="ticket-secondary-button">
+
+                Browse events
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

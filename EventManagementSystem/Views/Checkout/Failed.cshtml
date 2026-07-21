@@ -1,0 +1,48 @@
+﻿@model string
+
+@{
+    ViewData["Title"] = "Payment Unsuccessful";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="payment-result-page">
+
+    <div class="payment-result-card failed">
+
+        <div class="payment-result-icon">
+            <i class="fa-solid fa-xmark"></i>
+        </div>
+
+        <span class="ticket-eyebrow">
+            Payment incomplete
+        </span>
+
+        <h1>
+            We could not complete your order
+        </h1>
+
+        <p>
+            @Model
+        </p>
+
+        <div class="payment-result-actions">
+
+            <a asp-controller="Checkout"
+               asp-action="Index"
+               class="ticket-primary-button">
+
+                Try again
+            </a>
+
+            <a asp-controller="Cart"
+               asp-action="Index"
+               class="ticket-secondary-button">
+
+                Return to cart
+            </a>
+
+        </div>
+
+    </div>
+
+</div>

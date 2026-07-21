@@ -5,13 +5,11 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EventManagement.API.Service;
 
-public class AdminDashboardService :
-    IAdminDashboardService
+public class AdminDashboardService : IAdminDashboardService
 {
     private readonly ApplicationDbContext _context;
 
-    public AdminDashboardService(
-        ApplicationDbContext context)
+    public AdminDashboardService(ApplicationDbContext context)
     {
         _context = context;
     }
@@ -19,8 +17,7 @@ public class AdminDashboardService :
     /*
      * Main dashboard statistics.
      */
-    public async Task<AdminDashboardDto>
-        GetDashboardAsync()
+    public async Task<AdminDashboardDto>GetDashboardAsync()
     {
         var totalUsers =
             await _context.Users
@@ -69,8 +66,7 @@ public class AdminDashboardService :
     /*
      * All registered users.
      */
-    public async Task<List<AdminUserDto>>
-        GetUsersAsync()
+    public async Task<List<AdminUserDto>>GetUsersAsync()
     {
         return await _context.Users
             .AsNoTracking()
@@ -88,8 +84,7 @@ public class AdminDashboardService :
     /*
      * All organizer profiles.
      */
-    public async Task<List<AdminOrganizerDto>>
-        GetOrganizersAsync()
+    public async Task<List<AdminOrganizerDto>>GetOrganizersAsync()
     {
         return await (
             from organizer in
@@ -134,8 +129,7 @@ public class AdminDashboardService :
     /*
      * All platform events.
      */
-    public async Task<List<AdminEventDto>>
-        GetEventsAsync()
+    public async Task<List<AdminEventDto>>GetEventsAsync()
     {
         return await _context.Events
             .AsNoTracking()
@@ -182,8 +176,7 @@ public class AdminDashboardService :
     /*
      * All bookings.
      */
-    public async Task<List<AdminBookingDto>>
-        GetBookingsAsync()
+    public async Task<List<AdminBookingDto>>GetBookingsAsync()
     {
         return await (
             from registration in
@@ -238,8 +231,7 @@ public class AdminDashboardService :
      * registrations because registration currently
      * contains AmountPaid and PaymentStatus.
      */
-    public async Task<List<AdminPaymentDto>>
-        GetPaymentsAsync()
+    public async Task<List<AdminPaymentDto>>GetPaymentsAsync()
     {
         return await (
             from registration in
@@ -287,8 +279,7 @@ public class AdminDashboardService :
     /*
      * Platform report totals.
      */
-    public async Task<AdminReportDto>
-        GetReportsAsync()
+    public async Task<AdminReportDto>GetReportsAsync()
     {
         var today = DateTime.Today;
 

@@ -1,5 +1,6 @@
 ﻿using EventManagementSystem.Interface;
 using EventManagementSystem.Models;
+using EventManagementSystem.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EventManagementSystem.Controllers;

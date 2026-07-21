@@ -1,0 +1,247 @@
+﻿@model EventManagementSystem.DTO.CartPageViewModel
+
+@{
+    ViewData["Title"] = "Ticket Cart";
+    Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+}
+
+<div class="ticket-page">
+
+    <div class="ticket-page-heading">
+
+        <div>
+            <span class="ticket-eyebrow">
+                Your selection
+            </span>
+
+            <h1>
+                Ticket Cart
+            </h1>
+
+            <p>
+                Review your tickets before checkout.
+            </p>
+        </div>
+
+        <a asp-controller="Event"
+               asp-action="Index"
+               class="ticket-secondary-button">
+
+            <i class="fa-solid fa-arrow-left"></i>
+
+            Browse more events
+        </a>
+
+    </div>
+
+    @if (TempData["Success"] is not null)
+    {
+        <div class="ticket-alert success">
+            @TempData["Success"]
+        </div>
+    }
+
+    @if (TempData["Error"] is not null)
+    {
+        <div class="ticket-alert error">
+            @TempData["Error"]
+        </div>
+    }
+
+    @if (Model.Items.Count == 0)
+    {
+        <div class="ticket-empty-cart">
+
+            <div class="ticket-empty-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </div>
+
+            <h2>
+                Your cart is empty
+            </h2>
+
+            <p>
+                Browse available events and add
+                tickets to continue.
+            </p>
+
+            <a asp-controller="Event"
+                   asp-action="Index"
+                   class="ticket-primary-button">
+
+                Browse events
+            </a>
+
+        </div>
+    }
+    else
+    {
+        <div class="ticket-cart-layout">
+
+            <div class="ticket-cart-items">
+
+                @foreach (var item in Model.Items)
+                {
+                    <article class="ticket-cart-item">
+
+                        <div class="ticket-cart-image">
+
+                            @if (!string.IsNullOrWhiteSpace(
+                                                            item.EventImageUrl))
+                            {
+                                <img src="@item.EventImageUrl"
+                                     alt="@item.EventTitle" />
+                            }
+                            else
+                            {
+                                <i class="fa-solid fa-calendar-days"></i>
+                            }
+
+                        </div>
+
+                        <div class="ticket-cart-details">
+
+                            <span class="ticket-item-label">
+                                Event ticket
+                            </span>
+
+                            <h2>
+                                @item.EventTitle
+                            </h2>
+
+                            <p>
+                                <i class="fa-regular fa-calendar"></i>
+
+                                @item.EventDate.ToString(
+                                    "dd MMMM yyyy"
+                                )
+                            </p>
+
+                            <strong>
+                                ₦@item.UnitPrice.ToString("N2")
+                                <small>per ticket</small>
+                            </strong>
+
+                        </div>
+
+                        <div class="ticket-cart-actions">
+
+                            <form asp-controller="Cart"
+                                  asp-action="Update"
+                                  method="post"
+                                  class="cart-quantity-form">
+
+                                @Html.AntiForgeryToken()
+
+                                <input type="hidden"
+                                       name="eventId"
+                                       value="@item.EventId" />
+
+                                <input type="number"
+                                       name="quantity"
+                                       min="1"
+                                       max="@Math.Min(
+                                                                                                                  item.AvailableSeats,
+                                                                                                                  10
+                                                                                                              )"
+                                       value="@item.Quantity" />
+
+                                <button type="submit">
+                                    Update
+                                </button>
+
+                            </form>
+
+                            <strong class="cart-item-subtotal">
+                                ₦@item.Subtotal.ToString("N2")
+                            </strong>
+
+                            <form asp-controller="Cart"
+                                  asp-action="Remove"
+                                  method="post">
+
+                                @Html.AntiForgeryToken()
+
+                                <input type="hidden"
+                                       name="eventId"
+                                       value="@item.EventId" />
+
+                                <button type="submit"
+                                        class="remove-cart-item">
+
+                                    <i class="fa-regular fa-trash-can"></i>
+
+                                    Remove
+                                </button>
+
+                            </form>
+
+                        </div>
+
+                    </article>
+                }
+
+            </div>
+
+            <aside class="ticket-order-summary">
+
+                <span class="ticket-eyebrow">
+                    Summary
+                </span>
+
+                <h2>
+                    Order Summary
+                </h2>
+
+                <div class="ticket-summary-row">
+
+                    <span>
+                        Tickets
+                    </span>
+
+                    <strong>
+                        @Model.TotalQuantity
+                    </strong>
+
+                </div>
+
+                <div class="ticket-summary-row total">
+
+                    <span>
+                        Total
+                    </span>
+
+                    <strong>
+                        ₦@Model.TotalAmount.ToString("N2")
+                    </strong>
+
+                </div>
+
+                <a asp-controller="Checkout"
+                       asp-action="Index"
+                       class="ticket-primary-button full">
+
+                    Proceed to checkout
+
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+                <form asp-controller="Cart"
+                      asp-action="Clear"
+                      method="post">
+
+                    @Html.AntiForgeryToken()
+
+                    <button type="submit"
+                            class="clear-cart-button">
+                        Clear cart
+                    </button>
+
+                </form>
+
+            </aside>
+
+        </div>
+    }
+
+</div>
