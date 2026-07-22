@@ -4,14 +4,7 @@ namespace EventManagementSystem.Interface;
 
 public interface ICheckoutService
 {
-    Task<InitializeCheckoutResponseDto>
-        InitializeAsync(
-            InitializeCheckoutRequestDto request
-        );
+    Task<InitializeCheckoutResponseDto>InitializeAsync(InitializeCheckoutRequestDto request);
 
-    Task<VerifyPaymentResponseDto>
-        VerifyAsync(
-            string reference,
-            int userId
-        );
+    Task<VerifyPaymentResponseDto>VerifyAsync(string reference, int userId);
 }

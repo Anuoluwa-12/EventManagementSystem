@@ -12,10 +12,6 @@ namespace EventManagement.API.DTO
         public string Message { get; set; } = string.Empty;
 
         [JsonPropertyName("data")]
-        public PaystackVerifyData? Data
-        {
-            get;
-            set;
-        }
+        public PaystackVerifyData? Data { get; set;}
     }
 }

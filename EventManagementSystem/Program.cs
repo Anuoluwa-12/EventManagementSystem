@@ -56,7 +56,12 @@ builder.Services.AddScoped<IDashboardService,DashboardService>();
 
 builder.Services.AddScoped<IProfileService, ProfileService>();
 
-builder.Services.AddScoped<IEventService, EventService>();
+builder.Services.AddHttpClient<IEventService, EventService>(
+    client =>
+    {
+        client.BaseAddress = new Uri(apiBaseUrl);
+    }
+);
 
 builder.Services.AddHttpClient<
     ICheckoutService,

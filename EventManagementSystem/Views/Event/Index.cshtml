@@ -1,119 +1,128 @@
 ﻿@model List<EventManagementSystem.DTO.EventDto>
 
 @{
-    Layout = "_DashboardLayout";
-    ViewData["Title"] = "Events";
+	Layout = "~/Views/Shared/_DashboardLayout.cshtml";
+	ViewData["Title"] = "Events";
 }
 
-<body>    
-	<header id="header" class="header fixed-top">	    
+@section Styles {
+	<link rel="stylesheet"
+		  href="~/css/events.css"
+		  asp-append-version="true" />
 
-		<div class="branding">
-			<div class="container-fluid">
-				<nav class="main-nav navbar navbar-expand-lg">
-					<div class="site-logo"><a class="scrollto" href="#hero-block"><img class="logo-icon" src="~/assets/images/logo-white.svg" alt="logo"></a></div>
+	<link rel="stylesheet"
+		  href="~/css/ticket-purchase.css"
+		  asp-append-version="true" />
+}
+
+<header id="header" class="header fixed-top">
+
+	<div class="branding">
+		<div class="container-fluid">
+			<nav class="main-nav navbar navbar-expand-lg">
+				<div class="site-logo"><a class="scrollto" href="#hero-block"><img class="logo-icon" src="~/assets/images/logo-white.svg" alt="logo"></a></div>
 					
-					<div class="navbar-btn order-lg-2"><a class="btn btn-secondary" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Tickets</a></div>
+				<div class="navbar-btn order-lg-2"><a class="btn btn-secondary scrollto" href="#upcoming-events">Tickets</a></div>
 					
-					<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navigation" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
 					
-					<div id="navigation" class="navbar-collapse collapse  justify-content-lg-end me-lg-3">
-						<ul class="nav navbar-nav">
+				<div id="navigation" class="navbar-collapse collapse  justify-content-lg-end me-lg-3">
+					<ul class="nav navbar-nav">
 							
-							<li class="nav-item"><a class="nav-link scrollto" href="#about-section">About</a></li>                                              
-							<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Speakers</a></li>
-							<li class="nav-item"><a class="nav-link scrollto" href="#schedule-section">Schedule</a></li>
-							<li class="nav-item"><a class="nav-link scrollto" href="#tickets-section">Tickets</a></li>
-							<li class="nav-item"><a class="nav-link scrollto" href="#venue-section">Venue</a></li>
-							<li class="nav-item"><a class="nav-link scrollto" href="#sponsors-section">Sponsors</a></li>
-						</ul><!--//nav-->
-					</div><!--//navbar-collapse-->
+						<li class="nav-item"><a class="nav-link scrollto" href="#about-section">About</a></li>
+						<li class="nav-item"><a class="nav-link scrollto" href="#speakers-section">Speakers</a></li>
+						<li class="nav-item"><a class="nav-link scrollto" href="#schedule-section">Schedule</a></li>
+						<li class="nav-item"><a class="nav-link scrollto" href="#tickets-section">Tickets</a></li>
+						<li class="nav-item"><a class="nav-link scrollto" href="#venue-section">Venue</a></li>
+						<li class="nav-item"><a class="nav-link scrollto" href="#sponsors-section">Sponsors</a></li>
+					</ul><!--//nav-->
+				</div><!--//navbar-collapse-->
 
-				</nav><!--//main-nav-->
+			</nav><!--//main-nav-->
 				
-			</div><!--//container-->
-		</div><!--//branding-->
-	</header><!--//header-->
+		</div><!--//container-->
+	</div><!--//branding-->
+</header><!--//header-->
 	
-	<div id="hero-block" class="hero-block">
-		<div id="hero-carousel" class="hero-carousel carousel slide carousel-fade" data-ride="carousel">
-			<div class="carousel-inner">
-				<div class="carousel-item-1 carousel-item active">
-				</div>
-				<div class="carousel-item-2 carousel-item">
-				</div>
-				<div class="carousel-item-3 carousel-item">
-				</div>
+<div id="hero-block" class="hero-block">
+	<div id="hero-carousel" class="hero-carousel carousel slide carousel-fade" data-ride="carousel">
+		<div class="carousel-inner">
+			<div class="carousel-item-1 carousel-item active">
+			</div>
+			<div class="carousel-item-2 carousel-item">
+			</div>
+			<div class="carousel-item-3 carousel-item">
 			</div>
 		</div>
-		<div class="hero-block-mask"></div>
-		<div class="container">
-			<div class="hero-text-block">
-				<h1 class="hero-heading mb-2">DevConf 2027</h1>
-				<div class="hero-meta mb-3"><i class="far fa-calendar-alt me-2"></i>12 - 15 Oct <i class="fas fa-map-marker-alt mx-2"></i>Nigeria, Lagos</div>
-				<div class="hero-intro mb-4">  <br>Tech Conferences and Events.</div>
-				<div class="hero-cta"><a class="btn btn-primary btn-lg" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Get Tickets</a></div>
+	</div>
+	<div class="hero-block-mask"></div>
+	<div class="container">
+		<div class="hero-text-block">
+			<h1 class="hero-heading mb-2">DevConf 2027</h1>
+			<div class="hero-meta mb-3"><i class="far fa-calendar-alt me-2"></i>12 - 15 Oct <i class="fas fa-map-marker-alt mx-2"></i>Nigeria, Lagos</div>
+			<div class="hero-intro mb-4">  <br>Tech Conferences and Events.</div>
+			<div class="hero-cta"><a class="btn btn-primary btn-lg scrollto" href="#upcoming-events">Get Tickets</a></div>
 				
-			</div><!--//hero-text-block-->
-		</div><!--//container-->
+		</div><!--//hero-text-block-->
+	</div><!--//container-->
 
-	</div><!--//hero-block-->
+</div><!--//hero-block-->
 	
-	<div class="stats-block theme-bg-primary text-white py-4 text-center">
-		<div class="container">
-			<div class="row">
-				<div class="col-6 col-md-3">
-					<div class="item">
-						<div class="number">2000+</div>
-						<div class="unit">Attendees</div>
-					</div><!--//item-->
-				</div><!--//col-->
-				<div class="col-6 col-md-3">
-					<div class="item">
-						<div class="number">3</div>
-						<div class="unit">Days</div>
-					</div><!--//item-->
-				</div><!--//col-->
-				<div class="col-6 col-md-3">
-					<div class="item">
-						<div class="number">60+</div>
-						<div class="unit">Talks</div>
-					</div><!--//item-->
-				</div><!--//col-->
-				<div class="col-6 col-md-3">
-					<div class="item">
-						<div class="number">10+</div>
-						<div class="unit">Workshops</div>
-					</div><!--//item-->
-				</div><!--//col-->
-			</div>
-		</div><!--//container-->
-	</div><!--//stats-block-->
+<div class="stats-block theme-bg-primary text-white py-4 text-center">
+	<div class="container">
+		<div class="row">
+			<div class="col-6 col-md-3">
+				<div class="item">
+					<div class="number">2000+</div>
+					<div class="unit">Attendees</div>
+				</div><!--//item-->
+			</div><!--//col-->
+			<div class="col-6 col-md-3">
+				<div class="item">
+					<div class="number">3</div>
+					<div class="unit">Days</div>
+				</div><!--//item-->
+			</div><!--//col-->
+			<div class="col-6 col-md-3">
+				<div class="item">
+					<div class="number">60+</div>
+					<div class="unit">Talks</div>
+				</div><!--//item-->
+			</div><!--//col-->
+			<div class="col-6 col-md-3">
+				<div class="item">
+					<div class="number">10+</div>
+					<div class="unit">Workshops</div>
+				</div><!--//item-->
+			</div><!--//col-->
+		</div>
+	</div><!--//container-->
+</div><!--//stats-block-->
 
-	<section id="about-section" class="about-section section theme-bg-light">
-		<div class="container">
-			<h3 class="section-heading text-center mb-3">About DevConf</h3>
-			<div class="section-intro single-col-max mx-auto mb-4">Join developers, designers, entrepreneurs, and tech enthusiasts for a day of inspiring talks, networking, and groundbreaking ideas that shape the future of technology.</div>
-			<div class="benefits-list text-center mb-3">
-				<h4 class="text-center mb-4">Why Join Us</h4>
-				<ul class="list-unstyled text-start d-inline-block">
-					<li><i class="fas fa-check-circle me-2"></i>Gain insights into emerging technologies and industry trends</li>
-					<li><i class="fas fa-check-circle me-2"></i>Learn from leading technology experts and innovators</li>
-					<li><i class="fas fa-check-circle me-2"></i>Discover powerful tools, platforms, and best practices</li>
-					<li><i class="fas fa-check-circle me-2"></i>Connect with developers, founders, and technology professionals</li>
-					<li><i class="fas fa-check-circle me-2"></i>Build valuable professional connections and partnerships</li>
-					<li><i class="fas fa-check-circle me-2"></i>Participate in practical workshops and live demonstrations</li>
-					<li><i class="fas fa-check-circle me-2"></i>Relax and network at the official conference after-party</li>
-				</ul>
-			</div><!--//benefits-list-->
-			<div class="event-countdown text-center mb-3">		   
-				<h4 class="countdown-intro mb-2 text-center mb-3">Event Starts In:</h4>
-				<div id="countdown-box" class="countdown-box"></div>
-			</div><!--//event-countdown-->
-			<div class="about-cta text-center mb-5"><a class="" target="_blank">Get Your Ticket Today</a></div>
-		</div><!--//container-->
+<section id="about-section" class="about-section section theme-bg-light">
+	<div class="container">
+		<h3 class="section-heading text-center mb-3">About DevConf</h3>
+		<div class="section-intro single-col-max mx-auto mb-4">Join developers, designers, entrepreneurs, and tech enthusiasts for a day of inspiring talks, networking, and groundbreaking ideas that shape the future of technology.</div>
+		<div class="benefits-list text-center mb-3">
+			<h4 class="text-center mb-4">Why Join Us</h4>
+			<ul class="list-unstyled text-start d-inline-block">
+				<li><i class="fas fa-check-circle me-2"></i>Gain insights into emerging technologies and industry trends</li>
+				<li><i class="fas fa-check-circle me-2"></i>Learn from leading technology experts and innovators</li>
+				<li><i class="fas fa-check-circle me-2"></i>Discover powerful tools, platforms, and best practices</li>
+				<li><i class="fas fa-check-circle me-2"></i>Connect with developers, founders, and technology professionals</li>
+				<li><i class="fas fa-check-circle me-2"></i>Build valuable professional connections and partnerships</li>
+				<li><i class="fas fa-check-circle me-2"></i>Participate in practical workshops and live demonstrations</li>
+				<li><i class="fas fa-check-circle me-2"></i>Relax and network at the official conference after-party</li>
+			</ul>
+		</div><!--//benefits-list-->
+		<div class="event-countdown text-center mb-3">
+			<h4 class="countdown-intro mb-2 text-center mb-3">Event Starts In:</h4>
+			<div id="countdown-box" class="countdown-box"></div>
+		</div><!--//event-countdown-->
+		<div class="about-cta text-center mb-5"><a class="btn btn-primary scrollto" href="#upcoming-events">Get Your Ticket Today</a></div>
+	</div><!--//container-->
 	
 	<section id="speakers-section" class="speakers-section section">
 		<div class="container">
@@ -133,12 +142,12 @@
 						</div><!--//card-->
 						<div class="card-footer text-muted">
 							<ul class="social-list list-inline mb-0">
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
 							</ul><!--//social-list-->
 						</div>
-					</div><!--//card-->t
+					</div><!--//card-->
 				</div><!--//col-->
 				<div class="col-6 col-lg-3 mb-4">
 					<div class="card rounded-0">
@@ -153,9 +162,9 @@
 						</div><!--//card-->
 						<div class="card-footer text-muted">
 							<ul class="social-list list-inline mb-0">
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
 							</ul><!--//social-list-->
 						</div>
 					</div><!--//card-->
@@ -173,48 +182,48 @@
 						</div><!--//card-->
 						<div class="card-footer text-muted">
 							<ul class="social-list list-inline mb-0">
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
-								<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+								<li class="list-inline-item"><a href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
 							</ul><!--//social-list-->
 						</div>
 					</div><!--//card-->
 				</div><!--//col-->
 				
-			<div class="speakers-cta text-center py-3"><a class="btn btn-primary btn-lg" href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" target="_blank">Get Tickets</a></div>
-		</div><!--//container-->
+				<div class="speakers-cta text-center py-3"><a class="btn btn-primary btn-lg scrollto" href="#upcoming-events">Get Tickets</a></div>
+			</div><!--//container-->
 		
-	</section><!--//speakers-section-->
+		</section><!--//speakers-section-->
 	
-	<div class="container">
-		<hr>
-	</div>
-	
-	<section id="schedule-section" class="schedule-section section">
 		<div class="container">
-			<h3 class="section-heading text-center mb-5">Schedule</h3>
+			<hr>
+		</div>
+	
+		<section id="schedule-section" class="schedule-section section">
+			<div class="container">
+				<h3 class="section-heading text-center mb-5">Schedule</h3>
 			
-			<!-- Nav tabs -->
-			<ul class="schedule-nav nav nav-pills nav-fill" id="myTab" role="tablist">
-				<li class="nav-item me-2">
-					<a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#tab-1-content" role="tab" aria-controls="tab-1-content" aria-selected="true">
-						<span class="heading">Day 1</span>
-						<span class="meta">(Wed 12, Oct)</span>
-					</a>
-				</li>
-				<li class="nav-item me-2">
-					<a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#tab-2-content" role="tab" aria-controls="tab-2-content" aria-selected="false">
-						<span class="heading">Day 2</span>
-						<span class="meta">(Thu 13, Oct)</span>
-					</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#tab-3-content" role="tab" aria-controls="tab-3-content" aria-selected="false">
-						<span class="heading">Day 3</span>
-						<span class="meta">(Fri 14, Oct)</span>
-					</a>
-				</li>
-			</ul>
+				<!-- Nav tabs -->
+				<ul class="schedule-nav nav nav-pills nav-fill" id="myTab" role="tablist">
+					<li class="nav-item me-2">
+						<a class="nav-link active" id="tab-1" data-bs-toggle="tab" href="#tab-1-content" role="tab" aria-controls="tab-1-content" aria-selected="true">
+							<span class="heading">Day 1</span>
+							<span class="meta">(Wed 12, Oct)</span>
+						</a>
+					</li>
+					<li class="nav-item me-2">
+						<a class="nav-link" id="tab-2" data-bs-toggle="tab" href="#tab-2-content" role="tab" aria-controls="tab-2-content" aria-selected="false">
+							<span class="heading">Day 2</span>
+							<span class="meta">(Thu 13, Oct)</span>
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" id="tab-3" data-bs-toggle="tab" href="#tab-3-content" role="tab" aria-controls="tab-3-content" aria-selected="false">
+							<span class="heading">Day 3</span>
+							<span class="meta">(Fri 14, Oct)</span>
+						</a>
+					</li>
+				</ul>
 			
 				<!-- Tab panes -->
 				<div class="schedule-tab-content tab-content">
@@ -341,9 +350,9 @@
 											   data-bs-toggle="modal"
 											   data-bs-target="#modal-speaker-2">
 											<img class="profile-image rounded-circle mb-2"
-											 src="~/assets/images/OT.jpeg"
-											 alt="Omotayo Odupitan">
-											 </a>
+												 src="~/assets/images/OT.jpeg"
+												 alt="Omotayo Odupitan">
+											</a>
 
 											<div class="name">
 												<a class="theme-link"
@@ -557,79 +566,79 @@
 								</div>
 							</div>
 					
-				</div><!--//tab-1-content-->
-				<div class="tab-pane no-timeline" id="tab-2-content" role="tabpanel" aria-labelledby="tab-2">
-					<h4 class="text-center py-5 text-muted">Day 2 Agenda Coming Soon...</h4>
-				</div><!--//tab-2-content-->
-				<div class="tab-pane no-timeline" id="tab-3-content" role="tabpanel" aria-labelledby="tab-3">
-					<h4 class="text-center py-5 text-muted">Day 3 Agenda Coming Soon...</h4>
-				</div><!--//tab-3-content-->
-			</div><!--//schedule-tab-content-->
-			<div class="schedule-cta text-center mx-auto"><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" class="btn btn-primary btn-lg me-md-2 d-block d-md-inline-block mb-3 mb-md-0" target="_blank">Download Schedule</a><a href="https://themes.3rdwavemedia.com/bootstrap-templates/startup/devconf-free-bootstrap-4-conference-template-for-tech-conferences-and-events/" class="btn btn-secondary btn-lg d-block d-md-inline-block" target="_blank">Buy Tickets</a></div>
-		</div><!--//container-->
-	</section><!--//schedule-section-->
+						</div><!--//tab-1-content-->
+						<div class="tab-pane no-timeline" id="tab-2-content" role="tabpanel" aria-labelledby="tab-2">
+							<h4 class="text-center py-5 text-muted">Day 2 Agenda Coming Soon...</h4>
+						</div><!--//tab-2-content-->
+						<div class="tab-pane no-timeline" id="tab-3-content" role="tabpanel" aria-labelledby="tab-3">
+							<h4 class="text-center py-5 text-muted">Day 3 Agenda Coming Soon...</h4>
+						</div><!--//tab-3-content-->
+					</div><!--//schedule-tab-content-->
+					<div class="schedule-cta text-center mx-auto"><a href="#schedule-section" class="btn btn-primary btn-lg me-md-2 d-block d-md-inline-block mb-3 mb-md-0">View Schedule</a><a href="#upcoming-events" class="btn btn-secondary btn-lg d-block d-md-inline-block scrollto">Buy Tickets</a></div>
+				</div><!--//container-->
+			</section><!--//schedule-section-->
 	
-	<section id="tickets-section" class="tickets-section section theme-bg-light">
-		<div class="container">
-			<h3 class="section-heading text-center mb-3">Tickets</h3>
-			<div class="section-intro single-col-max mx-auto text-center mb-4">You can use 3rd party platforms such as <a class="theme-link" href="https://www.eventbrite.com/" target="_blank">eventbrite</a> and <a class="theme-link" href="https://www.tickettailor.com/" target="_blank">tickettailor</a> to sell your tickets.</div>
+			<section id="tickets-section" class="tickets-section section theme-bg-light">
+				<div class="container">
+					<h3 class="section-heading text-center mb-3">Tickets</h3>
+					<div class="section-intro single-col-max mx-auto text-center mb-4">Choose an available Lumievent event below, select the number of tickets you need, and add them directly to your cart.</div>
 			
-			<div class="row pricing mb-5">
-				<div class="col-12 col-md-4 p-2 p-lg-4">
-					<div class="card rounded-0 border-0">
-						<div class="card-body p-0">
-							<div class="heading  text-center p-3">
-								<h4 class="text-white mb-0">Super Early Bird</h4>
-							</div>
-							<div class="info p-3">
+					<div class="row pricing mb-5">
+						<div class="col-12 col-md-4 p-2 p-lg-4">
+							<div class="card rounded-0 border-0">
+								<div class="card-body p-0">
+									<div class="heading  text-center p-3">
+										<h4 class="text-white mb-0">Super Early Bird</h4>
+									</div>
+									<div class="info p-3">
 										<div class="price-figure text-center mb-3"><span class="currency">₦</span><span class="number">6000</span></div>
-								<div class="desc px-3">
-									Purchase before 1st Oct. Only 50 tickets available. There will be discount for the first 10 people. 
+										<div class="desc px-3">
+											Purchase before 1st Oct. Only 50 tickets available. There will be discount for the first 10 people.
+										</div>
+									</div><!--//info-->
+								</div><!--//card-body-->
+								<div class="card-footer text-center">
+									<a href="#" class="btn btn-primary disabled">SOLD OUT</a>
 								</div>
-							</div><!--//info-->
-						</div><!--//card-body-->
-						<div class="card-footer text-center">
-							<a href="#" class="btn btn-primary disabled">SOLD OUT</a>
-						</div>
-					</div><!--//card-->
-				</div><!--//col-->
-				<div class="col-12 col-md-4 p-2 p-lg-4">
-					<div class="card card-special rounded-0 border-0">
-						<div class="card-body p-0">
-							<div class="heading  text-center p-3">
-								<h4 class="text-white mb-0">Early Bird</h4>
-							</div>
-							<div class="info p-3">
-											<div class="price-figure text-center"><span class="currency">₦</span><span class="number">7000</span></div>
-								<div class="desc px-3">
-									Purchase before 1st June 2022. Only 100 tickets available. Don't snooze!. 
+							</div><!--//card-->
+						</div><!--//col-->
+						<div class="col-12 col-md-4 p-2 p-lg-4">
+							<div class="card card-special rounded-0 border-0">
+								<div class="card-body p-0">
+									<div class="heading  text-center p-3">
+										<h4 class="text-white mb-0">Early Bird</h4>
+									</div>
+									<div class="info p-3">
+										<div class="price-figure text-center"><span class="currency">₦</span><span class="number">7000</span></div>
+										<div class="desc px-3">
+											Purchase before 1st June 2022. Only 100 tickets available. Don't snooze!.
+										</div>
+									</div><!--//info-->
+								</div><!--//card-body-->
+								<div class="card-footer text-center">
+									<a href="#upcoming-events" class="btn btn-primary scrollto">Choose Event</a>
 								</div>
-							</div><!--//info-->
-						</div><!--//card-body-->
-						<div class="card-footer text-center">
-							<a href="#" class="btn btn-primary">Buy Now</a>
-						</div>
-					</div><!--//card-->
-				</div><!--//col-->
-				<div class="col-12 col-md-4 p-2 p-lg-4">
-					<div class="card rounded-0 border-0">
-						<div class="card-body p-0">
-							<div class="heading  text-center p-3">
-								<h4 class="text-white mb-0">Regular</h4>
-							</div>
-							<div class="info p-3">
-											<div class="price-figure text-center mb-3"><span class="currency">₦</span><span class="number">10000</span></div>
-								<div class="desc px-3">
-									Additional freebies and benefits included. You do not want to miss out on this. 						    
+							</div><!--//card-->
+						</div><!--//col-->
+						<div class="col-12 col-md-4 p-2 p-lg-4">
+							<div class="card rounded-0 border-0">
+								<div class="card-body p-0">
+									<div class="heading  text-center p-3">
+										<h4 class="text-white mb-0">Regular</h4>
+									</div>
+									<div class="info p-3">
+										<div class="price-figure text-center mb-3"><span class="currency">₦</span><span class="number">10000</span></div>
+										<div class="desc px-3">
+											Additional freebies and benefits included. You do not want to miss out on this.
+										</div>
+									</div><!--//info-->
+								</div><!--//card-body-->
+								<div class="card-footer text-center">
+									<a href="#upcoming-events" class="btn btn-primary scrollto">Choose Event</a>
 								</div>
-							</div><!--//info-->
-						</div><!--//card-body-->
-						<div class="card-footer text-center">
-							<a href="#" class="btn btn-primary">Buy Now</a>
-						</div>
-					</div><!--//card-->
-				</div><!--//col-->
-			</div><!--//pricing-->
+							</div><!--//card-->
+						</div><!--//col-->
+					</div><!--//pricing-->
 			
 					<div class="offers text-center bg-white p-4 p-lg-5">
 						<h4 class="mb-3">What's included?</h4>
@@ -693,379 +702,770 @@
 						</ul>
 					</div>
 
-		</div><!--//container-->
-	</section><!--//tickets-section-->
-		</div><!--//container-->
-	</section><!--//tickets-section-->
+				</div><!--//container-->
+			</section><!--//tickets-section-->
 
 
-	<section id="venue-section" class="venue-section section theme-bg-primary text-white">
-		<div class="container">
+			<section id="venue-section" class="venue-section section theme-bg-primary text-white">
+				<div class="container">
 
-			<h3 class="section-heading text-center mb-5 text-white">
-				Event Venue
-			</h3>
+					<h3 class="section-heading text-center mb-5 text-white">
+						Event Venue
+					</h3>
 
-			<div class="row gx-5 py-lg-5">
-				<div class="col-12 col-lg-7 h-100">
+					<div class="row gx-5 py-lg-5">
+						<div class="col-12 col-lg-7 h-100">
 
-					<div class="desc">
-						<h4 class="text-white mb-3">How to Get Here</h4>
+							<div class="desc">
+								<h4 class="text-white mb-3">How to Get Here</h4>
 
-						<p>
-							The Tech Conference will take place at
-							<strong>The Civic Centre</strong>, located in
-								<strong>Ozumba Mbadiwe Avenue, Victoria Island, Lagos.</strong>. The venue is easily accessible
-							by private vehicle, public transport, and ride-hailing services.
-							Please arrive at least 30 minutes before the first session to
-							complete registration and collect your conference badge.
+								<p>
+									The Tech Conference will take place at
+									<strong>The Civic Centre</strong>, located in
+									<strong>Ozumba Mbadiwe Avenue, Victoria Island, Lagos.</strong>. The venue is easily accessible
+									by private vehicle, public transport, and ride-hailing services.
+									Please arrive at least 30 minutes before the first session to
+									complete registration and collect your conference badge.
+								</p>
+
+								<div class="row pt-3">
+
+									<!-- Ride-hailing -->
+									<div class="col-12 col-md-6 mb-4">
+										<div class="grid-item p-4">
+											<h5 class="text-white mb-3 title">
+												<i class="fas fa-taxi me-2"></i>
+												By Ride-Hailing Service
+											</h5>
+
+											<p>
+												Use Uber, Bolt, or another ride-hailing service and enter
+												<strong>The Civic Centre, Victoria Island</strong> as your destination.
+												You can be dropped off directly at the venue’s main entrance.
+											</p>
+
+											<a class="text-white"
+												   href="#"
+												   target="_blank"
+												   rel="noopener noreferrer">
+												View Location &rarr;
+											</a>
+										</div>
+									</div>
+
+									<!-- Car -->
+									<div class="col-12 col-md-6 mb-4">
+										<div class="grid-item p-4">
+											<h5 class="text-white mb-3 title">
+												<i class="fas fa-car me-2"></i>
+												By Car
+											</h5>
+
+											<p>
+												Attendees driving to the conference can use the venue's
+												designated parking area. Parking spaces may be limited,
+												so early arrival is recommended.
+											</p>
+
+											<a class="text-white"
+												   href="#"
+												   target="_blank"
+												   rel="noopener noreferrer">
+												Check Driving Route &rarr;
+											</a>
+										</div>
+									</div>
+
+									<!-- Bus -->
+									<div class="col-12 col-md-6 mb-4">
+										<div class="grid-item p-4">
+											<h5 class="text-white mb-3 title">
+												<i class="fas fa-bus-alt me-2"></i>
+												By Public Transport
+											</h5>
+
+											<p>
+												Take a bus heading towards Victoria Island via Ozumba Mbadiwe Avenue.
+												Ask to stop at <strong>The Civic Centre, opposite 1004 Estate</strong>.
+												From the drop-off point, the venue is only a short walk away.
+											</p>
+
+											<a class="text-white"
+												   href="#"
+												   target="_blank"
+												   rel="noopener noreferrer">
+												View Transport Options &rarr;
+											</a>
+										</div>
+									</div>
+
+									<!-- Airport -->
+									<div class="col-12 col-md-6 mb-4">
+										<div class="grid-item p-4">
+											<h5 class="text-white mb-3 title">
+												<i class="fas fa-plane-arrival me-2"></i>
+												From the Airport
+											</h5>
+
+											<p>
+												Visitors arriving by air can take a taxi or ride-hailing service from
+												<strong>Murtala Muhammed International Airport</strong> to The Civic Centre,
+												Victoria Island. Travel time will depend on traffic conditions.
+											</p>
+											<a class="text-white"
+												   href="#"
+												   target="_blank"
+												   rel="noopener noreferrer">
+												Get Directions &rarr;
+											</a>
+										</div>
+									</div>
+
+								</div><!--//row-->
+							</div><!--//desc-->
+
+						</div><!--//col-->
+					</div><!--//row-->
+
+				</div><!--//container-->
+			</section><!--//venue-section-->
+
+			<section id="sponsors-section" class="sponsors-section section">
+				<div class="container">
+					<h3 class="section-heading text-center mb-3">Sponsors &amp; Partners</h3>
+					<div class="section-intro text-center single-col-max mx-auto mb-5">
+						Interested in sponsoring the Tech Conference? Partner with us to showcase your brand, connect with technology professionals, and support innovation. Get in touch to explore our sponsorship opportunities.
+					</div>
+
+					<div class="row logos justify-content-center">
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-1.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-2.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-3.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-4.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-5.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-6.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-7.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-8.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-9.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-10.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-11.svg" alt=""></div>
+						<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-12.svg" alt=""></div>
+					</div><!--//row-->
+					<div class="sponsors-cta text-center pt-5"><a class="btn-primary btn btn-lg" href="#">Become A Sponsor</a></div>
+				</div><!--//container-->
+			</section><!--//sponsors-section-->
+
+			<footer class="footer py-5 theme-bg-primary">
+				<div class="container text-center">
+			
+					<ul class="social-list list-inline mb-4">
+						<li class="list-inline-item me-3"><a href="#"><i class="fas fa-envelope"></i></a></li>
+						<li class="list-inline-item me-3"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+						<li class="list-inline-item me-3"><a href="#"><i class="fa-brands fa-instagram fa-fw"></i></a></li>
+						<li class="list-inline-item me-0"><a href="#"><i class="fa-brands fa-youtube fa-fw"></i></a></li>
+					</ul><!--//social-list-->
+			
+			
+					<ul class="footer-links list-inline mx-auto mb-4">
+						<li class="list-inline-item"><a href="#">Code of Conduct</a></li>
+						<li class="list-inline-item">|</li>
+						<li class="list-inline-item"><a href="#">Terms</a></li>
+						<li class="list-inline-item">|</li>
+						<li class="list-inline-item me-0"><a href="#">Privacy</a></li>
+					</ul><!--//footer-link-->
+					<!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
+					<small class="copyright">Designed with <i class="fas fa-heart" style="color: #EC645E;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
+			
+				</div><!--//container-->
+			</footer>
+
+			<!-- Modal Speaker -->
+			<div class="modal modal-speaker modal-speaker-1" id="modal-speaker-1" tabindex="-1" role="dialog" aria-labelledby="speaker-1-ModalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 id="speaker-1-ModalLabel" class="modal-title sr-only">
+								Speaker Name
+							</h4>
+						</div>
+						<div class="modal-body p-0">
+							<div class="theme-bg-light p-5">
+								<div class="row">
+									<div class="col-12 col-md-auto text-center">
+										<img class="profile-image mb-3 mb-md-0 me-md-4 rounded-circle mx-auto" src="assets/images/speakers/speaker-1.jpg" alt="" />
+									</div>
+							
+									<div class="col text-center text-md-start mx-auto">
+										<h2 class="name mb-2">Speaker Name</h2>
+										<div class="meta">Job Title Or Position</div>
+										<div class="meta mb-2">Company Or Organization</div>
+										<ul class="social-list list-inline mb-0">
+											<li class="list-inline-item"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
+											<li class="list-inline-item"><a href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
+											<li class="list-inline-item"><a href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
+										</ul><!--//social-list-->
+									</div><!--//col-->
+								</div><!--//row-->
+							</div>
+							<div class="desc p-4 p-lg-5">
+								<p>You can put speaker's bio or talk related info here. Duis a mi quis metus porttitor eleifend. Pellentesque finibus ultrices imperdiet. Maecenas auctor tortor quis risus tincidunt, mattis mattis leo placerat. Fusce metus augue, sagittis eget enim vel, venenatis auctor est. In interdum felis massa, ac porta nunc pretium non. In fringilla orci vitae imperdiet malesuada. Vestibulum feugiat lobortis est, in sagittis nisi molestie vel. Mauris ultrices vitae lectus eu feugiat. Fusce semper, nisi at placerat mollis, augue elit pretium enim, eu pellentesque justo purus et lectus. </p>
+								<p class="mb-0">Donec neque magna, molestie vel varius ut, pretium a urna. Pellentesque placerat nunc eu condimentum pellentesque. Vivamus dictum nisl leo, id fermentum lectus porttitor et. Pellentesque tristique erat libero, condimentum porttitor nisl pharetra et.</p>
+							</div>
+
+						</div><!--//modal-body-->
+					</div><!--//modal-content-->
+				</div><!--//modal-dialog-->
+			</div><!--//modal-->
+	
+
+			<section id="upcoming-events"
+					 class="section bg-light py-5">
+
+				<div class="container">
+
+					<div class="text-center mb-5">
+
+						<span class="ticket-eyebrow">
+							Available on Lumievent
+						</span>
+
+						<h2 class="section-heading mb-3">
+							Upcoming Events
+						</h2>
+
+						<p class="text-muted mb-0">
+							Select your ticket quantity and add
+							tickets directly to your cart.
 						</p>
 
-						<div class="row pt-3">
-
-							<!-- Ride-hailing -->
-							<div class="col-12 col-md-6 mb-4">
-								<div class="grid-item p-4">
-									<h5 class="text-white mb-3 title">
-										<i class="fas fa-taxi me-2"></i>
-										By Ride-Hailing Service
-									</h5>
-
-										<p>
-											Use Uber, Bolt, or another ride-hailing service and enter
-											<strong>The Civic Centre, Victoria Island</strong> as your destination.
-											You can be dropped off directly at the venue’s main entrance.
-										</p>
-
-									<a class="text-white"
-										   href="#"
-										   target="_blank"
-										   rel="noopener noreferrer">
-										View Location &rarr;
-									</a>
-								</div>
-							</div>
-
-							<!-- Car -->
-							<div class="col-12 col-md-6 mb-4">
-								<div class="grid-item p-4">
-									<h5 class="text-white mb-3 title">
-										<i class="fas fa-car me-2"></i>
-										By Car
-									</h5>
-
-									<p>
-										Attendees driving to the conference can use the venue's
-										designated parking area. Parking spaces may be limited,
-										so early arrival is recommended.
-									</p>
-
-									<a class="text-white"
-										   href="#"
-										   target="_blank"
-										   rel="noopener noreferrer">
-										Check Driving Route &rarr;
-									</a>
-								</div>
-							</div>
-
-							<!-- Bus -->
-							<div class="col-12 col-md-6 mb-4">
-								<div class="grid-item p-4">
-									<h5 class="text-white mb-3 title">
-										<i class="fas fa-bus-alt me-2"></i>
-										By Public Transport
-									</h5>
-
-										<p>
-											Take a bus heading towards Victoria Island via Ozumba Mbadiwe Avenue.
-											Ask to stop at <strong>The Civic Centre, opposite 1004 Estate</strong>.
-											From the drop-off point, the venue is only a short walk away.
-										</p>
-
-									<a class="text-white"
-										   href="#"
-										   target="_blank"
-										   rel="noopener noreferrer">
-										View Transport Options &rarr;
-									</a>
-								</div>
-							</div>
-
-							<!-- Airport -->
-							<div class="col-12 col-md-6 mb-4">
-								<div class="grid-item p-4">
-									<h5 class="text-white mb-3 title">
-										<i class="fas fa-plane-arrival me-2"></i>
-										From the Airport
-									</h5>
-
-										<p>
-											Visitors arriving by air can take a taxi or ride-hailing service from
-											<strong>Murtala Muhammed International Airport</strong> to The Civic Centre,
-											Victoria Island. Travel time will depend on traffic conditions.
-										</p>
-									<a class="text-white"
-										   href="#"
-										   target="_blank"
-										   rel="noopener noreferrer">
-										Get Directions &rarr;
-									</a>
-								</div>
-							</div>
-
-						</div><!--//row-->
-					</div><!--//desc-->
-
-				</div><!--//col-->
-			</div><!--//row-->
-
-		</div><!--//container-->
-	</section><!--//venue-section-->
-
-	<section id="sponsors-section" class="sponsors-section section">
-		<div class="container">
-			<h3 class="section-heading text-center mb-3">Sponsors &amp; Partners</h3>
-				<div class="section-intro text-center single-col-max mx-auto mb-5">
-					Interested in sponsoring the Tech Conference? Partner with us to showcase your brand, connect with technology professionals, and support innovation. Get in touch to explore our sponsorship opportunities.
-				</div>
-
-			<div class="row logos justify-content-center">
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-1.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-2.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-3.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-4.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-5.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-6.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-7.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-8.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-9.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-10.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-11.svg" alt=""></div>
-				<div class="logo-item col-6 col-md-4 col-lg-2"><img src="~/assets/images/logos/logo-12.svg" alt=""></div>
-			</div><!--//row-->
-			<div class="sponsors-cta text-center pt-5"><a class="btn-primary btn btn-lg" href="#">Become A Sponsor</a></div>
-		</div><!--//container-->
-	</section><!--//sponsors-section-->
-
-	<footer class="footer py-5 theme-bg-primary">
-		<div class="container text-center">
-			
-			<ul class="social-list list-inline mb-4"> 
-				<li class="list-inline-item me-3"><a href="#"><i class="fas fa-envelope"></i></a></li>
-				<li class="list-inline-item me-3"><a href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
-				<li class="list-inline-item me-3"><a href="#"><i class="fa-brands fa-instagram fa-fw"></i></a></li>
-				<li class="list-inline-item me-0"><a href="#"><i class="fa-brands fa-youtube fa-fw"></i></a></li>
-			</ul><!--//social-list-->
-			
-			
-			<ul class="footer-links list-inline mx-auto mb-4">
-				<li class="list-inline-item"><a href="#">Code of Conduct</a></li>
-				<li class="list-inline-item">|</li>
-				<li class="list-inline-item"><a href="#">Terms</a></li>
-				<li class="list-inline-item">|</li>
-				<li class="list-inline-item me-0"><a href="#">Privacy</a></li>
-			</ul><!--//footer-link-->
-			
-			 <!--/* This template is free as long as you keep the footer attribution link. If you'd like to use the template without the attribution link, you can buy the commercial license via our website: themes.3rdwavemedia.com Thank you for your support. :) */-->
-			<small class="copyright">Designed with <i class="fas fa-heart" style="color: #EC645E;"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank">Xiaoying Riley</a> for developers</small>
-			
-		</div><!--//container-->	    
-	</footer>
-
-	<!-- Modal Speaker -->
-	<div class="modal modal-speaker modal-speaker-1" id="modal-speaker-1" tabindex="-1" role="dialog" aria-labelledby="speaker-1-ModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true">&times;</button>
-					<h4 id="speaker-1-ModalLabel" class="modal-title sr-only"
-                    >Speaker Name</h4>
-				</div>
-				<div class="modal-body p-0">
-					<div class="theme-bg-light p-5">
-						<div class="row">
-							<div class="col-12 col-md-auto text-center">
-							    <img class="profile-image mb-3 mb-md-0 me-md-4 rounded-circle mx-auto" src="assets/images/speakers/speaker-1.jpg" alt="" />
-							</div>
-							
-							<div class="col text-center text-md-start mx-auto">
-								<h2 class="name mb-2">Speaker Name</h2>
-								<div class="meta">Job Title Or Position</div>
-								<div class="meta mb-2">Company Or Organization</div>
-								<ul class="social-list list-inline mb-0">								
-									<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-x-twitter fa-fw"></i></a></li>
-									<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-linkedin-in fa-fw"></i></a></li>
-									<li class="list-inline-item"><a  href="#"><i class="fa-brands fa-github fa-fw"></i></a></li>
-								</ul><!--//social-list--> 
-							</div><!--//col-->
-						</div><!--//row-->
-					</div>
-						<<div class="desc p-4 p-lg-5">
-						<p>You can put speaker's bio or talk related info here. Duis a mi quis metus porttitor eleifend. Pellentesque finibus ultrices imperdiet. Maecenas auctor tortor quis risus tincidunt, mattis mattis leo placerat. Fusce metus augue, sagittis eget enim vel, venenatis auctor est. In interdum felis massa, ac porta nunc pretium non. In fringilla orci vitae imperdiet malesuada. Vestibulum feugiat lobortis est, in sagittis nisi molestie vel. Mauris ultrices vitae lectus eu feugiat. Fusce semper, nisi at placerat mollis, augue elit pretium enim, eu pellentesque justo purus et lectus. </p>
-						<p class="mb-0">Donec neque magna, molestie vel varius ut, pretium a urna. Pellentesque placerat nunc eu condimentum pellentesque. Vivamus dictum nisl leo, id fermentum lectus porttitor et. Pellentesque tristique erat libero, condimentum porttitor nisl pharetra et.</p>
 					</div>
 
-				</div><!--//modal-body-->
-			</div><!--//modal-content-->
-		</div><!--//modal-dialog-->
-	</div><!--//modal-->
-	
-	<!-- Javascript -->          
-	<script src="assets/plugins/popper.min.js"></script>
-	<script src="assets/plugins/bootstrap/js/bootstrap.min.js"></script>  
-	<script src="assets/plugins/smoothscroll.min.js"></script>
-	<script src="assets/plugins/gumshoe/gumshoe.polyfills.min.js"></script> 
-	<script src="assets/js/main.js"></script>  
+					@if (TempData["Success"] is not null)
+					{
+						<div class="alert alert-success"
+							 role="alert">
 
-</body>
-<link rel="stylesheet" href="~/css/events.css" />
+							@TempData["Success"]
 
-<div class="container mt-5">
+						</div>
+					}
 
-    <h2 class="text-center mb-4">
-        Upcoming Events
-    </h2>
+					@if (TempData["Error"] is not null)
+					{
+						<div class="alert alert-danger"
+							 role="alert">
 
-    <!-- Search & Filter -->
-    <form asp-action="Index" method="get" class="row g-3 mb-5">
+							@TempData["Error"]
 
-        <div class="col-md-3">
-            <input type="text"
-                   name="search"
-                   value="@Context.Request.Query["search"]"
-                   class="form-control"
-                   placeholder="Search events..." />
-        </div>
+						</div>
+					}
 
-        <div class="col-md-2">
-            <select name="category" class="form-select">
+					<form asp-controller="Event"
+						  asp-action="Index"
+						  method="get"
+						  class="row g-3 mb-5">
 
-                <option value="">All Categories</option>
+						<div class="col-12 col-md-6 col-lg-3">
 
-                <option value="Music"
-                        selected="@(Context.Request.Query["category"] == "Music")">
-                    Music
-                </option>
+							<label class="form-label"
+								   for="eventSearch">
 
-                <option value="Technology"
-                        selected="@(Context.Request.Query["category"] == "Technology")">
-                    Technology
-                </option>
+								Search
+							</label>
 
-                <option value="Business"
-                        selected="@(Context.Request.Query["category"] == "Business")">
-                    Business
-                </option>
+							<input type="text"
+								   id="eventSearch"
+								   name="search"
+								   value="@Context.Request.Query["search"]"
+								   class="form-control"
+								   placeholder="Search events..." />
 
-                <option value="Sports"
-                        selected="@(Context.Request.Query["category"] == "Sports")">
-                    Sports
-                </option>
+						</div>
 
-            </select>
-        </div>
+						<div class="col-12 col-md-6 col-lg-2">
 
-        <div class="col-md-2">
-            <input type="text"
-                   name="location"
-                   value="@Context.Request.Query["location"]"
-                   class="form-control"
-                   placeholder="Location" />
-        </div>
+							<label class="form-label"
+								   for="eventCategory">
 
-        <div class="col-md-2">
-            <input type="date"
-                   name="date"
-                   value="@Context.Request.Query["date"]"
-                   class="form-control" />
-        </div>
+								Category
+							</label>
 
-        <div class="col-md-2">
-            <input type="number"
-                   name="maxPrice"
-                   value="@Context.Request.Query["maxPrice"]"
-                   class="form-control"
-                   placeholder="Max Price" />
-        </div>
+							<select id="eventCategory"
+									name="category"
+									class="form-select">
 
-        <div class="col-md-1">
-            <button type="submit"
-                    class="btn btn-primary w-100">
-                Search
-            </button>
-        </div>
+								<option value="">
+									All Categories
+								</option>
 
-    </form>
+								<option value="Music"
+										selected="@(Context.Request.Query["category"] == "Music" ? "selected" : null)">
+									Music
+								</option>
 
-    <!-- Events -->
-    <div class="row">
+								<option value="Technology"
+										selected="@(Context.Request.Query["category"] == "Technology" ? "selected" : null)">
+									Technology
+								</option>
 
-        @if (Model == null || !Model.Any())
-        {
-            <div class="col-12">
-                <div class="alert alert-warning text-center">
-                    No events found.
-                </div>
-            </div>
-        }
-        else
-        {
-            @foreach (var item in Model)
-            {
-                <div class="col-md-4 mb-4">
+								<option value="Business"
+										selected="@(Context.Request.Query["category"] == "Business" ? "selected" : null)">
+									Business
+								</option>
 
-                    <div class="card h-100 shadow">
+								<option value="Sports"
+										selected="@(Context.Request.Query["category"] == "Sports" ? "selected" : null)">
+									Sports
+								</option>
 
-                        <img src="@item.EventImageUrl"
-                             class="card-img-top"
-                             alt="Event Image">
+							</select>
 
-                        <div class="card-body">
+						</div>
 
-                            <h5>@item.Title</h5>
+						<div class="col-12 col-md-6 col-lg-2">
 
-                            <p>@item.Description</p>
+							<label class="form-label"
+								   for="eventLocation">
 
-                            <p>
-                                <strong>Date:</strong>
-                                @item.EventDate.ToString("dd MMM yyyy")
-                            </p>
+								Location
+							</label>
 
-                            <p>
-                                <strong>Venue:</strong>
-                                @item.Venue
-                            </p>
+							<input type="text"
+								   id="eventLocation"
+								   name="location"
+								   value="@Context.Request.Query["location"]"
+								   class="form-control"
+								   placeholder="Location" />
 
-                            <p>
-                                <strong>Category:</strong>
-                                @item.Category
-                            </p>
+						</div>
 
-                            <p>
-                                <strong>Organizer:</strong>
-                                @item.OrganizerName
-                            </p>
+						<div class="col-12 col-md-6 col-lg-2">
 
-                            <p>
-                                <strong>Price:</strong>
-                                ₦@item.TicketPrice
-                            </p>
+							<label class="form-label"
+								   for="eventDate">
 
-                            <a asp-action="Details"
-                                   asp-route-id="@item.Id"
-                                   class="btn btn-primary w-100 mt-2">
-                                View Details
-                            </a>
+								Date
+							</label>
 
-                        </div>
+							<input type="date"
+								   id="eventDate"
+								   name="date"
+								   value="@Context.Request.Query["date"]"
+								   class="form-control" />
 
-                    </div>
+						</div>
 
-                </div>
-            }
-        }
+						<div class="col-12 col-md-6 col-lg-2">
 
-    </div>
+							<label class="form-label"
+								   for="eventMaximumPrice">
 
-</div>
+								Maximum price
+							</label>
+
+							<input type="number"
+								   id="eventMaximumPrice"
+								   name="maxPrice"
+								   value="@Context.Request.Query["maxPrice"]"
+								   class="form-control"
+								   min="0"
+								   step="0.01"
+								   placeholder="Max price" />
+
+						</div>
+
+						<div class="col-12 col-md-6 col-lg-1
+							d-flex align-items-end">
+
+							<button type="submit"
+									class="btn btn-primary w-100">
+
+								<i class="fa-solid fa-magnifying-glass"></i>
+
+							</button>
+
+						</div>
+
+					</form>
+
+					<div class="row g-4">
+
+						@if (Model is null || !Model.Any())
+						{
+							<div class="col-12">
+
+								<div class="alert alert-warning text-center">
+
+									No events found.
+
+								</div>
+
+							</div>
+						}
+						else
+						{
+							@foreach (var item in Model)
+							{
+								var maximumQuantity =
+									Math.Min(
+										item.AvailableSeats,
+										10
+									);
+
+								<div class="col-12 col-md-6 col-xl-4">
+
+									<article class="card h-100
+										border-0 shadow-sm
+										overflow-hidden">
+
+										<div class="position-relative">
+
+											@if (!string.IsNullOrWhiteSpace(
+																				item.EventImageUrl))
+											{
+												<img src="@item.EventImageUrl"
+													 class="card-img-top"
+													 alt="@item.Title"
+													 style="height: 230px;
+												object-fit: cover;" />
+											}
+											else
+											{
+												<div class="d-flex
+													align-items-center
+													justify-content-center
+													bg-light text-primary"
+													 style="height: 230px;">
+
+													<i class="fa-solid
+														fa-calendar-days
+														fa-3x">
+													</i>
+
+												</div>
+											}
+
+											<span class="position-absolute
+												top-0 start-0
+												m-3 badge
+												rounded-pill
+												bg-primary">
+
+												@item.Category
+
+											</span>
+
+										</div>
+
+										<div class="card-body d-flex
+											flex-column p-4">
+
+											<h3 class="h5 fw-bold mb-3">
+												@item.Title
+											</h3>
+
+											<p class="text-muted small
+												event-card-description">
+
+												@item.Description
+
+											</p>
+
+											<div class="small text-muted mb-2">
+
+												<i class="fa-regular
+													fa-calendar
+													me-2 text-primary">
+												</i>
+
+												@item.EventDate.ToString(
+													"dd MMM yyyy"
+												)
+
+											</div>
+
+											<div class="small text-muted mb-2">
+
+												<i class="fa-solid
+													fa-location-dot
+													me-2 text-primary">
+												</i>
+
+												@item.Venue
+
+											</div>
+
+											<div class="small text-muted mb-3">
+
+												<i class="fa-regular
+													fa-user
+													me-2 text-primary">
+												</i>
+
+												@item.OrganizerName
+
+											</div>
+
+											<div class="d-flex
+												align-items-center
+												justify-content-between
+												gap-3
+												border-top
+												pt-3 mt-auto">
+
+												<div>
+
+													<small class="d-block
+														text-muted">
+
+														Ticket price
+													</small>
+
+													<strong class="fs-5
+														text-primary">
+
+														₦@item.TicketPrice.ToString("N2")
+
+													</strong>
+
+												</div>
+
+												@if (item.AvailableSeats > 0)
+												{
+													<span class="badge
+														rounded-pill
+														bg-success-subtle
+														text-success">
+
+														@item.AvailableSeats available
+
+													</span>
+												}
+												else
+												{
+													<span class="badge
+														rounded-pill
+														bg-danger-subtle
+														text-danger">
+
+														Sold out
+
+													</span>
+												}
+
+											</div>
+
+											@if (item.AvailableSeats > 0)
+											{
+												<form asp-controller="Cart"
+													  asp-action="Add"
+													  method="post"
+													  class="mt-4">
+
+													@Html.AntiForgeryToken()
+
+													<input type="hidden"
+														   name="EventId"
+														   value="@item.Id" />
+
+													<input type="hidden"
+														   name="EventTitle"
+														   value="@item.Title" />
+
+													<input type="hidden"
+														   name="EventImageUrl"
+														   value="@item.EventImageUrl" />
+
+													<input type="hidden"
+														   name="EventDate"
+														   value="@item.EventDate.ToString("O")" />
+
+													<input type="hidden"
+														   name="UnitPrice"
+														   value="@item.TicketPrice.ToString(
+																									   											   System.Globalization
+																										   											   .CultureInfo
+																										   											   .InvariantCulture
+																								   											   )" />
+
+													<input type="hidden"
+														   name="AvailableSeats"
+														   value="@item.AvailableSeats" />
+
+													<label class="form-label
+														small fw-semibold"
+														   for="quantity-@item.Id">
+
+														Number of tickets
+													</label>
+
+													<div class="input-group">
+
+														<button type="button"
+																class="btn
+															btn-outline-secondary
+															event-quantity-minus"
+																data-target="quantity-@item.Id"
+																aria-label="Reduce quantity">
+
+															<i class="fa-solid fa-minus"></i>
+
+														</button>
+
+														<input type="number"
+															   id="quantity-@item.Id"
+															   name="Quantity"
+															   value="1"
+															   min="1"
+															   max="@maximumQuantity"
+															   class="form-control
+														text-center
+														event-quantity-input"
+															   readonly />
+
+														<button type="button"
+																class="btn
+															btn-outline-secondary
+															event-quantity-plus"
+																data-target="quantity-@item.Id"
+																aria-label="Increase quantity">
+
+															<i class="fa-solid fa-plus"></i>
+
+														</button>
+
+													</div>
+
+													<div class="d-grid gap-2 mt-3">
+
+														<button type="submit"
+																class="btn
+															btn-primary">
+
+															<i class="fa-solid
+																fa-cart-plus
+																me-2">
+															</i>
+
+															Add to Cart
+
+														</button>
+
+														<a asp-controller="Event"
+															   asp-action="Details"
+															   asp-route-id="@item.Id"
+															   class="btn
+															btn-outline-primary">
+
+															View Details
+
+														</a>
+
+													</div>
+
+												</form>
+											}
+											else
+											{
+												<div class="d-grid mt-4">
+
+													<a asp-controller="Event"
+														   asp-action="Details"
+														   asp-route-id="@item.Id"
+														   class="btn
+														btn-outline-primary">
+
+														View Details
+
+													</a>
+
+												</div>
+											}
+
+										</div>
+
+									</article>
+
+								</div>
+							}
+						}
+
+					</div>
+
+				</div>
+
+			</section>
+
+			@section Scripts {
+
+				<script src="~/assets/plugins/smoothscroll.min.js">
+				</script>
+
+				<script src="~/assets/plugins/gumshoe/gumshoe.polyfills.min.js">
+				</script>
+
+				<script src="~/assets/js/main.js">
+				</script>
+
+				<script>
+						document.addEventListener(
+							"DOMContentLoaded",
+							function () {
+								const quantityButtons =
+									document.querySelectorAll(
+										".event-quantity-minus, " +
+										".event-quantity-plus"
+									);
+
+								quantityButtons.forEach(
+									function (button) {
+										button.addEventListener(
+											"click",
+											function () {
+												const targetId =
+													button.getAttribute(
+														"data-target"
+													);
+
+												const input =
+													document.getElementById(
+														targetId
+													);
+
+												if (!input) {
+													return;
+												}
+
+												const minimum =
+													Number(input.min);
+
+												const maximum =
+													Number(input.max);
+
+												const current =
+													Number(input.value);
+
+												const isIncrease =
+													button.classList.contains(
+														"event-quantity-plus"
+													);
+
+												input.value =
+													isIncrease
+														? Math.min(
+															maximum,
+															current + 1
+														)
+														: Math.max(
+															minimum,
+															current - 1
+														);
+											}
+										);
+									}
+								);
+							}
+						);
+				</script>
+			}

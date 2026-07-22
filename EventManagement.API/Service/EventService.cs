@@ -97,5 +97,19 @@ namespace EventManagement.API.Service
 
             return true;
         }
+
+        public async Task<Event?> GetEventByIdAsync(int id)
+        {
+            if (id <= 0)
+            {
+                return null;
+            }
+
+            return await _context.Events
+                .AsNoTracking()
+                .FirstOrDefaultAsync(
+                    eventItem => eventItem.Id == id
+                );
+        }
     }
 }

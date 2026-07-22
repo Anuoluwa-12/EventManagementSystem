@@ -15,6 +15,7 @@
         public decimal TicketPrice { get; set; }
 
         public string Category { get; set; }
+        public  int AvailableSeats { get; set; }
 
         public string EventImageUrl { get; set; }
 

@@ -1,41 +1,19 @@
 ﻿@{
-    var pageTitle =
-        ViewData["Title"]?.ToString()
-        ?? "Dashboard";
+    var pageTitle = ViewData["Title"]?.ToString() ?? "Dashboard";
 
-    var firstName =
-        Context.Session.GetString("FirstName")
-        ?? "User";
+    var firstName = Context.Session.GetString("FirstName") ?? "User";
 
-    var userRole =
-        Context.Session.GetString("Role")?
-            .Trim();
+    var userRole = Context.Session.GetString("Role")?.Trim();
 
-    var currentController =
-        ViewContext.RouteData
-            .Values["controller"]?
-            .ToString();
+    var currentController = ViewContext.RouteData.Values["controller"]?.ToString();
 
-    var currentAction =
-        ViewContext.RouteData
-            .Values["action"]?
-            .ToString();
+    var currentAction = ViewContext.RouteData.Values["action"]?.ToString();
 
-    var firstInitial =
-        string.IsNullOrWhiteSpace(firstName)
-            ? "U"
-            : firstName[..1].ToUpperInvariant();
+    var firstInitial = string.IsNullOrWhiteSpace(firstName) ? "U" : firstName[..1].ToUpperInvariant();
 
-    string ActiveClass(
-        string controllerName,
-        string? actionName = null)
+    string ActiveClass(string controllerName, string? actionName = null)
     {
-        var controllerMatches =
-            string.Equals(
-                currentController,
-                controllerName,
-                StringComparison.OrdinalIgnoreCase
-            );
+        var controllerMatches = string.Equals(currentController, controllerName, StringComparison.OrdinalIgnoreCase);
 
         if (!controllerMatches)
         {
@@ -47,13 +25,7 @@
             return "active";
         }
 
-        return string.Equals(
-            currentAction,
-            actionName,
-            StringComparison.OrdinalIgnoreCase
-        )
-            ? "active"
-            : string.Empty;
+        return string.Equals(currentAction, actionName, StringComparison.OrdinalIgnoreCase) ? "active" : string.Empty;
     }
 }
 
@@ -180,9 +152,7 @@
 
                     </span>
 
-                    <span>
-                        Dashboard
-                    </span>
+                    <span> Dashboard </span>
 
                 </a>
 
@@ -196,9 +166,7 @@
 
                     </span>
 
-                    <span>
-                        My Events
-                    </span>
+                    <span> My Events </span>
 
                     <a asp-controller="Cart"
                            asp-action="Index"
@@ -208,24 +176,17 @@
                             <i class="fa-solid fa-cart-shopping"></i>
                         </span>
 
-                        <span>
-                            Ticket Cart
-                        </span>
+                        <span> Ticket Cart </span>
 
                     </a>
                 </a>
 
                 <a asp-controller="Profile"
                        asp-action="Tickets"
-                       class="@ActiveClass(
-                                                              "Profile",
-                                                              "Tickets"
-                                                          )">
+                       class="@ActiveClass("Profile", "Tickets")">
 
                     <span class="navigation-icon">
-
-                        <i class="fa-solid fa-ticket"></i>
-
+                       <i class="fa-solid fa-ticket"></i>
                     </span>
 
                     <span>
@@ -236,10 +197,7 @@
 
                 <a asp-controller="Profile"
                        asp-action="Index"
-                       class="@ActiveClass(
-                                                              "Profile",
-                                                              "Index"
-                                                          )">
+                       class="@ActiveClass("Profile", "Index")">
 
                     <span class="navigation-icon">
 
@@ -247,11 +205,8 @@
 
                     </span>
 
-                    <span>
-                        My Profile
-                    </span>
-
-                </a>
+                    <span> My Profile </span>
+                 </a>
 
             </nav>
 
@@ -267,100 +222,62 @@
 
                 <a asp-controller="Organizer"
                        asp-action="Dashboard"
-                       class="@ActiveClass(
-                                                              "Organizer",
-                                                              "Dashboard"
-                                                          )">
+                       class="@ActiveClass("Organizer", "Dashboard")">
 
                     <span class="navigation-icon">
-
                         <i class="fa-solid fa-chart-pie"></i>
-
                     </span>
 
-                    <span>
-                        Organizer Dashboard
-                    </span>
-
+                    <span> Organizer Dashboard </span>
                 </a>
 
                 <a asp-controller="Organizer"
                        asp-action="Events"
-                       class="@ActiveClass(
-                                                              "Organizer",
-                                                              "Events"
-                                                          )">
+                       class="@ActiveClass("Organizer", "Events")">
 
                     <span class="navigation-icon">
-
-                        <i class="fa-solid fa-list-check"></i>
-
+                       <i class="fa-solid fa-list-check"></i>
                     </span>
 
-                    <span>
-                        Manage Events
-                    </span>
-
+                    <span> Manage Events </span>
                 </a>
 
                 <a asp-controller="Organizer"
                        asp-action="CreateEvent"
-                       class="@ActiveClass(
-                                                              "Organizer",
-                                                              "CreateEvent"
-                                                          )">
+                       class="@ActiveClass("Organizer", "CreateEvent")">
 
                     <span class="navigation-icon">
-
-                        <i class="fa-solid fa-calendar-plus"></i>
-
+                      <i class="fa-solid fa-calendar-plus"></i>
                     </span>
 
-                    <span>
-                        Create Event
-                    </span>
-
+                    <span> Create Event </span>
                 </a>
 
             </nav>
+            </div>
 
-        </div>
-
-        @if (string.Equals(
-                    userRole,
-                    "Admin",
-                    StringComparison.OrdinalIgnoreCase))
+        @if (string.Equals(userRole, "Admin", StringComparison.OrdinalIgnoreCase))
         {
             <div class="sidebar-section">
 
-                <span class="sidebar-section-label">
-                    Administration
-                </span>
+                <span class="sidebar-section-label"> Administration </span>
 
                 <nav class="dashboard-navigation">
 
                     <a asp-controller="AdminDashboard"
                            asp-action="Index"
                            class="admin-navigation-link
-                        @ActiveClass(
-                                                   "AdminDashboard"
-                                               )">
+                        @ActiveClass("AdminDashboard")">
 
                         <span class="navigation-icon">
-
-                            <i class="fa-solid fa-user-shield"></i>
-
+                          <i class="fa-solid fa-user-shield"></i>
                         </span>
 
-                        <span>
-                            Admin Dashboard
-                        </span>
-
+                        <span> Admin Dashboard </span>
                     </a>
 
-                </nav>
-
-            </div>
+                    </nav>
+                    </div>
         }
 
         <div class="sidebar-footer">
@@ -371,9 +288,7 @@
 
                 <i class="fa-solid fa-arrow-left"></i>
 
-                <span>
-                    Back to website
-                </span>
+                <span> Back to website </span>
 
             </a>
 
@@ -383,15 +298,11 @@
 
                 <i class="fa-solid fa-arrow-right-from-bracket"></i>
 
-                <span>
-                    Logout
-                </span>
-
+                <span> Logout </span>
             </a>
 
         </div>
-
-    </aside>
+        </aside>
 
     <div class="dashboard-shell">
 
@@ -405,22 +316,15 @@
                         aria-label="Open navigation menu">
 
                     <i class="fa-solid fa-bars"></i>
-
                 </button>
 
                 <div class="topbar-title">
 
-                    <span>
-                        Lumievent account
-                    </span>
+                    <span> Lumievent account </span>
 
-                    <h2>
-                        @pageTitle
-                    </h2>
-
+                    <h2> @pageTitle </h2>
                 </div>
-
-            </div>
+                </div>
 
             <div class="topbar-actions">
 
@@ -430,7 +334,6 @@
                        aria-label="View events">
 
                     <i class="fa-regular fa-calendar"></i>
-
                 </a>
 
                 <button type="button"
@@ -440,164 +343,114 @@
                     <i class="fa-regular fa-bell"></i>
 
                     <span class="notification-dot"></span>
-
                 </button>
+                
 
                 <a asp-controller="Profile"
                        asp-action="Index"
                        class="topbar-profile">
 
-                    <span class="topbar-avatar">
-                        @firstInitial
-                    </span>
+                    <span class="topbar-avatar"> @firstInitial </span>
 
                     <span class="topbar-profile-copy">
 
-                        <strong>
-                            @firstName
-                        </strong>
+                        <strong> @firstName </strong>
 
-                        <small>
-                            View profile
-                        </small>
-
+                        <small> View profile </small>
                     </span>
 
                     <i class="fa-solid fa-chevron-down"></i>
-
-                </a>
+                 </a>
 
             </div>
-
-        </header>
+            </header>
 
         <main class="dashboard-main-content">
 
             @if (TempData["Success"] is not null)
             {
-                <div class="alert alert-success
-                    dashboard-alert"
+                <div class="alert alert-success dashboard-alert"
                      role="alert">
 
                     <i class="fa-solid fa-circle-check"></i>
-
-                    @TempData["Success"]
-
+                   @TempData["Success"]
                 </div>
             }
 
             @if (TempData["Error"] is not null)
             {
-                <div class="alert alert-danger
-                    dashboard-alert"
+                <div class="alert alert-danger dashboard-alert"
                      role="alert">
 
                     <i class="fa-solid fa-circle-exclamation"></i>
-
                     @TempData["Error"]
-
                 </div>
             }
 
             @RenderBody()
 
         </main>
-
-    </div>
+        </div>
 
     <div id="dashboardOverlay"
          class="dashboard-overlay">
     </div>
 
-    <script src="~/lib/jquery/dist/jquery.min.js">
-    </script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
 
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
-    </script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-            document.addEventListener(
-                "DOMContentLoaded",
-                function () {
-                    const sidebar =
-                        document.getElementById(
-                            "dashboardSidebar"
-                        );
+            document.addEventListener("DOMContentLoaded", function () 
+            {
+                    const sidebar = document.getElementById("dashboardSidebar");
 
-                    const menuButton =
-                        document.getElementById(
-                            "dashboardMenuButton"
-                        );
+                    const menuButton = document.getElementById("dashboardMenuButton");
 
-                    const closeButton =
-                        document.getElementById(
-                            "sidebarCloseButton"
-                        );
+                    const closeButton = document.getElementById("sidebarCloseButton");
 
-                    const overlay =
-                        document.getElementById(
-                            "dashboardOverlay"
-                        );
+                    const overlay = document.getElementById("dashboardOverlay");
 
-                    function openSidebar() {
-                        sidebar?.classList.add(
-                            "show-sidebar"
-                        );
+                    function openSidebar() 
+                    {
+                        sidebar?.classList.add("show-sidebar");
 
-                        overlay?.classList.add(
-                            "show-overlay"
-                        );
+                        overlay?.classList.add("show-overlay");
 
-                        document.body.classList.add(
-                            "sidebar-is-open"
-                        );
+                        document.body.classList.add("sidebar-is-open");
                     }
 
-                    function closeSidebar() {
-                        sidebar?.classList.remove(
-                            "show-sidebar"
-                        );
+                    function closeSidebar() 
+                    {
+                        sidebar?.classList.remove("show-sidebar");
 
-                        overlay?.classList.remove(
-                            "show-overlay"
-                        );
+                        overlay?.classList.remove("show-overlay");
 
-                        document.body.classList.remove(
-                            "sidebar-is-open"
-                        );
+                        document.body.classList.remove("sidebar-is-open");
                     }
 
-                    menuButton?.addEventListener(
-                        "click",
-                        openSidebar
-                    );
+                    menuButton?.addEventListener("click", openSidebar);
 
-                    closeButton?.addEventListener(
-                        "click",
-                        closeSidebar
-                    );
+                    closeButton?.addEventListener("click", closeSidebar);
 
-                    overlay?.addEventListener(
-                        "click",
-                        closeSidebar
-                    );
+                    overlay?.addEventListener("click", closeSidebar);
 
-                    document.addEventListener(
-                        "keydown",
-                        function (event) {
+                    document.addEventListener("keydown",
+                        function (event)
+                        {
                             if (event.key === "Escape") {
                                 closeSidebar();
                             }
                         }
                     );
 
-                    window.addEventListener(
-                        "resize",
-                        function () {
-                            if (window.innerWidth > 991) {
+                    window.addEventListener("resize", function ()
+                    {
+                            if (window.innerWidth > 991)
+                            {
                                 closeSidebar();
                             }
-                        }
+                    }
                     );
                 }
             );

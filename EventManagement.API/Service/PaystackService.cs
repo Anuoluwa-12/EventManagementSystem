@@ -15,41 +15,24 @@ public class PaystackService : IPaystackService
     {
         _httpClient = httpClient;
 
-        var secretKey =
-            configuration["Paystack:SecretKey"];
+        var secretKey = configuration["Paystack:SecretKey"];
 
         if (string.IsNullOrWhiteSpace(secretKey))
         {
-            throw new InvalidOperationException(
-                "Paystack:SecretKey is missing."
-            );
+            throw new InvalidOperationException("Paystack:SecretKey is missing.");
         }
 
-        _httpClient.DefaultRequestHeaders
-            .Authorization =
-            new AuthenticationHeaderValue(
-                "Bearer",
-                secretKey
-            );
+        _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", secretKey);
 
-        _httpClient.DefaultRequestHeaders
-            .Accept.Add(
-                new MediaTypeWithQualityHeaderValue(
-                    "application/json"
-                )
+        _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json")
             );
     }
 
     public async Task<PaystackInitializeResponse?>InitializeTransactionAsync(PaystackInitializeRequest request)
     {
-        using var response =
-            await _httpClient.PostAsJsonAsync(
-                "transaction/initialize",
-                request
-            );
+        using var response = await _httpClient.PostAsJsonAsync("transaction/initialize", request);
 
-        var body =
-            await response.Content.ReadAsStringAsync();
+        var body = await response.Content.ReadAsStringAsync();
 
         if (string.IsNullOrWhiteSpace(body))
         {
@@ -58,8 +41,7 @@ public class PaystackService : IPaystackService
 
         return JsonSerializer.Deserialize<PaystackInitializeResponse>
             (
-                body,
-                new JsonSerializerOptions
+                body, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }
@@ -68,14 +50,10 @@ public class PaystackService : IPaystackService
 
     public async Task<PaystackVerifyResponse?> VerifyTransactionAsync(string reference)
     {
-        using var response =
-            await _httpClient.GetAsync(
-                "transaction/verify/" +
-                Uri.EscapeDataString(reference)
+        using var response = await _httpClient.GetAsync("transaction/verify/" + Uri.EscapeDataString(reference)
             );
 
-        var body =
-            await response.Content.ReadAsStringAsync();
+        var body = await response.Content.ReadAsStringAsync();
 
         if (string.IsNullOrWhiteSpace(body))
         {
@@ -84,8 +62,7 @@ public class PaystackService : IPaystackService
 
         return JsonSerializer.Deserialize<PaystackVerifyResponse>
             (
-                body,
-                new JsonSerializerOptions
+                body, new JsonSerializerOptions
                 {
                     PropertyNameCaseInsensitive = true
                 }

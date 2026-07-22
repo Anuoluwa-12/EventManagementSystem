@@ -13,13 +13,9 @@
             <i class="fa-solid fa-check"></i>
         </div>
 
-        <span class="ticket-eyebrow">
-            Payment confirmed
-        </span>
+        <span class="ticket-eyebrow"> Payment confirmed </span>
 
-        <h1>
-            Your tickets are ready!
-        </h1>
+        <h1> Your tickets are ready! </h1>
 
         <p>
             Your payment of
@@ -31,13 +27,9 @@
 
         <div class="payment-reference">
 
-            <span>
-                Payment reference
-            </span>
+            <span> Payment reference </span>
 
-            <strong>
-                @Model.Reference
-            </strong>
+            <strong> @Model.Reference </strong>
 
         </div>
 
@@ -52,18 +44,12 @@
                     </div>
 
                     <div>
-                        <span>
-                            @ticket.EventTitle
-                        </span>
+                        <span> @ticket.EventTitle </span>
 
-                        <strong>
-                            @ticket.TicketNumber
-                        </strong>
+                        <strong> @ticket.TicketNumber </strong>
                     </div>
 
-                    <span class="ticket-valid-badge">
-                        @ticket.Status
-                    </span>
+                    <span class="ticket-valid-badge"> @ticket.Status </span>
 
                 </article>
             }

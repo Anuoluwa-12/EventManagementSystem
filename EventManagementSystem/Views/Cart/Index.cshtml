@@ -14,13 +14,9 @@
                 Your selection
             </span>
 
-            <h1>
-                Ticket Cart
-            </h1>
+            <h1> Ticket Cart </h1>
 
-            <p>
-                Review your tickets before checkout.
-            </p>
+            <p> Review your tickets before checkout.</p>
         </div>
 
         <a asp-controller="Event"
@@ -56,14 +52,9 @@
                 <i class="fa-solid fa-cart-shopping"></i>
             </div>
 
-            <h2>
-                Your cart is empty
-            </h2>
+            <h2> Your cart is empty </h2>
 
-            <p>
-                Browse available events and add
-                tickets to continue.
-            </p>
+            <p> Browse available events and add tickets to continue. </p>
 
             <a asp-controller="Event"
                    asp-action="Index"
@@ -86,8 +77,7 @@
 
                         <div class="ticket-cart-image">
 
-                            @if (!string.IsNullOrWhiteSpace(
-                                                            item.EventImageUrl))
+                            @if (!string.IsNullOrWhiteSpace(item.EventImageUrl))
                             {
                                 <img src="@item.EventImageUrl"
                                      alt="@item.EventTitle" />
@@ -105,16 +95,11 @@
                                 Event ticket
                             </span>
 
-                            <h2>
-                                @item.EventTitle
-                            </h2>
+                            <h2> @item.EventTitle </h2>
 
-                            <p>
-                                <i class="fa-regular fa-calendar"></i>
+                            <p> <i class="fa-regular fa-calendar"></i>
 
-                                @item.EventDate.ToString(
-                                    "dd MMMM yyyy"
-                                )
+                                @item.EventDate.ToString("dd MMMM yyyy")
                             </p>
 
                             <strong>
@@ -140,15 +125,10 @@
                                 <input type="number"
                                        name="quantity"
                                        min="1"
-                                       max="@Math.Min(
-                                                                                                                  item.AvailableSeats,
-                                                                                                                  10
-                                                                                                              )"
-                                       value="@item.Quantity" />
+                                       max="@Math.Min(item.AvailableSeats, 10)"
+                                      value="@item.Quantity" />
 
-                                <button type="submit">
-                                    Update
-                                </button>
+                                <button type="submit"> Update </button>
 
                             </form>
 
@@ -168,10 +148,8 @@
 
                                 <button type="submit"
                                         class="remove-cart-item">
-
-                                    <i class="fa-regular fa-trash-can"></i>
-
-                                    Remove
+                                        <i class="fa-regular fa-trash-can"></i>
+                                        Remove
                                 </button>
 
                             </form>
@@ -185,31 +163,21 @@
 
             <aside class="ticket-order-summary">
 
-                <span class="ticket-eyebrow">
-                    Summary
-                </span>
+                <span class="ticket-eyebrow"> Summary </span>
 
-                <h2>
-                    Order Summary
-                </h2>
+                <h2> Order Summary </h2>
 
                 <div class="ticket-summary-row">
 
-                    <span>
-                        Tickets
-                    </span>
+                    <span> Tickets </span>
 
-                    <strong>
-                        @Model.TotalQuantity
-                    </strong>
+                    <strong> @Model.TotalQuantity </strong>
 
                 </div>
 
                 <div class="ticket-summary-row total">
 
-                    <span>
-                        Total
-                    </span>
+                    <span> Total </span>
 
                     <strong>
                         ₦@Model.TotalAmount.ToString("N2")
@@ -220,10 +188,8 @@
                 <a asp-controller="Checkout"
                        asp-action="Index"
                        class="ticket-primary-button full">
-
-                    Proceed to checkout
-
-                    <i class="fa-solid fa-arrow-right"></i>
+                     Proceed to checkout
+                   <i class="fa-solid fa-arrow-right"></i>
                 </a>
 
                 <form asp-controller="Cart"

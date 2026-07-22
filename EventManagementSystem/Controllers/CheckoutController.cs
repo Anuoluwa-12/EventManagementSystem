@@ -8,11 +8,9 @@ namespace EventManagementSystem.Controllers;
 
 public class CheckoutController : Controller
 {
-    private readonly ICheckoutService
-        _checkoutService;
+    private readonly ICheckoutService _checkoutService;
 
-    public CheckoutController(
-        ICheckoutService checkoutService)
+    public CheckoutController(ICheckoutService checkoutService)
     {
         _checkoutService = checkoutService;
     }
@@ -20,38 +18,23 @@ public class CheckoutController : Controller
     [HttpGet]
     public IActionResult Index()
     {
-        var userId =
-            HttpContext.Session.GetInt32(
-                "UserId"
-            );
+        var userId = HttpContext.Session.GetInt32("UserId");
 
         if (!userId.HasValue)
         {
-            return RedirectToAction(
-                "Login",
-                "Auth"
-            );
+            return RedirectToAction("Login", "Auth");
         }
 
         var cart = GetCart();
 
         if (cart.Count == 0)
         {
-            return RedirectToAction(
-                "Index",
-                "Cart"
-            );
+            return RedirectToAction("Index", "Cart");
         }
 
-        return View(
-            new CheckoutViewModel
+        return View(new CheckoutViewModel
             {
-                Email =
-                    HttpContext.Session
-                        .GetString("Email")
-                    ??
-                    string.Empty,
-
+                Email = HttpContext.Session.GetString("Email") ?? string.Empty,
                 Items = cart
             }
         );
@@ -59,20 +42,13 @@ public class CheckoutController : Controller
 
     [HttpPost]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Start(
-        CheckoutViewModel model)
+    public async Task<IActionResult> Start(CheckoutViewModel model)
     {
-        var userId =
-            HttpContext.Session.GetInt32(
-                "UserId"
-            );
+        var userId = HttpContext.Session.GetInt32("UserId");
 
         if (!userId.HasValue)
         {
-            return RedirectToAction(
-                "Login",
-                "Auth"
-            );
+            return RedirectToAction("Login", "Auth");
         }
 
         var cart = GetCart();
@@ -81,151 +57,84 @@ public class CheckoutController : Controller
 
         if (cart.Count == 0)
         {
-            ModelState.AddModelError(
-                string.Empty,
-                "Your cart is empty."
-            );
+            ModelState.AddModelError(string.Empty, "Your cart is empty.");
         }
 
         if (!ModelState.IsValid)
         {
-            return View(
-                "Index",
-                model
-            );
+            return View("Index", model);
         }
 
-        var callbackUrl =
-            Url.Action(
-                nameof(Callback),
-                "Checkout",
+        var callbackUrl = Url.Action(nameof(Callback), "Checkout",
                 values: null,
                 protocol: Request.Scheme
             );
 
-        if (string.IsNullOrWhiteSpace(
-            callbackUrl))
+        if (string.IsNullOrWhiteSpace(callbackUrl))
         {
-            ModelState.AddModelError(
-                string.Empty,
-                "The payment callback URL " +
-                "could not be generated."
+            ModelState.AddModelError(string.Empty, "The payment callback URL " + "could not be generated."
             );
 
-            return View(
-                "Index",
-                model
-            );
+            return View("Index", model);
         }
 
-        var result =
-            await _checkoutService
-                .InitializeAsync(
-                    new InitializeCheckoutRequestDto
+        var result = await _checkoutService.InitializeAsync(new InitializeCheckoutRequestDto
                     {
                         UserId = userId.Value,
                         Email = model.Email,
-                        CallbackUrl =
-                            callbackUrl,
-                        Items = cart
-                            .Select(
-                                item =>
-                                    new CheckoutItemRequestDto
+                        CallbackUrl = callbackUrl,
+                        Items = cart.Select(
+                                item => new CheckoutItemRequestDto
                                     {
-                                        EventId =
-                                            item.EventId,
-
-                                        Quantity =
-                                            item.Quantity
+                                     EventId = item.EventId,
+                                     Quantity = item.Quantity
                                     }
                             )
                             .ToList()
                     }
                 );
 
-        if (!result.Success
-            ||
-            string.IsNullOrWhiteSpace(
-                result.AuthorizationUrl
-            ))
+        if (!result.Success || string.IsNullOrWhiteSpace(result.AuthorizationUrl))
         {
-            ModelState.AddModelError(
-                string.Empty,
-                result.Message
-            );
+            ModelState.AddModelError(string.Empty, result.Message);
 
-            return View(
-                "Index",
-                model
-            );
+            return View("Index", model);
         }
 
-        return Redirect(
-            result.AuthorizationUrl
-        );
+        return Redirect(result.AuthorizationUrl);
     }
 
     [HttpGet]
-    public async Task<IActionResult> Callback(
-        string? reference,
-        string? trxref)
+    public async Task<IActionResult> Callback(string? reference, string? trxref)
     {
-        var userId =
-            HttpContext.Session.GetInt32(
-                "UserId"
-            );
+        var userId = HttpContext.Session.GetInt32("UserId");
 
         if (!userId.HasValue)
         {
-            return RedirectToAction(
-                "Login",
-                "Auth"
-            );
+            return RedirectToAction("Login", "Auth");
         }
 
-        var paymentReference =
-            reference ?? trxref;
+        var paymentReference = reference ?? trxref;
 
-        if (string.IsNullOrWhiteSpace(
-            paymentReference))
+        if (string.IsNullOrWhiteSpace(paymentReference))
         {
-            return View(
-                "Failed",
-                "The payment reference is missing."
-            );
+            return View("Failed", "The payment reference is missing.");
         }
 
-        var result =
-            await _checkoutService
-                .VerifyAsync(
-                    paymentReference,
-                    userId.Value
-                );
+        var result = await _checkoutService.VerifyAsync(paymentReference, userId.Value);
 
         if (!result.Success)
         {
-            return View(
-                "Failed",
-                result.Message
-            );
+            return View("Failed", result.Message);
         }
 
-        HttpContext.Session.Remove(
-            CartController.CartSessionKey
-        );
+        HttpContext.Session.Remove(CartController.CartSessionKey);
 
-        return View(
-            "Success",
-            result
-        );
+        return View("Success", result);
     }
 
     private List<CartItemDto> GetCart()
     {
-        return HttpContext.Session
-            .GetObject<List<CartItemDto>>(
-                CartController.CartSessionKey
-            )
-            ?? [];
+        return HttpContext.Session.GetObject<List<CartItemDto>>(CartController.CartSessionKey) ?? [];
     }
 }

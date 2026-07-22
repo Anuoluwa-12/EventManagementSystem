@@ -13,32 +13,24 @@
             <i class="fa-solid fa-xmark"></i>
         </div>
 
-        <span class="ticket-eyebrow">
-            Payment incomplete
-        </span>
+        <span class="ticket-eyebrow"> Payment incomplete </span>
 
-        <h1>
-            We could not complete your order
-        </h1>
+        <h1> We could not complete your order </h1>
 
-        <p>
-            @Model
-        </p>
+        <p> @Model </p>
 
         <div class="payment-result-actions">
 
             <a asp-controller="Checkout"
                asp-action="Index"
                class="ticket-primary-button">
-
-                Try again
+               Try again
             </a>
 
             <a asp-controller="Cart"
                asp-action="Index"
                class="ticket-secondary-button">
-
-                Return to cart
+               Return to cart
             </a>
 
         </div>

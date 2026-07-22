@@ -23,9 +23,7 @@ public class CheckoutController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var result =
-            await _checkoutService
-                .InitializeAsync(request);
+        var result = await _checkoutService.InitializeAsync(request);
 
         if (!result.Success)
         {
@@ -38,27 +36,18 @@ public class CheckoutController : ControllerBase
     [HttpGet("verify/{reference}")]
     public async Task<IActionResult> Verify(string reference, [FromQuery] int userId)
     {
-        if (string.IsNullOrWhiteSpace(reference)
-            ||
-            userId <= 0)
+        if (string.IsNullOrWhiteSpace(reference) || userId <= 0)
         {
-            return BadRequest(
-                new VerifyPaymentResponseDto
+            return BadRequest(new VerifyPaymentResponseDto
                 {
                     Success = false,
                     Reference = reference ?? "",
-                    Message =
-                        "A payment reference and " +
-                        "user ID are required."
+                    Message = "A payment reference and " + "user ID are required."
                 }
             );
         }
 
-        var result =
-            await _checkoutService.VerifyAsync(
-                reference,
-                userId
-            );
+        var result = await _checkoutService.VerifyAsync(reference, userId);
 
         if (!result.Success)
         {
