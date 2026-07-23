@@ -11,9 +11,7 @@
         <div>
             <h2>Bookings</h2>
 
-            <p>
-                View all attendee event registrations.
-            </p>
+            <p> View all attendee event registrations. </p>
         </div>
     </div>
 
@@ -67,7 +65,7 @@
                                         <small class="text-muted">
                                             @booking.AttendeeEmail
                                         </small>
-                                    </td>
+                                    </td>n
 
                                     <td>
                                         @booking.EventTitle
@@ -85,10 +83,7 @@
 
                                     <td class="pe-4">
                                         <span class="badge
-                                            @(booking.PaymentStatus == "Paid"
-                                                                        ? "bg-success"
-                                                                        : "bg-warning text-dark")">
-
+                                            @(booking.PaymentStatus == "Paid" ? "bg-success" : "bg-warning text-dark")">
                                             @booking.PaymentStatus
                                         </span>
                                     </td>

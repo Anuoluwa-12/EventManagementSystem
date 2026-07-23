@@ -2,14 +2,9 @@
 
     <div class="ticket-purchase-heading">
 
-        <span>
-            Ticket price
-        </span>
+        <span> Ticket price </span>
 
-        <strong>
-            ₦@Model.TicketPrice.ToString("N2")
-        </strong>
-
+        <strong> ₦@Model.TicketPrice.ToString("N2") </strong>
     </div>
 
     @if (Model.AvailableSeats > 0)
@@ -84,15 +79,10 @@
 
             <div class="ticket-price-summary">
 
-                <span>
-                    Subtotal
-                </span>
+                <span> Subtotal </span>
 
-                <strong id="ticketSubtotal">
-                    ₦@Model.TicketPrice.ToString("N2")
-                </strong>
-
-            </div>
+                <strong id="ticketSubtotal"> ₦@Model.TicketPrice.ToString("N2") </strong>
+           </div>
 
             <button type="submit"
                     class="add-ticket-to-cart-button">
@@ -111,64 +101,40 @@
             <i class="fa-solid fa-circle-xmark"></i>
 
             This event is sold out.
-
         </div>
     }
 
 </div>
 
 <script>
-    document.addEventListener(
-        "DOMContentLoaded",
-        function () {
-            const quantityInput =
-                document.getElementById(
-                    "ticketQuantity"
-                );
+    document.addEventListener("DOMContentLoaded", function ()
+ {
+            const quantityInput = document.getElementById("ticketQuantity");
 
-            const decreaseButton =
-                document.getElementById(
-                    "decreaseTicketQuantity"
-                );
+            const decreaseButton = document.getElementById("decreaseTicketQuantity");
 
-            const increaseButton =
-                document.getElementById(
-                    "increaseTicketQuantity"
-                );
+            const increaseButton = document.getElementById("increaseTicketQuantity");
 
-            const subtotalElement =
-                document.getElementById(
-                    "ticketSubtotal"
-                );
+            const subtotalElement = document.getElementById("ticketSubtotal");
 
-            if (!quantityInput) {
+            if (!quantityInput) 
+            {
                 return;
             }
 
-            const unitPrice =
-                @Model.TicketPrice.ToString(
-                        System.Globalization
-                                .CultureInfo
-                                .InvariantCulture
-                );
+            const unitPrice = @Model.TicketPrice.ToString( System.Globalization.CultureInfo .InvariantCulture);
 
-            const minimum =
-                Number(quantityInput.min);
+            const minimum = Number(quantityInput.min);
 
-            const maximum =
-                Number(quantityInput.max);
+            const maximum = Number(quantityInput.max);
 
-            function updateSubtotal() {
-                const quantity =
-                    Number(quantityInput.value);
+            function updateSubtotal() 
+            {
+                const quantity = Number(quantityInput.value);
 
-                const subtotal =
-                    unitPrice * quantity;
+                const subtotal = unitPrice * quantity;
 
-                subtotalElement.textContent =
-                    "₦" +
-                    subtotal.toLocaleString(
-                        "en-NG",
+                subtotalElement.textContent = "₦" + subtotal.toLocaleString("en-NG",
                         {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2
@@ -176,37 +142,21 @@
                     );
             }
 
-            decreaseButton?.addEventListener(
-                "click",
-                function () {
-                    const current =
-                        Number(
-                            quantityInput.value
-                        );
+            decreaseButton?.addEventListener("click", function ()
+            {
+                    const current = Number(quantityInput.value);
 
-                    quantityInput.value =
-                        Math.max(
-                            minimum,
-                            current - 1
-                        );
+                    quantityInput.value = Math.max(minimum, current - 1);
 
                     updateSubtotal();
                 }
             );
 
-            increaseButton?.addEventListener(
-                "click",
-                function () {
-                    const current =
-                        Number(
-                            quantityInput.value
-                        );
+            increaseButton?.addEventListener("click", function () 
+            {
+                    const current = Number(quantityInput.value);
 
-                    quantityInput.value =
-                        Math.min(
-                            maximum,
-                            current + 1
-                        );
+                    quantityInput.value = Math.min(maximum, current + 1);
 
                     updateSubtotal();
                 }

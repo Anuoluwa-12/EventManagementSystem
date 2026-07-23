@@ -40,9 +40,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0" />
 
-    <title>
-        @pageTitle - Lumievent
-    </title>
+    <title> @pageTitle - Lumievent </title>
 
     <link rel="stylesheet"
           href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
@@ -90,15 +88,10 @@
                    class="sidebar-brand-link">
 
                 <span class="sidebar-logo-mark">
-
-                    <i class="fa-solid fa-bolt"></i>
-
+                   <i class="fa-solid fa-bolt"></i>
                 </span>
 
-                <span class="sidebar-brand-text">
-                    Lumievent
-                </span>
-
+                <span class="sidebar-brand-text"> Lumievent </span>
             </a>
 
             <button type="button"
@@ -107,7 +100,6 @@
                     aria-label="Close menu">
 
                 <i class="fa-solid fa-xmark"></i>
-
             </button>
 
         </div>
@@ -120,25 +112,18 @@
 
             <div class="sidebar-user-details">
 
-                <strong>
-                    @firstName
-                </strong>
+                <strong> @firstName </strong>
 
                 <span>
-                    @(string.IsNullOrWhiteSpace(userRole)
-                        ? "Lumievent User"
-                        : userRole)
+                    @(string.IsNullOrWhiteSpace(userRole) ? "Lumievent User" : userRole)
                 </span>
 
             </div>
-
         </div>
 
         <div class="sidebar-section">
 
-            <span class="sidebar-section-label">
-                Main menu
-            </span>
+            <span class="sidebar-section-label"> Main menu </span>
 
             <nav class="dashboard-navigation">
 
@@ -189,11 +174,8 @@
                        <i class="fa-solid fa-ticket"></i>
                     </span>
 
-                    <span>
-                        My Tickets
-                    </span>
-
-                </a>
+                    <span> My Tickets </span>
+               </a>
 
                 <a asp-controller="Profile"
                        asp-action="Index"
@@ -209,14 +191,11 @@
                  </a>
 
             </nav>
-
-        </div>
+         </div>
 
         <div class="sidebar-section">
 
-            <span class="sidebar-section-label">
-                Event management
-            </span>
+            <span class="sidebar-section-label"> Event management </span>
 
             <nav class="dashboard-navigation">
 
@@ -435,10 +414,10 @@
 
                     overlay?.addEventListener("click", closeSidebar);
 
-                    document.addEventListener("keydown",
-                        function (event)
+                    document.addEventListener("keydown", function (event)
                         {
-                            if (event.key === "Escape") {
+                            if (event.key === "Escape")
+                            {
                                 closeSidebar();
                             }
                         }

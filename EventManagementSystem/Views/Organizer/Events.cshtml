@@ -13,13 +13,9 @@
         gap-3 mb-4">
 
         <div>
-            <h2 class="mb-2">
-                Manage Events
-            </h2>
+            <h2 class="mb-2"> Manage Events </h2>
 
-            <p class="text-muted mb-0">
-                View, edit, cancel and delete your events.
-            </p>
+            <p class="text-muted mb-0"> View, edit, cancel and delete your events. </p>
         </div>
 
         <div class="d-flex flex-wrap gap-2">
@@ -66,13 +62,9 @@
                     </i>
                 </div>
 
-                <h4>
-                    No events created yet
-                </h4>
+                <h4> No events created yet </h4>
 
-                <p class="text-muted">
-                    Create your first event to start accepting bookings.
-                </p>
+                <p class="text-muted"> Create your first event to start accepting bookings. </p>
 
                 <a asp-controller="Organizer"
                        asp-action="CreateEvent"
@@ -182,16 +174,10 @@
 
                                     <td>
                                         <div>
-                                            @item.EventDate.ToString(
-                                                "dd MMM yyyy"
-                                            )
+                                            @item.EventDate.ToString("dd MMM yyyy")
                                         </div>
 
-                                        <small class="text-muted">
-                                            @item.EventTime.ToString(
-                                                @"hh\:mm"
-                                            )
-                                        </small>
+                                        <small class="text-muted"> @item.EventTime.ToString(@"hh\:mm") </small>
                                     </td>
 
                                     <td>
@@ -210,10 +196,7 @@
                                             available
                                         </div>
 
-                                        <small class="text-muted">
-                                            @item.BookedSeats booked
-                                            out of @item.TotalSeats
-                                        </small>
+                                        <small class="text-muted"> @item.BookedSeats booked out of @item.TotalSeats </small>
                                     </td>
 
                                     <td>
